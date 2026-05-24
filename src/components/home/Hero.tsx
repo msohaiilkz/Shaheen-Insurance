@@ -25,8 +25,8 @@ export default function Hero() {
           className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(184,149,42,1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(184,149,42,1) 1px, transparent 1px)
+              linear-gradient(rgba(214,166,90,1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(214,166,90,1) 1px, transparent 1px)
             `,
             backgroundSize: '64px 64px',
           }}
@@ -103,7 +103,7 @@ export default function Hero() {
               Explore Products
               <ArrowRight size={15} />
             </Link>
-            <Link to="/claims/intimation" className="btn-outline text-sm">
+            <Link to="/claims/intimation" className="btn-red text-sm">
               File a Claim
             </Link>
             <Link to="/contact" className="btn-outline text-sm">

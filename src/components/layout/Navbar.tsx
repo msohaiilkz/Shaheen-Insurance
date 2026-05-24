@@ -76,7 +76,7 @@ export default function Navbar() {
   return (
     <>
       {/* Top accent bar — UAN + PACRA rating */}
-      <div className="text-white/70 text-[11px] py-1.5 px-6 flex justify-between items-center" style={{ backgroundColor: '#070F1D' }}>
+      <div className="text-white/70 text-[11px] py-1.5 px-6 flex justify-between items-center" style={{ backgroundColor: '#1A2570' }}>
         <span className="hidden md:flex items-center gap-4">
           <span>Shaheen Insurance Company Ltd — A Sign of Protection</span>
         </span>
@@ -163,7 +163,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               to="/claims/intimation"
-              className="hidden lg:inline-flex items-center gap-2 px-5 py-2 bg-gold text-white font-semibold text-[13px] tracking-wide hover:bg-gold-dark transition-colors"
+              className="hidden lg:inline-flex items-center gap-2 px-5 py-2 bg-red text-white font-semibold text-[13px] tracking-wide hover:bg-red-dark transition-colors"
             >
               File a Claim
             </Link>
@@ -213,7 +213,7 @@ export default function Navbar() {
                 </div>
               ))}
               <div className="pt-4 pb-2 border-t border-navy/10">
-                <Link to="/claims/intimation" className="block w-full text-center bg-gold text-white font-bold py-3 text-sm tracking-wide hover:bg-gold-dark transition-colors">
+                <Link to="/claims/intimation" className="block w-full text-center bg-red text-white font-bold py-3 text-sm tracking-wide hover:bg-red-dark transition-colors">
                   File a Claim
                 </Link>
               </div>

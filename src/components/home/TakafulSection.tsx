@@ -22,7 +22,7 @@ export default function TakafulSection() {
       {/* Background pattern */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 opacity-[0.04]"
-          style={{ backgroundImage: 'linear-gradient(rgba(184,149,42,1) 1px,transparent 1px),linear-gradient(90deg,rgba(184,149,42,1) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
+          style={{ backgroundImage: 'linear-gradient(rgba(214,166,90,1) 1px,transparent 1px),linear-gradient(90deg,rgba(214,166,90,1) 1px,transparent 1px)', backgroundSize: '64px 64px' }} />
         <div className="absolute top-0 right-0 w-[1px] h-full bg-gold/10" />
         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold/15" />
       </div>

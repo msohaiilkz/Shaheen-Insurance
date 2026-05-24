@@ -103,7 +103,7 @@ export default function ProductsSection() {
               transition={{ duration: 0.5, delay: i * 0.07 }}
             >
               <Link to={path} className="group block h-full">
-                <div className="h-full bg-white border border-navy/8 p-6 transition-all duration-300 group-hover:shadow-navy group-hover:-translate-y-1 group-hover:bg-navy" style={{ borderTop: '3px solid #B8952A' }}>
+                <div className="h-full bg-white border border-navy/8 p-6 transition-all duration-300 group-hover:shadow-navy group-hover:-translate-y-1 group-hover:bg-navy" style={{ borderTop: '3px solid #D6A65A' }}>
 
                   {/* Icon */}
                   <div className="w-11 h-11 bg-navy group-hover:bg-gold flex items-center justify-center mb-5 transition-colors duration-300">

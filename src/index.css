@@ -17,7 +17,7 @@
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    color: #0C1B33;
+    color: #1A1C1E;
     background: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -28,19 +28,20 @@
 
 @layer components {
   /* ── BUTTONS ─────────────────────────────────────────── */
-  /* Gold CTA — primary action */
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 bg-gold text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:bg-gold-dark;
   }
 
-  /* White outline — used on dark/hero sections */
   .btn-outline {
     @apply inline-flex items-center gap-2 px-6 py-3 border border-white/50 text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:border-gold hover:text-gold;
   }
 
-  /* Navy solid — secondary action */
   .btn-navy {
-    @apply inline-flex items-center gap-2 px-6 py-3 bg-navy text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:bg-[#1A2E4A];
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-navy text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:bg-navy-light;
+  }
+
+  .btn-red {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-red text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:bg-red-dark;
   }
 
   /* ── TYPOGRAPHY ──────────────────────────────────────── */
@@ -49,16 +50,15 @@
   }
 
   .section-subtitle {
-    @apply text-base md:text-lg text-navy/55 leading-relaxed max-w-2xl;
+    @apply text-base md:text-lg leading-relaxed max-w-2xl;
+    color: #6C7278;
   }
 
   /* ── DECORATIVE ──────────────────────────────────────── */
-  /* Accent rule — 3px solid, no roundness */
   .gold-line {
     @apply w-10 h-[3px] bg-gold;
   }
 
-  /* Card surface */
   .card-surface {
     @apply bg-white border border-navy/8 shadow-card;
   }
@@ -66,7 +66,7 @@
 
 @layer utilities {
   .text-gradient-gold {
-    background: linear-gradient(135deg, #B8952A, #CDA94A);
+    background: linear-gradient(135deg, #D6A65A, #E0BC7A);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -76,4 +76,4 @@
 /* ── SCROLLBAR ────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #F8F9FA; }
-::-webkit-scrollbar-thumb { background: #B8952A; }
+::-webkit-scrollbar-thumb { background: #28368F; }

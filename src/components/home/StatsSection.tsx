@@ -78,7 +78,7 @@ export default function StatsSection() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 className="bg-white p-6 shadow-card border border-navy/8 text-center group cursor-default"
-                style={{ borderTop: '3px solid #B8952A' }}
+                style={{ borderTop: '3px solid #D6A65A' }}
               >
                 <div className="w-11 h-11 bg-navy group-hover:bg-gold transition-colors flex items-center justify-center mx-auto mb-4">
                   <Icon size={20} className="text-gold group-hover:text-white transition-colors" />

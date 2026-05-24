@@ -64,7 +64,7 @@ export default function NewsSection() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
               className="bg-white border border-navy/8 shadow-card p-6 flex flex-col group hover:-translate-y-1 hover:shadow-navy transition-all duration-300"
-              style={{ borderTop: '3px solid #B8952A' }}
+              style={{ borderTop: '3px solid #D6A65A' }}
             >
               <div className="flex items-center justify-between mb-4">
                 <span className="text-[11px] bg-gold/10 text-gold-dark font-semibold px-3 py-1 uppercase tracking-wide">

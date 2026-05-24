@@ -4,19 +4,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ── PRIMARY: Deep Navy ───────────────────────
+        // ── PRIMARY: Shaheen Blue ────────────────────
         navy: {
-          DEFAULT: '#0C1B33',
-          light:   '#1A2E4A',
-          dark:    '#070F1D',
+          DEFAULT: '#28368F',
+          light:   '#3D4FA3',
+          dark:    '#1A2570',
         },
-        // ── ACCENT: Institutional Gold ───────────────
+        // ── ACCENT: Gold ─────────────────────────────
         gold: {
-          DEFAULT: '#B8952A',
-          light:   '#CDA94A',
-          dark:    '#8A6E18',
+          DEFAULT: '#D6A65A',
+          light:   '#E0BC7A',
+          dark:    '#B8882A',
         },
-        // ── SURFACE: Near-white (derived from white) ─
+        // ── SECONDARY: Shaheen Red ────────────────────
+        red: {
+          DEFAULT: '#E12A2E',
+          dark:    '#C41E22',
+        },
+        // ── SURFACE ──────────────────────────────────
         surface: '#F8F9FA',
       },
       fontFamily: {
@@ -24,14 +29,14 @@ export default {
         sans:    ['Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'hero-gradient': 'linear-gradient(160deg, #070F1D 0%, #0C1B33 55%, #101F3A 100%)',
-        'gold-gradient': 'linear-gradient(135deg, #B8952A 0%, #CDA94A 50%, #8A6E18 100%)',
-        'navy-gradient': 'linear-gradient(180deg, #0C1B33 0%, #070F1D 100%)',
+        'hero-gradient': 'linear-gradient(160deg, #0e1a60 0%, #1A2570 55%, #28368F 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #B8882A 0%, #D6A65A 50%, #E0BC7A 100%)',
+        'navy-gradient': 'linear-gradient(180deg, #28368F 0%, #1A2570 100%)',
       },
       boxShadow: {
-        'gold': '0 4px 20px rgba(184,149,42,0.25)',
-        'navy': '0 4px 20px rgba(12,27,51,0.25)',
-        'card': '0 2px 16px rgba(12,27,51,0.08)',
+        'gold': '0 4px 20px rgba(214,166,90,0.25)',
+        'navy': '0 4px 20px rgba(40,54,143,0.25)',
+        'card': '0 2px 16px rgba(40,54,143,0.08)',
       },
       animation: {
         'float':      'float 6s ease-in-out infinite',
@@ -44,8 +49,8 @@ export default {
           '50%':      { transform: 'translateY(-8px)' },
         },
         pulseGold: {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(184,149,42,0.4)' },
-          '50%':      { boxShadow: '0 0 0 8px rgba(184,149,42,0)' },
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(214,166,90,0.4)' },
+          '50%':      { boxShadow: '0 0 0 8px rgba(214,166,90,0)' },
         },
         fadeInUp: {
           from: { opacity: '0', transform: 'translateY(18px)' },
