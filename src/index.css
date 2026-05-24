@@ -1,0 +1,79 @@
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/barlow-condensed/600.css';
+@import '@fontsource/barlow-condensed/700.css';
+@import '@fontsource/barlow-condensed/800.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #0C1B33;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root { min-height: 100vh; display: flex; flex-direction: column; }
+}
+
+@layer components {
+  /* ── BUTTONS ─────────────────────────────────────────── */
+  /* Gold CTA — primary action */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-gold text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:bg-gold-dark;
+  }
+
+  /* White outline — used on dark/hero sections */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border border-white/50 text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:border-gold hover:text-gold;
+  }
+
+  /* Navy solid — secondary action */
+  .btn-navy {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-navy text-white font-semibold text-sm tracking-wide transition-colors duration-150 hover:bg-[#1A2E4A];
+  }
+
+  /* ── TYPOGRAPHY ──────────────────────────────────────── */
+  .section-title {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-wide uppercase;
+  }
+
+  .section-subtitle {
+    @apply text-base md:text-lg text-navy/55 leading-relaxed max-w-2xl;
+  }
+
+  /* ── DECORATIVE ──────────────────────────────────────── */
+  /* Accent rule — 3px solid, no roundness */
+  .gold-line {
+    @apply w-10 h-[3px] bg-gold;
+  }
+
+  /* Card surface */
+  .card-surface {
+    @apply bg-white border border-navy/8 shadow-card;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #B8952A, #CDA94A);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ── SCROLLBAR ────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #F8F9FA; }
+::-webkit-scrollbar-thumb { background: #B8952A; }
