@@ -66,76 +66,143 @@ export default function ProductsSection() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: 'spring' as const, stiffness: 100, damping: 15 }
+    }
+  }
+
   return (
-    <section ref={ref} className="py-14 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
+    <section ref={ref} className="py-20 md:py-32 bg-surface relative overflow-hidden">
+      {/* Logical Abstract Background Pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#28368F" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14"
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-20"
         >
-          <div>
-            <div className="gold-line mb-4" />
-            <h2 className="section-title text-navy">
-              Our <span className="text-gradient-gold">Insurance</span> Products
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-4 md:mb-6">
+              <div className="w-12 h-[2px] bg-gold" />
+              <span className="font-display font-bold text-navy tracking-[0.2em] uppercase text-sm">Portfolio</span>
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight">
+              Our <span className="text-gold relative inline-block">
+                Insurance
+                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0,5 Q50,10 100,5" stroke="#D6A65A" strokeWidth="2" fill="none" />
+                </svg>
+              </span> Products
             </h2>
-            <p className="section-subtitle mt-3">
-              Comprehensive solutions for individuals, businesses, and corporations — all under one roof.
+            <p className="text-navy/60 text-lg mt-6 font-light">
+              Comprehensive and logical solutions for individuals, businesses, and corporations — designed for ultimate security.
             </p>
 
           </div>
-          <Link to="/products" className="btn-navy shrink-0 self-start lg:self-auto">
-            View All Products
-            <ArrowRight size={16} />
+          <Link to="/products" className="group flex items-center justify-center gap-2 bg-navy hover:bg-gold text-white hover:text-navy font-bold px-8 py-4 transition-all duration-300 shrink-0 self-start lg:self-auto overflow-hidden relative">
+             <span className="relative z-10 flex items-center gap-2">
+               View All Products
+               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+             </span>
           </Link>
         </motion.div>
 
         {/* Products grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+        >
           {PRODUCTS.map(({ icon: Icon, title, desc, path, tags }, i) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, y: 32 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.07 }}
+              variants={itemVariants}
+              whileHover={{ y: -8 }}
+              className="relative group h-full"
             >
-              <Link to={path} className="group block h-full">
-                <div className="h-full bg-white border border-navy/8 p-6 transition-all duration-300 group-hover:shadow-navy group-hover:-translate-y-1 group-hover:bg-navy" style={{ borderTop: '3px solid #D6A65A' }}>
+              <Link to={path} className="flex flex-col h-full bg-white p-8 shadow-[0_4px_20px_rgba(40,54,143,0.05)] border border-navy/5 overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(40,54,143,0.12)] relative">
+                
+                {/* Animated Top Border */}
+                <div className="absolute top-0 left-0 w-full h-[3px] bg-navy/10">
+                  <motion.div 
+                    className="h-full bg-gold"
+                    initial={{ width: '0%' }}
+                    whileInView={{ width: '100%' }}
+                    transition={{ duration: 1, delay: i * 0.1 + 0.5 }}
+                    viewport={{ once: true }}
+                  />
+                </div>
 
-                  {/* Icon */}
-                  <div className="w-11 h-11 bg-navy group-hover:bg-gold flex items-center justify-center mb-5 transition-colors duration-300">
-                    <Icon size={20} className="text-gold group-hover:text-white transition-colors duration-300" />
+                {/* Background Animation Element */}
+                <div className="absolute -right-12 -top-12 w-32 h-32 bg-navy/5 rounded-full blur-2xl group-hover:bg-gold/20 transition-all duration-500 transform group-hover:scale-150 pointer-events-none" />
+
+                {/* Icon Wrapper with "Logical" animation */}
+                <div className="relative mb-8 shrink-0">
+                  <div className="w-14 h-14 bg-navy flex items-center justify-center transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110 relative z-10">
+                    <Icon size={24} className="text-gold" />
                   </div>
+                  {/* Decorative dots behind icon */}
+                  <div className="absolute top-2 left-2 w-14 h-14 border border-gold/30 -z-0 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
+                </div>
 
-                  {/* Content */}
-                  <h3 className="font-display font-bold text-navy group-hover:text-white text-lg mb-2 tracking-wide uppercase transition-colors duration-300">
-                    {title}
-                  </h3>
-                  <p className="text-navy/55 group-hover:text-white/60 text-sm leading-relaxed mb-4 transition-colors duration-300">
-                    {desc}
-                  </p>
+                {/* Content */}
+                <h3 className="font-display font-bold text-navy text-xl mb-3 tracking-wide uppercase group-hover:text-gold transition-colors duration-300 shrink-0">
+                  {title}
+                </h3>
+                <p className="text-navy/60 text-sm leading-relaxed mb-6 flex-grow">
+                  {desc}
+                </p>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {tags.map((tag) => (
-                      <span key={tag} className="text-[11px] bg-navy/6 text-navy/55 group-hover:bg-white/10 group-hover:text-white/60 px-2.5 py-0.5 font-medium transition-colors duration-300">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-6 shrink-0 mt-auto">
+                  {tags.map((tag) => (
+                    <span key={tag} className="text-[10px] bg-surface text-navy font-semibold px-3 py-1 border border-navy/10 uppercase tracking-wider group-hover:border-gold/30 transition-colors duration-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-                  {/* Arrow */}
-                  <div className="flex items-center gap-1 text-xs font-semibold text-gold group-hover:text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    Learn More <ArrowRight size={12} />
-                  </div>
+                {/* Arrow */}
+                <div className="flex items-center gap-2 text-sm font-bold text-navy group-hover:text-gold transition-colors duration-300 pt-4 border-t border-navy/5 shrink-0">
+                  <span className="relative">
+                    Learn More
+                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold group-hover:w-full transition-all duration-300" />
+                  </span>
+                  <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </Link>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

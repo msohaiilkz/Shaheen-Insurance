@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import ContactSidebar from '../components/layout/ContactSidebar'
+import PageSEO from '../components/shared/PageSEO'
 import { Phone, Mail, MapPin, User } from 'lucide-react'
 
 const BRANCHES = [
@@ -139,12 +140,83 @@ const BRANCHES = [
 export default function BranchNetworkPage() {
   return (
     <>
+      <PageSEO
+        title="Branch Network"
+        description="Shaheen Insurance branch offices across Pakistan — Karachi, Lahore, Islamabad, Faisalabad, Peshawar, Multan, and more. Find your nearest branch with contact details."
+        keywords="Shaheen Insurance branches, insurance office Karachi, insurance office Lahore, Shaheen Insurance contact, branch network Pakistan"
+        path="/branches"
+        schema={{ '@context': 'https://schema.org', '@type': 'LocalBusiness', name: 'Shaheen Insurance Company Limited', telephone: '+92-21-32630370', address: { '@type': 'PostalAddress', streetAddress: '10th Floor, Shaheen Complex, M.R. Kayani Road', addressLocality: 'Karachi', addressCountry: 'PK' }, areaServed: 'PK' }}
+      />
       <PageHero
         title="Branch Network"
         subtitle="12 branch offices spanning Pakistan — from Karachi to Peshawar, we bring Shaheen Insurance closer to you"
         breadcrumbs={[{ label: 'Branch Network' }]}
-        badge="12 Branch Offices"
+        badge="12 Branch Offices" videoCategory="branches"
       />
+
+      {/* Pakistan Map Banner */}
+      <section className="bg-surface border-b border-navy/8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 py-10">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="relative rounded-2xl overflow-hidden bg-navy">
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(214,166,90,0.4) 1px, transparent 0)', backgroundSize: '28px 28px' }} />
+            <div className="relative flex flex-col md:flex-row items-center gap-6 p-8">
+              {/* Pakistan Map SVG */}
+              <div className="shrink-0">
+                <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-90">
+                  {/* Simplified Pakistan map outline */}
+                  <path d="M60,20 L80,15 L100,18 L120,12 L145,20 L160,35 L170,55 L165,75 L175,90 L180,110 L170,130 L155,145 L140,160 L120,170 L100,175 L80,168 L65,155 L50,140 L40,120 L35,100 L38,80 L45,60 L55,40 Z" fill="rgba(214,166,90,0.15)" stroke="rgba(214,166,90,0.5)" strokeWidth="1.5"/>
+                  {/* Kashmir region */}
+                  <path d="M120,12 L145,8 L160,20 L160,35 L145,20 Z" fill="rgba(214,166,90,0.08)" stroke="rgba(214,166,90,0.3)" strokeWidth="1" strokeDasharray="3,2"/>
+                  {/* City dots */}
+                  <circle cx="75" cy="148" r="5" fill="#D6A65A" opacity="0.9"/>
+                  <text x="83" y="152" fill="white" fontSize="8" fontFamily="sans-serif" opacity="0.8">Karachi</text>
+                  <circle cx="90" cy="75" r="4" fill="#D6A65A" opacity="0.9"/>
+                  <text x="97" y="79" fill="white" fontSize="8" fontFamily="sans-serif" opacity="0.8">Lahore</text>
+                  <circle cx="100" cy="55" r="4" fill="#D6A65A" opacity="0.9"/>
+                  <text x="108" y="59" fill="white" fontSize="8" fontFamily="sans-serif" opacity="0.8">Islamabad</text>
+                  <circle cx="82" cy="100" r="3.5" fill="#D6A65A" opacity="0.8"/>
+                  <text x="89" y="104" fill="white" fontSize="7" fontFamily="sans-serif" opacity="0.7">Multan</text>
+                  <circle cx="70" cy="85" r="3" fill="#D6A65A" opacity="0.8"/>
+                  <text x="76" y="89" fill="white" fontSize="7" fontFamily="sans-serif" opacity="0.7">Faisalabad</text>
+                  <circle cx="110" cy="45" r="3" fill="#D6A65A" opacity="0.7"/>
+                  <text x="116" y="49" fill="white" fontSize="7" fontFamily="sans-serif" opacity="0.7">Peshawar</text>
+                  <circle cx="95" cy="88" r="3" fill="#D6A65A" opacity="0.7"/>
+                  <text x="100" y="92" fill="white" fontSize="7" fontFamily="sans-serif" opacity="0.7">Sialkot</text>
+                  <circle cx="80" cy="140" r="3" fill="#D6A65A" opacity="0.7"/>
+                  <text x="86" y="144" fill="white" fontSize="7" fontFamily="sans-serif" opacity="0.7">Hyderabad</text>
+                  {/* Connection lines from Karachi HQ */}
+                  <line x1="75" y1="148" x2="90" y2="75" stroke="rgba(214,166,90,0.25)" strokeWidth="1" strokeDasharray="4,3"/>
+                  <line x1="75" y1="148" x2="100" y2="55" stroke="rgba(214,166,90,0.25)" strokeWidth="1" strokeDasharray="4,3"/>
+                  <line x1="75" y1="148" x2="82" y2="100" stroke="rgba(214,166,90,0.25)" strokeWidth="1" strokeDasharray="4,3"/>
+                  <line x1="75" y1="148" x2="70" y2="85" stroke="rgba(214,166,90,0.25)" strokeWidth="1" strokeDasharray="4,3"/>
+                  <line x1="75" y1="148" x2="110" y2="45" stroke="rgba(214,166,90,0.25)" strokeWidth="1" strokeDasharray="4,3"/>
+                </svg>
+              </div>
+              {/* Text content */}
+              <div className="text-white flex-1 text-center md:text-left">
+                <div className="text-gold text-xs font-semibold uppercase tracking-widest mb-3">Nationwide Presence</div>
+                <h2 className="font-display font-bold text-2xl md:text-3xl mb-3">Serving Pakistan Since 1996</h2>
+                <p className="text-white/65 text-sm leading-relaxed mb-5 max-w-lg">From Karachi to Peshawar, Shaheen Insurance has 12+ branch offices across Pakistan's major cities, bringing trusted insurance solutions closer to every Pakistani family and business.</p>
+                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                  <div className="bg-white/10 rounded-xl px-5 py-3 text-center">
+                    <div className="text-gold font-bold text-xl">12+</div>
+                    <div className="text-white/60 text-xs">Branch Offices</div>
+                  </div>
+                  <div className="bg-white/10 rounded-xl px-5 py-3 text-center">
+                    <div className="text-gold font-bold text-xl">10+</div>
+                    <div className="text-white/60 text-xs">Cities</div>
+                  </div>
+                  <div className="bg-white/10 rounded-xl px-5 py-3 text-center">
+                    <div className="text-gold font-bold text-xl">28+</div>
+                    <div className="text-white/60 text-xs">Years of Trust</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">

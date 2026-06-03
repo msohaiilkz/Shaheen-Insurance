@@ -26,11 +26,37 @@ export default function InvestorRelationsPage() {
         title="Investor Relations"
         subtitle="Shareholder services, corporate disclosures, and investor communications for Shaheen Insurance (PSX: SHNI)"
         breadcrumbs={[{ label: 'Investor Information', path: '/investor' }, { label: 'Investor Relations' }]}
+        videoCategory="investor"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-44 md:h-52">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&auto=format&fit=crop"
+                  alt="Investor Relations" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">PSX: SHNI</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Shareholders</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&q=80&auto=format&fit=crop"
+                    alt="Investor" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-gold rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-navy font-display font-bold text-lg">A++</div>
+                  <div className="text-navy/70 text-[10px]">PACRA Stable</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

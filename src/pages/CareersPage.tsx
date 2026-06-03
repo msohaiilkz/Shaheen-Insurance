@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import ContactSidebar from '../components/layout/ContactSidebar'
+import PageSEO from '../components/shared/PageSEO'
 import { Briefcase, Mail, Phone, CheckCircle2, Users, TrendingUp, Award } from 'lucide-react'
 
 const CULTURE_POINTS = [
@@ -12,15 +13,47 @@ const CULTURE_POINTS = [
 export default function CareersPage() {
   return (
     <>
+      <PageSEO
+        title="Careers at Shaheen Insurance"
+        description="Join Shaheen Insurance — build a career with Pakistan's PACRA A++ rated insurer. We offer a professional, growth-oriented environment backed by Shaheen Foundation (PAF)."
+        keywords="insurance jobs Pakistan, Shaheen Insurance careers, insurance company jobs Karachi, PAF sponsored company jobs"
+        path="/careers"
+        schema={{ '@context': 'https://schema.org', '@type': 'EmployerAggregateRating', itemReviewed: { '@type': 'Organization', name: 'Shaheen Insurance Company Limited' } }}
+      />
       <PageHero
         title="Careers"
         subtitle="Build your career with one of Pakistan's most trusted insurance institutions — backed by Shaheen Foundation (PAF)"
-        breadcrumbs={[{ label: 'Careers' }]}
+        breadcrumbs={[{ label: 'Careers' }]} videoCategory="careers"
       />
 
       <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&auto=format&fit=crop"
+                  alt="Careers at Shaheen Insurance Pakistan" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">PAF Sponsored</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Since 1996</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80&auto=format&fit=crop"
+                    alt="Team" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">28+</div>
+                  <div className="text-white/60 text-[10px]">Years of Growth</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* No Openings State */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -116,3 +149,4 @@ export default function CareersPage() {
     </>
   )
 }
+

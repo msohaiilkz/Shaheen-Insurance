@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { Download, Mail, AlertCircle, CheckCircle2, Building2, ClipboardList } from 'lucide-react'
 
 const NETWORKS = [
@@ -36,15 +37,48 @@ const HOW_TO_USE = [
 export default function PanelHospitalsPage() {
   return (
     <>
+      <PageSEO
+        title="Panel Hospitals Network"
+        description="Shaheen Insurance panel hospital network — cashless treatment at hospitals across Karachi, Lahore, Islamabad, Faisalabad, Peshawar and more cities in Pakistan."
+        keywords="panel hospitals Pakistan, cashless treatment insurance, Shaheen Insurance hospitals, health insurance network Pakistan"
+        path="/health-care/panel-hospitals"
+        schema={{ '@context': 'https://schema.org', '@type': 'MedicalOrganization', name: 'Shaheen Insurance Panel Hospital Network', description: 'Nationwide panel hospital network for cashless healthcare in Pakistan.', areaServed: 'PK' }}
+      />
       <PageHero
         title="Panel Hospitals"
         subtitle="Nationwide network of panel hospitals offering cashless treatment, discounts, and quality healthcare services for Shaheen Insurance policyholders"
         breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: 'Panel Hospitals' }]}
+        videoCategory="health"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80&auto=format&fit=crop"
+                  alt="Panel Hospital Network" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/15 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Corporate Mentor</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Crescent Care</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=400&q=80&auto=format&fit=crop"
+                    alt="Hospital" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-sm">Cashless</div>
+                  <div className="text-white/60 text-[10px]">Direct Billing</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -159,3 +193,4 @@ export default function PanelHospitalsPage() {
     </>
   )
 }
+

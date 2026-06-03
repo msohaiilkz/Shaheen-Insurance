@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
@@ -34,16 +34,49 @@ const RE_TAKAFUL_PARTNERS = [
 export default function TakafulHealthPage() {
   return (
     <>
+      <PageSEO
+        title="Takaful Health Care"
+        description="Shaheen Insurance Takaful Health Care — Shariah-compliant health insurance plans under SECP-authorized Window Takaful Operations. Health Care, Health Care Plus, and Takaful Wallet plans."
+        keywords="Takaful health insurance Pakistan, Islamic health insurance, Window Takaful, Shariah health cover, halal insurance Pakistan"
+        path="/health-care/takaful"
+        schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Takaful Health Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
+      />
       <PageHero
         title="Takaful Health Care"
         subtitle="Shariah-compliant health insurance solutions under our SECP-authorized Window Takaful Operations — launched April 2018"
         breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: 'Takaful Health Care' }]}
-        badge="Window Takaful"
+        badge="Window Takaful" videoCategory="takaful"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&q=80&auto=format&fit=crop"
+                  alt="Takaful Health Insurance" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Window Takaful</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white font-semibold text-xs px-3 py-1 rounded-full">SECP Authorized</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80&auto=format&fit=crop"
+                    alt="Medical care" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-sm">Since</div>
+                  <div className="text-gold font-display font-bold text-xl">2018</div>
+                  <div className="text-white/60 text-[10px]">WTO Operations</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -171,3 +204,4 @@ export default function TakafulHealthPage() {
     </>
   )
 }
+

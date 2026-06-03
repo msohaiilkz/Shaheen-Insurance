@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import PageHero from '../components/layout/PageHero'
 import ContactSidebar from '../components/layout/ContactSidebar'
+import PageSEO from '../components/shared/PageSEO'
 import { FileText, Download, AlertCircle, Mail } from 'lucide-react'
 
 type DocItem = { title: string; desc?: string; url: string }
@@ -63,16 +64,47 @@ const CATEGORIES: DocCategory[] = [
 export default function DownloadsPage() {
   return (
     <>
+      <PageSEO
+        title="Downloads"
+        description="Download Shaheen Insurance policy documents, claim forms, application forms, and wordings. All documents available as PDF for easy access."
+        keywords="Shaheen Insurance forms download, policy wording, claim forms PDF, insurance application form Pakistan"
+        path="/downloads"
+      />
       <PageHero
         title="Downloads"
         subtitle="All policy documents, governance forms, claim forms, and investor documents in one place — available as downloadable PDFs"
         breadcrumbs={[{ label: 'Downloads' }]}
-        badge="Documents & Forms"
+        badge="Documents & Forms" videoCategory="downloads"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-44 md:h-52">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=80&auto=format&fit=crop"
+                  alt="Downloads — Policy Documents & Forms" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">PDF Forms</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Policy Documents</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80&auto=format&fit=crop"
+                    alt="Documents" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">5+</div>
+                  <div className="text-white/60 text-[10px]">Document Types</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

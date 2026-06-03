@@ -1,7 +1,5 @@
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
+/* Inter Variable Font — opsz,wght axes (same as Fonts.js Main) */
+@import '@fontsource-variable/inter';
 @import '@fontsource/barlow-condensed/600.css';
 @import '@fontsource/barlow-condensed/700.css';
 @import '@fontsource/barlow-condensed/800.css';
@@ -13,7 +11,15 @@
 @layer base {
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* navbar offset: top-bar(28px) + nav(56px) = 84px; md: top-bar(28px) + nav(64px) = 92px */
+    --navbar-offset: 84px;
+  }
+
+  @media (min-width: 768px) {
+    html { --navbar-offset: 92px; }
+  }
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
@@ -21,9 +27,12 @@
     background: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   #root { min-height: 100vh; display: flex; flex-direction: column; }
+
+  img { max-width: 100%; height: auto; }
 }
 
 @layer components {
@@ -71,6 +80,28 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+}
+
+/* ── HERO ANIMATED GRADIENT ──────────────────────── */
+@keyframes heroGradient {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50%       { transform: translateY(-8px) scale(1.01); }
+}
+
+.hero-animated-bg {
+  background: linear-gradient(-45deg, #0D1B4D, #1a2a6e, #162058, #0D1B4D, #1e3380, #28368F);
+  background-size: 400% 400%;
+  animation: heroGradient 14s ease infinite;
+}
+
+.hero-float {
+  animation: heroFloat 6s ease-in-out infinite;
 }
 
 /* ── SCROLLBAR ────────────────────────────────────── */

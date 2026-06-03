@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { TrendingUp, Award, Building2, Users, FileText, Download, Mail, Phone, ExternalLink, ArrowRight } from 'lucide-react'
 
 const KEY_INFO = [
@@ -45,16 +46,47 @@ const DOCUMENTS = [
 export default function InvestorPage() {
   return (
     <>
+      <PageSEO
+        title="Investor Information"
+        description="Shaheen Insurance investor relations — PSX listed (SHNI), annual reports, financial statements, AGM notices, and shareholder information for PACRA A++ rated SICL."
+        keywords="Shaheen Insurance investor, SHNI PSX, SICL annual report, insurance company stock Pakistan, shareholder information"
+        path="/investor"
+        schema={{ '@context': 'https://schema.org', '@type': 'WebPage', name: 'Investor Information — Shaheen Insurance', description: 'Investor relations page for PSX-listed Shaheen Insurance Company Limited.' }}
+      />
       <PageHero
         title="Investor Information"
         subtitle="Financial transparency, regulatory compliance, and shareholder services — Shaheen Insurance listed on PSX (SHNI)"
         breadcrumbs={[{ label: 'Investor Information' }]}
-        badge="Investor Relations"
+        badge="Investor Relations" videoCategory="investor"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&auto=format&fit=crop"
+                  alt="Shaheen Insurance Investor Relations" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">PSX: SHNI</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">PACRA A++</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-base">Rs. 600M</div>
+                  <div className="text-white/60 text-[10px]">Paid-up Capital</div>
+                </div>
+                <div className="bg-gold rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-navy font-display font-bold text-lg">A++</div>
+                  <div className="text-navy/70 text-[10px]">PACRA Rating</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Key Stats */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -195,3 +227,4 @@ export default function InvestorPage() {
     </>
   )
 }
+

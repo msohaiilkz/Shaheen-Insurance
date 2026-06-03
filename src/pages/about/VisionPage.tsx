@@ -1,20 +1,54 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { Eye, Target, Heart, Globe } from 'lucide-react'
 
 export default function VisionPage() {
   return (
     <>
+      <PageSEO
+        title="Vision & Mission"
+        description="Shaheen Insurance's vision: to be Pakistan's most trusted insurer. Our mission focuses on prompt claims, customer satisfaction, and building financial security for policyholders nationwide."
+        keywords="Shaheen Insurance vision, mission, values, insurance company goals Pakistan"
+        path="/about/vision"
+      />
       <PageHero
         title="Vision & Mission"
         subtitle="Our guiding principles — delivering insurance at its best while caring for society and our customers"
         breadcrumbs={[{ label: 'About Us', path: '/about' }, { label: 'Vision & Mission' }]}
+        videoCategory="about"
       />
 
       <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop"
+                  alt="Shaheen Insurance Vision" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Shaheen Foundation</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">PAF Sponsored</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=400&q=80&auto=format&fit=crop"
+                    alt="Mission" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-sm">Since</div>
+                  <div className="text-gold font-display font-bold text-lg">1996</div>
+                  <div className="text-white/60 text-[10px]">Incorporated</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Vision */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -127,3 +161,4 @@ export default function VisionPage() {
     </>
   )
 }
+

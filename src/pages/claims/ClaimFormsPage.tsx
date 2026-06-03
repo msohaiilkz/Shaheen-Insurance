@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { FileText, Download, Car, Flame, Heart, Home, Package, Mail, Phone, AlertCircle } from 'lucide-react'
 
 const FORMS = [
@@ -40,15 +41,47 @@ const FORMS = [
 export default function ClaimFormsPage() {
   return (
     <>
+      <PageSEO
+        title="Claim Forms Download"
+        description="Download Shaheen Insurance claim forms — motor, fire, health, burglary, and general insurance claim forms available as PDF for easy printing and submission."
+        keywords="Shaheen Insurance claim form, motor claim form download, health claim form, insurance forms PDF Pakistan"
+        path="/claims/forms"
+      />
       <PageHero
         title="Claim Forms"
         subtitle="Download the correct claim form for your insurance type — all forms available in PDF format for easy printing and submission"
         breadcrumbs={[{ label: 'Claims', path: '/claims' }, { label: 'Claim Forms' }]}
+        videoCategory="claims"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-44 md:h-52">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=80&auto=format&fit=crop"
+                  alt="Claim Forms Download" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">PDF Forms</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Free Download</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop"
+                    alt="Documentation" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">5</div>
+                  <div className="text-white/60 text-[10px]">Form Types</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

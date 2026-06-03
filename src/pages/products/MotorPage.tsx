@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { CheckCircle2, Car, FileText, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -24,8 +25,15 @@ const THIRD_PARTY = [
 export default function MotorPage() {
   return (
     <>
+      <PageSEO
+        title="Motor Insurance"
+        description="Shaheen Insurance motor insurance — comprehensive and third-party vehicle coverage in Pakistan. Protection against accidental damage, theft, fire, and third-party liability."
+        keywords="motor insurance Pakistan, car insurance, vehicle insurance, comprehensive motor cover, third party motor insurance Karachi"
+        path="/products/motor"
+        schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Motor Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK', description: 'Comprehensive and third-party motor vehicle insurance in Pakistan.' }}
+      />
       <PageHero title="Motor Insurance" subtitle="Comprehensive protection for your vehicle — covering accidental damage, theft, fire, and third-party liability"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Motor Insurance' }]} badge="Personal Product" />
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Motor Insurance' }]} badge="Personal Product" videoCategory="motor" />
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
@@ -34,6 +42,33 @@ export default function MotorPage() {
               <div className="gold-line mb-4" />
               <h2 className="font-display text-3xl font-bold text-navy mb-4">About Motor Insurance</h2>
               <p className="text-gray-600 leading-relaxed">Shaheen Insurance offers comprehensive motor vehicle insurance protecting your car against a wide range of risks. Whether it's an accident, fire, theft, or natural calamity — your vehicle is protected with Shaheen's motor policy.</p>
+            </motion.div>
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80&auto=format&fit=crop"
+                  alt="Motor Insurance" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Comprehensive Cover</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&q=80&auto=format&fit=crop"
+                    alt="Vehicle" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <p className="text-white text-[10px] font-semibold">Third-Party</p>
+                  </div>
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-2xl">28+</div>
+                  <div className="text-white/60 text-[10px]">Years of Service</div>
+                </div>
+              </div>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -106,3 +141,4 @@ export default function MotorPage() {
     </>
   )
 }
+

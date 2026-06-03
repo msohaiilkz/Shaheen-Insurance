@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import PageHero from '../components/layout/PageHero'
 import ContactSidebar from '../components/layout/ContactSidebar'
+import PageSEO from '../components/shared/PageSEO'
 import { Phone, Mail, MapPin, Send, CheckCircle2, Building2 } from 'lucide-react'
 
 const SUBJECT_OPTIONS = [
@@ -73,15 +74,45 @@ export default function ContactPage() {
 
   return (
     <>
+      <PageSEO
+        title="Contact Us"
+        description="Contact Shaheen Insurance — call 111-765-111, email info@shaheeninsurance.com, or visit our 10th Floor office in Shaheen Complex, Karachi. We respond within 5 business days."
+        keywords="contact Shaheen Insurance, insurance company phone number, insurance office Karachi, 111-765-111"
+        path="/contact"
+        schema={{ '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contact Shaheen Insurance', description: 'Get in touch with Shaheen Insurance Company Limited.', url: 'https://www.shaheeninsurance.com/contact' }}
+      />
       <PageHero
         title="Contact Us"
         subtitle="Reach Shaheen Insurance — Head Office Karachi, branches nationwide, or connect with us online"
-        breadcrumbs={[{ label: 'Contact Us' }]}
+        breadcrumbs={[{ label: 'Contact Us' }]} videoCategory="contact"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-44 md:h-52">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format&fit=crop"
+                  alt="Shaheen Insurance Head Office Karachi" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Shaheen Complex, Karachi</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-base">111-765-111</div>
+                  <div className="text-white/60 text-[10px]">UAN</div>
+                </div>
+                <div className="bg-gold rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-navy font-display font-bold text-sm">12+</div>
+                  <div className="text-navy/70 text-[10px]">Branches</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Office Cards */}
             <div>

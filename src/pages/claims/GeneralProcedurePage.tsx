@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { Car, Flame, Home, Cog, Monitor, Package, Heart, ChevronRight, AlertCircle } from 'lucide-react'
 import { useState } from 'react'
 
@@ -169,15 +170,47 @@ export default function GeneralProcedurePage() {
 
   return (
     <>
+      <PageSEO
+        title="General Claim Procedure"
+        description="Shaheen Insurance claim procedures — detailed step-by-step guidance for motor, fire, burglary, machinery, electronics, and health claims. Know exactly what to do when loss occurs."
+        keywords="insurance claim procedure Pakistan, how to file motor claim, fire claim process, health claim procedure Shaheen Insurance"
+        path="/claims/procedure"
+      />
       <PageHero
         title="General Claim Procedure"
         subtitle="Step-by-step guidance for filing claims across all insurance types — auto, fire, burglary, machinery, electronics, health, and more"
         breadcrumbs={[{ label: 'Claims', path: '/claims' }, { label: 'General Procedure' }]}
+        videoCategory="claims"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-44 md:h-52">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80&auto=format&fit=crop"
+                  alt="Claim Procedure" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">5-Step Process</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">7 Claim Types</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80&auto=format&fit=crop"
+                    alt="Documentation" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-sm">5 Days</div>
+                  <div className="text-white/60 text-[10px]">Acknowledgment</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* General Steps */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

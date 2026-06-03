@@ -67,7 +67,7 @@ export default function StatsSection() {
         </motion.div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {STATS.map(({ icon: Icon, value, suffix, label, sub }, i) => {
             const isNum = typeof value === 'number'
             return (

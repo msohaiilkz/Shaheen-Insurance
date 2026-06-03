@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -35,8 +36,15 @@ const PRODUCTS = [
 export default function EngineeringPage() {
   return (
     <>
+      <PageSEO
+        title="Engineering Insurance"
+        description="Shaheen Insurance engineering insurance — CAR, EAR, CPM, Machinery Breakdown, MLOP, and EEI policies for construction projects and industrial operations in Pakistan."
+        keywords="engineering insurance Pakistan, CAR insurance, contractors all risk, machinery breakdown insurance, EEI Pakistan"
+        path="/products/engineering"
+        schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Engineering Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
+      />
       <PageHero title="Engineering Insurance" subtitle="Comprehensive coverage for construction projects, machinery, and industrial operations — CAR, EAR, CPM, Machinery & MLOP"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Engineering' }]} badge="Business Product" />
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Engineering' }]} badge="Business Product" videoCategory="engineering" />
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
@@ -44,6 +52,31 @@ export default function EngineeringPage() {
               <div className="gold-line mb-4" />
               <h2 className="font-display text-3xl font-bold text-navy mb-4">Engineering Insurance Products</h2>
               <p className="text-gray-600 leading-relaxed">Shaheen Insurance provides five specialized engineering insurance products covering every phase of construction and industrial operations — from groundbreaking to commissioning and ongoing operations.</p>
+            </motion.div>
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80&auto=format&fit=crop"
+                  alt="Engineering Insurance" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">CAR / EAR</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white font-semibold text-xs px-3 py-1 rounded-full">CPM / MLOP</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&q=80&auto=format&fit=crop"
+                    alt="Construction" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">5</div>
+                  <div className="text-white/60 text-[10px]">Products</div>
+                </div>
+              </div>
             </motion.div>
 
             <div className="space-y-5">
@@ -90,3 +123,4 @@ export default function EngineeringPage() {
     </>
   )
 }
+

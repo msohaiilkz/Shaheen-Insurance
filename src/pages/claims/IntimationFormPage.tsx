@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { CheckCircle2, Clock, Send } from 'lucide-react'
 
 const NATURE_OPTIONS = [
@@ -43,15 +44,48 @@ export default function IntimationFormPage() {
 
   return (
     <>
+      <PageSEO
+        title="Claim Intimation Form"
+        description="Submit your Shaheen Insurance claim intimation online. Our claims team will acknowledge within 5 business days. Quick and easy online claim notification form."
+        keywords="claim intimation Shaheen Insurance, online claim filing Pakistan, insurance claim notification, submit claim online"
+        path="/claims/intimation"
+        schema={{ '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Shaheen Insurance Claim Intimation', description: 'Online claim intimation form for Shaheen Insurance policyholders.' }}
+      />
       <PageHero
         title="Claim Intimation Form"
         subtitle="Submit your claim intimation online — our claims team will acknowledge and respond within 5 business days"
         breadcrumbs={[{ label: 'Claims', path: '/claims' }, { label: 'Claim Intimation Form' }]}
+        videoCategory="claims"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-44 md:h-52">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80&auto=format&fit=crop"
+                  alt="Online Claim Intimation" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Online Intimation</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">5-Day SLA</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80&auto=format&fit=crop"
+                    alt="Claims" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-sm">Fast</div>
+                  <div className="text-white/60 text-[10px]">Response</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { CheckCircle2, FileText, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
@@ -9,8 +10,15 @@ const COVERAGE = ['Fire and lightning', 'Riot, strike and malicious damage', 'Ex
 export default function FirePage() {
   return (
     <>
+      <PageSEO
+        title="Fire & Property Insurance"
+        description="Shaheen Insurance fire and property insurance — protection against fire, lightning, explosion, earthquake, riot, and allied perils for residential and commercial properties in Pakistan."
+        keywords="fire insurance Pakistan, property insurance, commercial fire cover, earthquake insurance Pakistan, building insurance"
+        path="/products/fire"
+        schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Fire Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK', description: 'Fire and allied perils insurance for properties in Pakistan.' }}
+      />
       <PageHero title="Fire & Property Insurance" subtitle="Protect your property against fire, lightning, explosion, earthquake, riot and allied perils"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Fire Insurance' }]} badge="Business Product" />
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Fire Insurance' }]} badge="Business Product" videoCategory="fire" />
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
@@ -18,6 +26,33 @@ export default function FirePage() {
               <div className="gold-line mb-4" />
               <h2 className="font-display text-3xl font-bold text-navy mb-4">About Fire Insurance</h2>
               <p className="text-gray-600 leading-relaxed">Shaheen Insurance's Fire & Property policy provides wide-ranging protection to residential and commercial properties against fire and a host of allied perils. Whether it's your home, factory, warehouse, or commercial establishment — you are protected.</p>
+            </motion.div>
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop"
+                  alt="Fire Insurance" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Property & Fire Cover</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&q=80&auto=format&fit=crop"
+                    alt="Building" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                  <div className="absolute bottom-2 left-2">
+                    <p className="text-white text-[10px] font-semibold">Commercial</p>
+                  </div>
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">9 Perils</div>
+                  <div className="text-white/60 text-[10px]">Fully Covered</div>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
@@ -66,3 +101,4 @@ export default function FirePage() {
     </>
   )
 }
+

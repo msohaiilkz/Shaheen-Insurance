@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { CheckCircle2, Users, TrendingUp, Building2, Phone, Mail, Heart, Shield } from 'lucide-react'
 
 const BENEFITS = [
@@ -31,15 +32,48 @@ const PLAN_FEATURES = [
 export default function GroupHealthPage() {
   return (
     <>
+      <PageSEO
+        title="Group Health Insurance"
+        description="Shaheen Insurance group health insurance for corporates — higher coverage limits at lower per-head premiums. Protect your employees with hospitalization, maternity, and OPD options."
+        keywords="group health insurance Pakistan, corporate health insurance, employee health benefits, group medical cover Pakistan"
+        path="/health-care/group"
+        schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Group Health Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
+      />
       <PageHero
         title="Group Health Insurance"
         subtitle="Corporate health solutions that protect your employees with higher coverage limits, lower per-head premiums, and simplified administration"
         breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: 'Group Health Insurance' }]}
+        videoCategory="health"
       />
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-12">
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800&q=80&auto=format&fit=crop"
+                  alt="Group Health Insurance" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/15 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex gap-2">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Corporate Plans</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Cashless</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80&auto=format&fit=crop"
+                    alt="Medical" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">Lower</div>
+                  <div className="text-white/60 text-[10px]">Per-Head Premium</div>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Intro */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -161,3 +195,4 @@ export default function GroupHealthPage() {
     </>
   )
 }
+

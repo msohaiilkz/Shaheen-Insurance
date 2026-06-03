@@ -1,14 +1,22 @@
-import { motion } from 'framer-motion'
+﻿import { motion } from 'framer-motion'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { CheckCircle2, Link as LinkIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function MarinePage() {
   return (
     <>
+      <PageSEO
+        title="Marine Insurance"
+        description="Shaheen Insurance marine cargo insurance — import/export and inland transit coverage in Pakistan. Protect your goods from origin to destination with ICC clauses A, B & C."
+        keywords="marine insurance Pakistan, cargo insurance, import export insurance, goods in transit, marine cargo cover"
+        path="/products/marine"
+        schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Marine Cargo Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
+      />
       <PageHero title="Marine Insurance" subtitle="Import/export cargo and inland goods-in-transit coverage — protecting your goods from origin to destination"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Marine Insurance' }]} badge="Business Product" />
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Marine Insurance' }]} badge="Business Product" videoCategory="marine" />
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-10">
@@ -19,6 +27,30 @@ export default function MarinePage() {
                 <p>Shaheen Insurance provides comprehensive marine coverage for businesses involved in import, export, and inland transportation of goods.</p>
                 <div className="bg-gold/8 border border-gold/20 rounded-xl p-5">
                   <p className="text-navy font-semibold">"Marine Cargo Inland Insurance, also called goods-in-transit insurance, will cover for the loss or damage to the goods in transit."</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Visual Collage */}
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
+              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
+              <div className="col-span-2 relative rounded-2xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1494412651409-8963ce7935a7?w=800&q=80&auto=format&fit=crop"
+                  alt="Marine Insurance" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Import · Export · Transit</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                <div className="relative rounded-2xl overflow-hidden flex-1">
+                  <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80&auto=format&fit=crop"
+                    alt="Cargo" className="w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-navy/40" />
+                </div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                  <div className="text-gold font-display font-bold text-lg">9 Risks</div>
+                  <div className="text-white/60 text-[10px]">Fully Covered</div>
                 </div>
               </div>
             </motion.div>
@@ -63,3 +95,4 @@ export default function MarinePage() {
     </>
   )
 }
+

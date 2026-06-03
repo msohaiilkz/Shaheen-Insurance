@@ -26,7 +26,7 @@ export default {
       },
       fontFamily: {
         display: ['"Barlow Condensed"', 'Barlow', 'system-ui', 'sans-serif'],
-        sans:    ['Inter', 'system-ui', 'sans-serif'],
+        sans:    ['"Inter Variable"', 'Inter', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'hero-gradient': 'linear-gradient(160deg, #0e1a60 0%, #1A2570 55%, #28368F 100%)',

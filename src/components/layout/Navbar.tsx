@@ -75,15 +75,15 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top accent bar — UAN + PACRA rating */}
-      <div className="text-white/70 text-[11px] py-1.5 px-6 flex justify-between items-center" style={{ backgroundColor: '#1A2570' }}>
-        <span className="hidden md:flex items-center gap-4">
+      {/* Top accent bar */}
+      <div className="text-white/70 text-[11px] py-1.5 px-4 lg:px-6 flex justify-between items-center" style={{ backgroundColor: '#1A2570' }}>
+        <span className="hidden sm:flex items-center gap-4 truncate">
           <span>Shaheen Insurance Company Ltd — A Sign of Protection</span>
         </span>
-        <div className="flex items-center gap-4 ml-auto">
+        <div className="flex items-center gap-3 ml-auto">
           <a href="tel:111765111" className="flex items-center gap-1.5 hover:text-gold transition-colors">
             <Phone size={10} className="text-gold" />
-            UAN: <span className="text-white font-medium">111-765-111</span>
+            <span className="hidden xs:inline">UAN: </span><span className="text-white font-medium">111-765-111</span>
           </a>
           <span className="w-px h-3 bg-white/20" />
           <span className="text-gold font-semibold">PACRA: A++</span>
@@ -92,12 +92,13 @@ export default function Navbar() {
 
       {/* Main navbar — always white */}
       <motion.header
+        id="main-navbar"
         className={`sticky top-0 z-50 bg-white border-b border-navy/10 transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''}`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
       >
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-14 md:h-16">
 
           {/* Logo */}
           <Link to="/" className="shrink-0 flex items-center">
@@ -182,28 +183,38 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22 }}
-            className="lg:hidden fixed top-[calc(1.75rem+4rem)] left-0 right-0 z-40 bg-white border-b border-navy/10 shadow-lg overflow-y-auto max-h-[80vh]"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden fixed left-0 right-0 z-40 bg-white border-b border-navy/10 shadow-xl overflow-y-auto"
+            style={{ top: 'calc(var(--navbar-offset, 82px))', maxHeight: 'calc(100vh - 82px)' }}
           >
-            <div className="px-4 py-4 space-y-0.5">
+            <div className="px-4 py-3 space-y-0.5">
               {NAV_ITEMS.map((item) => (
                 <div key={item.path}>
                   <Link
                     to={item.path}
-                    className="block px-4 py-3 font-semibold text-navy hover:text-gold hover:bg-surface transition-colors text-sm border-l-2 border-transparent hover:border-gold"
+                    className={`flex items-center justify-between px-4 py-3 font-semibold text-sm border-l-2 transition-colors ${
+                      location.pathname.startsWith(item.path) && item.path !== '/' || location.pathname === item.path
+                        ? 'text-gold border-gold bg-surface'
+                        : 'text-navy border-transparent hover:text-gold hover:bg-surface hover:border-gold'
+                    }`}
                   >
                     {item.label}
+                    {item.children && <ChevronDown size={13} className="opacity-40" />}
                   </Link>
                   {item.children && (
-                    <div className="ml-4 border-l border-navy/10">
+                    <div className="ml-4 border-l-2 border-gold/20 mb-1">
                       {item.children.map((child) => (
                         <Link
                           key={child.path}
                           to={child.path}
-                          className="block px-4 py-2 text-sm text-navy/60 hover:text-gold transition-colors"
+                          className={`block px-4 py-2.5 text-sm transition-colors ${
+                            location.pathname === child.path
+                              ? 'text-gold font-semibold'
+                              : 'text-navy/55 hover:text-gold'
+                          }`}
                         >
                           {child.label}
                         </Link>
@@ -212,8 +223,8 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="pt-4 pb-2 border-t border-navy/10">
-                <Link to="/claims/intimation" className="block w-full text-center bg-red text-white font-bold py-3 text-sm tracking-wide hover:bg-red-dark transition-colors">
+              <div className="pt-3 pb-2 border-t border-navy/10">
+                <Link to="/claims/intimation" className="block w-full text-center bg-red text-white font-bold py-3.5 text-sm tracking-wide hover:bg-red-dark transition-colors rounded">
                   File a Claim
                 </Link>
               </div>
