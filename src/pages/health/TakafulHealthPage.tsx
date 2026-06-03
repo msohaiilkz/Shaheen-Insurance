@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import PageHero from '../../components/layout/PageHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
+import PageSEO from '../../components/shared/PageSEO'
 import { Shield, Heart, Wallet, Download, Mail, CheckCircle2, Globe, Star } from 'lucide-react'
 
 const PRODUCTS = [

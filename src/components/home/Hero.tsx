@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
-import { ArrowRight, Shield, Star, TrendingUp, CheckCircle2, Car, Heart, Plane, Flame, Wrench, Bell, FileText, MapPin, ChevronDown, Eye, ClipboardList, Headphones, User, Home } from 'lucide-react'
+import { ArrowRight, Shield, Star, TrendingUp, CheckCircle2, Car, Heart, Plane, Flame, Bell, FileText, MapPin, ChevronDown, Eye, ClipboardList, Headphones, User, Home } from 'lucide-react'
 
 const TRUST_POINTS = [
   'Licensed by SECP — Window Takaful Operator',

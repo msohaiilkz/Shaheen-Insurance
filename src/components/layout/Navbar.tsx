@@ -93,7 +93,7 @@ export default function Navbar() {
       {/* Main navbar — always white */}
       <motion.header
         id="main-navbar"
-        className={`sticky top-0 z-50 bg-white border-b border-navy/10 transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''}`}
+        className={`sticky top-0 z-50 bg-white border-b border-navy/10 transition-shadow duration-300 relative ${scrolled ? 'shadow-md' : ''}`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
@@ -177,61 +177,61 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </motion.header>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden fixed left-0 right-0 z-40 bg-white border-b border-navy/10 shadow-xl overflow-y-auto"
-            style={{ top: 'calc(var(--navbar-offset, 82px))', maxHeight: 'calc(100vh - 82px)' }}
-          >
-            <div className="px-4 py-3 space-y-0.5">
-              {NAV_ITEMS.map((item) => (
-                <div key={item.path}>
-                  <Link
-                    to={item.path}
-                    className={`flex items-center justify-between px-4 py-3 font-semibold text-sm border-l-2 transition-colors ${
-                      location.pathname.startsWith(item.path) && item.path !== '/' || location.pathname === item.path
-                        ? 'text-gold border-gold bg-surface'
-                        : 'text-navy border-transparent hover:text-gold hover:bg-surface hover:border-gold'
-                    }`}
-                  >
-                    {item.label}
-                    {item.children && <ChevronDown size={13} className="opacity-40" />}
+        {/* Mobile menu — absolute top-full, always right below sticky navbar */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="lg:hidden absolute top-full left-0 right-0 z-50 bg-white border-b border-navy/10 shadow-xl overflow-y-auto"
+              style={{ maxHeight: 'calc(100vh - 3.5rem)' }}
+            >
+              <div className="px-4 py-3 space-y-0.5">
+                {NAV_ITEMS.map((item) => (
+                  <div key={item.path}>
+                    <Link
+                      to={item.path}
+                      className={`flex items-center justify-between px-4 py-3 font-semibold text-sm border-l-2 transition-colors ${
+                        location.pathname.startsWith(item.path) && item.path !== '/' || location.pathname === item.path
+                          ? 'text-gold border-gold bg-surface'
+                          : 'text-navy border-transparent hover:text-gold hover:bg-surface hover:border-gold'
+                      }`}
+                    >
+                      {item.label}
+                      {item.children && <ChevronDown size={13} className="opacity-40" />}
+                    </Link>
+                    {item.children && (
+                      <div className="ml-4 border-l-2 border-gold/20 mb-1">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            className={`block px-4 py-2.5 text-sm transition-colors ${
+                              location.pathname === child.path
+                                ? 'text-gold font-semibold'
+                                : 'text-navy/55 hover:text-gold'
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <div className="pt-3 pb-2 border-t border-navy/10">
+                  <Link to="/claims/intimation" className="block w-full text-center bg-red text-white font-bold py-3.5 text-sm tracking-wide hover:bg-red-dark transition-colors rounded">
+                    File a Claim
                   </Link>
-                  {item.children && (
-                    <div className="ml-4 border-l-2 border-gold/20 mb-1">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          className={`block px-4 py-2.5 text-sm transition-colors ${
-                            location.pathname === child.path
-                              ? 'text-gold font-semibold'
-                              : 'text-navy/55 hover:text-gold'
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
                 </div>
-              ))}
-              <div className="pt-3 pb-2 border-t border-navy/10">
-                <Link to="/claims/intimation" className="block w-full text-center bg-red text-white font-bold py-3.5 text-sm tracking-wide hover:bg-red-dark transition-colors rounded">
-                  File a Claim
-                </Link>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
     </>
   )
 }

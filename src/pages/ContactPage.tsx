@@ -103,13 +103,13 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex flex-col gap-3">
-                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
-                  <div className="text-gold font-display font-bold text-base">111-765-111</div>
-                  <div className="text-white/60 text-[10px]">UAN</div>
+                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-2 text-center overflow-hidden">
+                  <div className="text-gold font-display font-bold text-[10px] sm:text-sm truncate w-full text-center">111-765-111</div>
+                  <div className="text-white/60 text-[9px]">UAN</div>
                 </div>
-                <div className="bg-gold rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
+                <div className="bg-gold rounded-2xl flex-1 flex flex-col items-center justify-center p-2 text-center">
                   <div className="text-navy font-display font-bold text-sm">12+</div>
-                  <div className="text-navy/70 text-[10px]">Branches</div>
+                  <div className="text-navy/70 text-[9px]">Branches</div>
                 </div>
               </div>
             </motion.div>

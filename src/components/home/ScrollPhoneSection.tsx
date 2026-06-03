@@ -231,7 +231,7 @@ export default function ScrollPhoneSection() {
         </AnimatePresence>
 
         {/* ── LAYOUT: Left text | Center phone | Right dots ── */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between gap-8">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-center md:justify-between gap-4 md:gap-8">
 
           {/* LEFT — Text content */}
           <div className="flex-1 max-w-sm hidden md:block">
@@ -374,7 +374,7 @@ export default function ScrollPhoneSection() {
           </div>
 
           {/* RIGHT — Step dots + mobile text */}
-          <div className="flex-1 max-w-sm flex flex-col items-end gap-4">
+          <div className="shrink-0 md:flex-1 md:max-w-sm flex flex-col items-end gap-4">
 
             {/* Mobile-only text */}
             <div className="md:hidden w-full">
