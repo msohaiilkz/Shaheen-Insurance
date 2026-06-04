@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_ITEMS = [
-  { label: 'Home', path: '/' },
   {
-    label: 'About Us',
+    label: 'About',
     path: '/about',
     children: [
       { label: 'Who We Are', path: '/about/who-we-are' },
@@ -50,188 +49,244 @@ const NAV_ITEMS = [
       { label: 'Intimation Form', path: '/claims/intimation' },
     ],
   },
-  { label: 'Branch Network', path: '/branches' },
-  { label: 'Investor Info', path: '/investor' },
-  { label: 'Media Center', path: '/media' },
-  { label: 'Contact Us', path: '/contact' },
+  { label: 'Branches', path: '/branches' },
+  { label: 'Investor', path: '/investor' },
+  { label: 'Contact', path: '/contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const location = useLocation()
+  const isHome = location.pathname === '/'
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
     setMobileOpen(false)
+    setMobileExpanded(null)
     setOpenDropdown(null)
   }, [location.pathname])
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
+  const navBg = isHome && !scrolled ? 'bg-transparent' : 'bg-white shadow-sm'
+  const logoFilter = isHome && !scrolled ? 'brightness-0 invert' : 'none'
+  const linkColor = isHome && !scrolled ? 'text-white/80 hover:text-white' : 'text-gray-700 hover:text-navy'
+  const activeLinkColor = isHome && !scrolled ? 'text-gold' : 'text-navy font-semibold'
+
   return (
     <>
-      {/* Top accent bar */}
-      <div className="text-white/70 text-[11px] py-1.5 px-4 lg:px-6 flex justify-between items-center" style={{ backgroundColor: '#1A2570' }}>
-        <span className="hidden sm:flex items-center gap-4 truncate">
-          <span>Shaheen Insurance Company Ltd — A Sign of Protection</span>
-        </span>
-        <div className="flex items-center gap-3 ml-auto">
-          <a href="tel:111765111" className="flex items-center gap-1.5 hover:text-gold transition-colors">
-            <Phone size={10} className="text-gold" />
-            <span className="hidden xs:inline">UAN: </span><span className="text-white font-medium">111-765-111</span>
-          </a>
-          <span className="w-px h-3 bg-white/20" />
-          <span className="text-gold font-semibold">PACRA: A++</span>
-        </div>
-      </div>
-
-      {/* Main navbar — always white */}
-      <motion.header
-        id="main-navbar"
-        className={`sticky top-0 z-50 bg-white border-b border-navy/10 transition-shadow duration-300 relative ${scrolled ? 'shadow-md' : ''}`}
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-      >
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between h-14 md:h-16">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-10 flex items-center justify-between h-16 lg:h-18">
 
           {/* Logo */}
-          <Link to="/" className="shrink-0 flex items-center">
+          <Link to="/" className="shrink-0">
             <img
               src="/logo.png"
-              alt="Shaheen Insurance Company Ltd"
-              className="h-9 lg:h-11 w-auto object-contain"
+              alt="Shaheen Insurance"
+              className="h-9 w-auto object-contain transition-all duration-300"
+              style={{ filter: logoFilter }}
             />
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-0.5">
-            {NAV_ITEMS.map((item) => (
-              <div
-                key={item.path}
-                className="relative"
-                onMouseEnter={() => item.children && setOpenDropdown(item.label)}
-                onMouseLeave={() => setOpenDropdown(null)}
-              >
-                <Link
-                  to={item.path}
-                  className={`flex items-center gap-1 px-3 py-2 text-[13px] font-medium tracking-wide transition-colors duration-150 ${
-                    location.pathname === item.path || location.pathname.startsWith(item.path + '/')
-                      ? 'text-gold'
-                      : 'text-navy hover:text-gold'
-                  }`}
+          <nav className="hidden lg:flex items-center gap-1">
+            {NAV_ITEMS.map((item) => {
+              const isActive = location.pathname === item.path || location.pathname.startsWith(item.path + '/')
+              return (
+                <div
+                  key={item.path}
+                  className="relative"
+                  onMouseEnter={() => item.children && setOpenDropdown(item.label)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  {item.label}
-                  {item.children && <ChevronDown size={11} className="opacity-50 mt-px" />}
-                </Link>
+                  <Link
+                    to={item.path}
+                    className={`flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium tracking-wide transition-colors duration-150 ${isActive ? activeLinkColor : linkColor}`}
+                  >
+                    {item.label}
+                    {item.children && <ChevronDown size={11} className="opacity-60 mt-px" />}
+                  </Link>
 
-                {/* Dropdown */}
-                <AnimatePresence>
-                  {item.children && openDropdown === item.label && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-0 w-52 bg-white shadow-navy border border-navy/8 py-1 z-50"
-                    >
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.path}
-                          to={child.path}
-                          className={`block px-4 py-2.5 text-[13px] hover:bg-surface hover:text-gold transition-colors border-l-2 ${
-                            location.pathname === child.path
-                              ? 'text-gold border-gold bg-surface'
-                              : 'text-navy/70 border-transparent'
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
+                  <AnimatePresence>
+                    {item.children && openDropdown === item.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-0 mt-1 w-52 bg-white border border-gray-100 shadow-xl shadow-navy/8 py-2 z-50 rounded-xl overflow-hidden"
+                      >
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.path}
+                            to={child.path}
+                            className={`flex items-center justify-between px-4 py-2.5 text-[13px] transition-colors ${
+                              location.pathname === child.path
+                                ? 'text-navy font-semibold bg-surface'
+                                : 'text-gray-600 hover:text-navy hover:bg-surface'
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )
+            })}
           </nav>
 
-          {/* CTA + Mobile toggle */}
+          {/* Right side */}
           <div className="flex items-center gap-3">
             <Link
               to="/claims/intimation"
-              className="hidden lg:inline-flex items-center gap-2 px-5 py-2 bg-red text-white font-semibold text-[13px] tracking-wide hover:bg-red-dark transition-colors"
+              className={`hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold transition-all duration-200 rounded-lg ${
+                isHome && !scrolled
+                  ? 'bg-gold text-navy hover:bg-gold/90'
+                  : 'bg-navy text-white hover:bg-navy/90'
+              }`}
             >
               File a Claim
+              <ArrowRight size={14} />
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 text-navy hover:text-gold transition-colors"
+              className={`lg:hidden p-2 rounded-lg transition-colors ${
+                isHome && !scrolled ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-surface'
+              }`}
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile menu — absolute top-full, always right below sticky navbar */}
-        <AnimatePresence>
-          {mobileOpen && (
+      {/* Mobile menu — full-screen overlay */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 lg:hidden"
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-navy/95 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+
+            {/* Menu panel */}
             <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-              className="lg:hidden absolute top-full left-0 right-0 z-50 bg-white border-b border-navy/10 shadow-xl overflow-y-auto"
-              style={{ maxHeight: 'calc(100vh - 3.5rem)' }}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white flex flex-col"
             >
-              <div className="px-4 py-3 space-y-0.5">
-                {NAV_ITEMS.map((item) => (
-                  <div key={item.path}>
-                    <Link
-                      to={item.path}
-                      className={`flex items-center justify-between px-4 py-3 font-semibold text-sm border-l-2 transition-colors ${
-                        location.pathname.startsWith(item.path) && item.path !== '/' || location.pathname === item.path
-                          ? 'text-gold border-gold bg-surface'
-                          : 'text-navy border-transparent hover:text-gold hover:bg-surface hover:border-gold'
-                      }`}
-                    >
-                      {item.label}
-                      {item.children && <ChevronDown size={13} className="opacity-40" />}
-                    </Link>
-                    {item.children && (
-                      <div className="ml-4 border-l-2 border-gold/20 mb-1">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.path}
-                            to={child.path}
-                            className={`block px-4 py-2.5 text-sm transition-colors ${
-                              location.pathname === child.path
-                                ? 'text-gold font-semibold'
-                                : 'text-navy/55 hover:text-gold'
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
+              {/* Header */}
+              <div className="flex items-center justify-between px-5 h-16 border-b border-gray-100">
+                <img src="/logo.png" alt="Shaheen Insurance" className="h-8 w-auto object-contain" />
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-2 text-gray-500 hover:text-navy rounded-lg hover:bg-surface transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Nav items */}
+              <div className="flex-1 overflow-y-auto py-4 px-4">
+                {NAV_ITEMS.map((item) => {
+                  const isActive = location.pathname.startsWith(item.path)
+                  const isExpanded = mobileExpanded === item.label
+                  return (
+                    <div key={item.path} className="mb-1">
+                      <div
+                        className={`flex items-center justify-between px-4 py-3 rounded-xl cursor-pointer transition-colors ${
+                          isActive ? 'bg-surface text-navy font-semibold' : 'text-gray-700 hover:bg-surface hover:text-navy'
+                        }`}
+                        onClick={() => {
+                          if (item.children) {
+                            setMobileExpanded(isExpanded ? null : item.label)
+                          } else {
+                            setMobileOpen(false)
+                          }
+                        }}
+                      >
+                        <Link
+                          to={item.path}
+                          className="flex-1 text-sm font-medium"
+                          onClick={(e) => item.children && e.preventDefault()}
+                        >
+                          {item.label}
+                        </Link>
+                        {item.children && (
+                          <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                            <ChevronDown size={15} className="text-gray-400" />
+                          </motion.div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                ))}
-                <div className="pt-3 pb-2 border-t border-navy/10">
-                  <Link to="/claims/intimation" className="block w-full text-center bg-red text-white font-bold py-3.5 text-sm tracking-wide hover:bg-red-dark transition-colors rounded">
-                    File a Claim
-                  </Link>
-                </div>
+
+                      <AnimatePresence>
+                        {item.children && isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="ml-4 mt-1 border-l-2 border-gold/20 pl-3 pb-1">
+                              {item.children.map((child) => (
+                                <Link
+                                  key={child.path}
+                                  to={child.path}
+                                  onClick={() => setMobileOpen(false)}
+                                  className={`block py-2.5 text-sm transition-colors ${
+                                    location.pathname === child.path
+                                      ? 'text-navy font-semibold'
+                                      : 'text-gray-500 hover:text-navy'
+                                  }`}
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )
+                })}
+              </div>
+
+              {/* Bottom CTA */}
+              <div className="px-4 pb-6 pt-3 border-t border-gray-100">
+                <Link
+                  to="/claims/intimation"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full bg-navy text-white font-bold py-3.5 rounded-xl text-sm hover:bg-navy/90 transition-colors"
+                >
+                  File a Claim
+                  <ArrowRight size={15} />
+                </Link>
               </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.header>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

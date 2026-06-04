@@ -1,208 +1,103 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
-import { Car, Flame, Anchor, Plane, Wrench, Package, Landmark, Heart, ArrowRight } from 'lucide-react'
+import { Car, Flame, Anchor, Plane, Wrench, Package, Landmark, Heart, ArrowUpRight } from 'lucide-react'
 
 const PRODUCTS = [
-  {
-    icon: Car,
-    title: 'Motor Insurance',
-    desc: 'Comprehensive cover against accidental damage, fire, theft, riots, floods, and third-party liability.',
-    path: '/products/motor',
-    tags: ['Comprehensive', 'Third-Party'],
-  },
-  {
-    icon: Flame,
-    title: 'Fire Insurance',
-    desc: 'Protection against fire, lightning, explosion, earthquake, riot, burglary and allied perils.',
-    path: '/products/fire',
-    tags: ['Property', 'Allied Perils'],
-  },
-  {
-    icon: Anchor,
-    title: 'Marine Insurance',
-    desc: 'Import/export cargo and inland goods-in-transit coverage against loss or damage during transit.',
-    path: '/products/marine',
-    tags: ['Cargo', 'Inland Transit'],
-  },
-  {
-    icon: Plane,
-    title: 'Travel Insurance',
-    desc: 'Up to USD 50,000 medical cover, 92-day trips, worldwide emergency assistance via Eurocross (S&P A+).',
-    path: '/products/travel',
-    tags: ['Up to 92 Days', 'USD 50K Cover'],
-  },
-  {
-    icon: Wrench,
-    title: 'Engineering Insurance',
-    desc: 'CAR, EAR, Machinery Breakdown, CPM and MLOP — complete protection for construction & industrial projects.',
-    path: '/products/engineering',
-    tags: ['CAR', 'Machinery', 'MLOP'],
-  },
-  {
-    icon: Package,
-    title: 'Miscellaneous',
-    desc: 'Cash in safe/transit, personal accident, workmen compensation, fidelity guarantee, and more.',
-    path: '/products/miscellaneous',
-    tags: ['Personal Accident', 'Liability'],
-  },
-  {
-    icon: Landmark,
-    title: 'Bond Insurance',
-    desc: 'Bid bonds, mobilization advance bonds, and performance bonds for contractors and project owners.',
-    path: '/products/bond',
-    tags: ['Bid Bond', 'Performance Bond'],
-  },
-  {
-    icon: Heart,
-    title: 'Health Insurance',
-    desc: 'Takaful health care, group & individual plans with panel hospital access across Pakistan.',
-    path: '/health-care',
-    tags: ['Takaful', 'Group', 'Individual'],
-  },
+  { icon: Car,      title: 'Motor',         desc: 'Comprehensive & third-party cover for cars, bikes, and commercial vehicles.', path: '/products/motor',         color: 'bg-blue-50 text-blue-600' },
+  { icon: Flame,    title: 'Fire',          desc: 'Property protection against fire, explosion, earthquake and allied perils.',   path: '/products/fire',          color: 'bg-orange-50 text-orange-600' },
+  { icon: Anchor,   title: 'Marine',        desc: 'Import/export cargo and inland goods-in-transit coverage.',                   path: '/products/marine',        color: 'bg-cyan-50 text-cyan-600' },
+  { icon: Plane,    title: 'Travel',        desc: 'Up to USD 50,000 medical cover for trips up to 92 days, worldwide.',         path: '/products/travel',        color: 'bg-indigo-50 text-indigo-600' },
+  { icon: Wrench,   title: 'Engineering',   desc: 'CAR, EAR, Machinery Breakdown and MLOP for industrial projects.',            path: '/products/engineering',   color: 'bg-gray-100 text-gray-700' },
+  { icon: Package,  title: 'Miscellaneous', desc: 'Cash transit, personal accident, workmen compensation and more.',            path: '/products/miscellaneous', color: 'bg-purple-50 text-purple-600' },
+  { icon: Landmark, title: 'Bond',          desc: 'Bid, performance, and mobilization advance bonds for contractors.',          path: '/products/bond',          color: 'bg-yellow-50 text-yellow-700' },
+  { icon: Heart,    title: 'Health',        desc: 'Takaful health, group and individual plans with panel hospital access.',      path: '/health-care',            color: 'bg-red-50 text-red-500' },
 ]
 
 export default function ProductsSection() {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { type: 'spring' as const, stiffness: 100, damping: 15 }
-    }
-  }
+  const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="py-20 md:py-32 bg-surface relative overflow-hidden">
-      {/* Logical Abstract Background Pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.02]">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#28368F" strokeWidth="1"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+    <section ref={ref} className="py-24 md:py-32 bg-white">
+      <div className="max-w-7xl mx-auto px-5 lg:px-10">
 
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-20"
-        >
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-3 mb-4 md:mb-6">
-              <div className="w-12 h-[2px] bg-gold" />
-              <span className="font-display font-bold text-navy tracking-[0.2em] uppercase text-sm">Portfolio</span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight">
-              Our <span className="text-gold relative inline-block">
-                Insurance
-                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0,5 Q50,10 100,5" stroke="#D6A65A" strokeWidth="2" fill="none" />
-                </svg>
-              </span> Products
-            </h2>
-            <p className="text-navy/60 text-lg mt-6 font-light">
-              Comprehensive and logical solutions for individuals, businesses, and corporations — designed for ultimate security.
-            </p>
-
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3"
+            >
+              Our Coverage
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="font-display font-black text-navy text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight"
+            >
+              Insurance<br />Products
+            </motion.h2>
           </div>
-          <Link to="/products" className="group flex items-center justify-center gap-2 bg-navy hover:bg-gold text-white hover:text-navy font-bold px-8 py-4 transition-all duration-300 shrink-0 self-start lg:self-auto overflow-hidden relative">
-             <span className="relative z-10 flex items-center gap-2">
-               View All Products
-               <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-             </span>
-          </Link>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+          >
+            <Link
+              to="/products"
+              className="inline-flex items-center gap-2 text-navy border-b-2 border-navy pb-0.5 text-sm font-bold hover:text-gold hover:border-gold transition-colors duration-200"
+            >
+              View All Products <ArrowUpRight size={15} />
+            </Link>
+          </motion.div>
+        </div>
 
-        {/* Products grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          {PRODUCTS.map(({ icon: Icon, title, desc, path, tags }, i) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-100 border border-gray-100">
+          {PRODUCTS.map(({ icon: Icon, title, desc, path, color }, i) => (
             <motion.div
               key={title}
-              variants={itemVariants}
-              whileHover={{ y: -8 }}
-              className="relative group h-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
             >
-              <Link to={path} className="flex flex-col h-full bg-white p-8 shadow-[0_4px_20px_rgba(40,54,143,0.05)] border border-navy/5 overflow-hidden transition-all duration-500 group-hover:shadow-[0_20px_40px_rgba(40,54,143,0.12)] relative">
-                
-                {/* Animated Top Border */}
-                <div className="absolute top-0 left-0 w-full h-[3px] bg-navy/10">
-                  <motion.div 
-                    className="h-full bg-gold"
-                    initial={{ width: '0%' }}
-                    whileInView={{ width: '100%' }}
-                    transition={{ duration: 1, delay: i * 0.1 + 0.5 }}
-                    viewport={{ once: true }}
-                  />
+              <Link
+                to={path}
+                className="group flex flex-col bg-white p-7 h-full hover:bg-navy transition-all duration-300 relative overflow-hidden"
+              >
+                {/* Icon */}
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-white/10 ${color}`}>
+                  <Icon size={20} className="group-hover:text-gold transition-colors duration-300" />
                 </div>
 
-                {/* Background Animation Element */}
-                <div className="absolute -right-12 -top-12 w-32 h-32 bg-navy/5 rounded-full blur-2xl group-hover:bg-gold/20 transition-all duration-500 transform group-hover:scale-150 pointer-events-none" />
-
-                {/* Icon Wrapper with "Logical" animation */}
-                <div className="relative mb-8 shrink-0">
-                  <div className="w-14 h-14 bg-navy flex items-center justify-center transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110 relative z-10">
-                    <Icon size={24} className="text-gold" />
-                  </div>
-                  {/* Decorative dots behind icon */}
-                  <div className="absolute top-2 left-2 w-14 h-14 border border-gold/30 -z-0 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform duration-500" />
-                </div>
-
-                {/* Content */}
-                <h3 className="font-display font-bold text-navy text-xl mb-3 tracking-wide uppercase group-hover:text-gold transition-colors duration-300 shrink-0">
+                {/* Title */}
+                <h3 className="font-display font-bold text-navy text-lg uppercase tracking-wide mb-2 group-hover:text-white transition-colors duration-300">
                   {title}
                 </h3>
-                <p className="text-navy/60 text-sm leading-relaxed mb-6 flex-grow">
+
+                {/* Desc */}
+                <p className="text-gray-500 text-sm leading-relaxed flex-1 group-hover:text-white/65 transition-colors duration-300">
                   {desc}
                 </p>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-6 shrink-0 mt-auto">
-                  {tags.map((tag) => (
-                    <span key={tag} className="text-[10px] bg-surface text-navy font-semibold px-3 py-1 border border-navy/10 uppercase tracking-wider group-hover:border-gold/30 transition-colors duration-300">
-                      {tag}
-                    </span>
-                  ))}
+                {/* Arrow */}
+                <div className="mt-5 flex items-center gap-1.5">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-navy/40 group-hover:text-gold transition-colors duration-300">
+                    Learn more
+                  </span>
+                  <ArrowUpRight size={13} className="text-navy/30 group-hover:text-gold transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
 
-                {/* Arrow */}
-                <div className="flex items-center gap-2 text-sm font-bold text-navy group-hover:text-gold transition-colors duration-300 pt-4 border-t border-navy/5 shrink-0">
-                  <span className="relative">
-                    Learn More
-                    <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold group-hover:w-full transition-all duration-300" />
-                  </span>
-                  <ArrowRight size={16} className="transform group-hover:translate-x-1 transition-transform duration-300" />
-                </div>
+                {/* Bottom accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gold scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

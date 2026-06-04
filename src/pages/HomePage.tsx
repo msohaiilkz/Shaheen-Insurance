@@ -1,12 +1,10 @@
 import PageSEO from '../components/shared/PageSEO'
 import Hero from '../components/home/Hero'
-import StatsSection from '../components/home/StatsSection'
 import ProductsSection from '../components/home/ProductsSection'
-import TakafulSection from '../components/home/TakafulSection'
-import WhyShaheenSection from '../components/home/WhyShaheenSection'
-import ScrollPhoneSection from '../components/home/ScrollPhoneSection'
-import LaptopShowcaseSection from '../components/home/LaptopShowcaseSection'
-import NewsSection from '../components/home/NewsSection'
+import StatsSection from '../components/home/StatsSection'
+import ClaimsProcess from '../components/home/ClaimsProcess'
+import HealthBand from '../components/home/HealthBand'
+import CTASection from '../components/home/CTASection'
 
 export default function HomePage() {
   return (
@@ -25,13 +23,11 @@ export default function HomePage() {
         }}
       />
       <Hero />
-      <StatsSection />
       <ProductsSection />
-      <LaptopShowcaseSection />
-      <TakafulSection />
-      <WhyShaheenSection />
-      <ScrollPhoneSection />
-      <NewsSection />
+      <StatsSection />
+      <ClaimsProcess />
+      <HealthBand />
+      <CTASection />
     </main>
   )
 }
