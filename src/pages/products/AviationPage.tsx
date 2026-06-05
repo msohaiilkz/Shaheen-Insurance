@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { CheckCircle2, ArrowRight, Phone, FileText, Plane, Shield, Package, Users } from 'lucide-react'
+import { ArrowRight, Phone, FileText, Plane, Shield, Package, Users } from 'lucide-react'
 import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'

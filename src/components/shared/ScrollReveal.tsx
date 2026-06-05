@@ -1,4 +1,4 @@
-import { useEffect, useRef, ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode, type ElementType } from 'react'
 import { gsap } from '../../lib/gsap'
 
 interface RevealProps {
@@ -6,7 +6,7 @@ interface RevealProps {
   delay?: number
   from?: 'bottom' | 'left' | 'right' | 'scale'
   className?: string
-  as?: keyof JSX.IntrinsicElements
+  as?: ElementType
 }
 
 export default function ScrollReveal({ children, delay = 0, from = 'bottom', className, as: Tag = 'div' }: RevealProps) {

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FileText, Download, Car, Flame, Heart, Home, Package, Mail, Phone, AlertCircle, ArrowRight } from 'lucide-react'
+import { Download, Car, Flame, Heart, Home, Package, Mail, Phone, AlertCircle, ArrowRight } from 'lucide-react'
 import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
