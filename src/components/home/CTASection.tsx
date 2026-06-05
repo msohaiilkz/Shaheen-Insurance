@@ -1,61 +1,113 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useInView } from 'framer-motion'
 import { ArrowRight, Phone } from 'lucide-react'
+import { gsap } from '../../lib/gsap'
 
 export default function CTASection() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const sectionRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(contentRef.current, {
+        opacity: 0,
+        y: 50,
+        scale: 0.97,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+      })
+
+      // Stagger the buttons
+      const btns = contentRef.current?.querySelectorAll('.cta-btn')
+      if (btns) {
+        gsap.from(btns, {
+          opacity: 0,
+          y: 20,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        })
+      }
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section ref={ref} className="py-24 bg-navy relative overflow-hidden">
-      {/* Background texture */}
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(rgba(214,166,90,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(214,166,90,0.8) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px',
-        }}
-      />
+    <section ref={sectionRef} className="py-24 bg-navy relative overflow-hidden">
+
+      {/* SVG grid background */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="cta-grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#cta-grid)" />
+      </svg>
+
       {/* Gold glow top right */}
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Gold glow bottom left */}
+      <div className="absolute -bottom-32 -left-32 w-72 h-72 bg-gold/6 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="h-px w-8 bg-gold/60" />
-            <span className="text-gold text-[11px] font-bold tracking-[0.3em] uppercase">Get Protected Today</span>
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
+      {/* Decorative SVG shield */}
+      <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.025] pointer-events-none" width="400" height="400" viewBox="0 0 24 24" fill="#D6A65A">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+      </svg>
 
-          <h2 className="font-display font-black text-white text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6">
-            Ready to Get<br />
-            <span className="text-gold">Covered?</span>
-          </h2>
+      <div className="relative z-10 max-w-3xl mx-auto px-5 text-center" ref={contentRef}>
+        <div className="inline-flex items-center gap-3 mb-6">
+          <div className="h-px w-8 bg-gold/60" />
+          <span className="text-gold text-[11px] font-bold tracking-[0.3em] uppercase">Get Protected Today</span>
+          <div className="h-px w-8 bg-gold/60" />
+        </div>
 
-          <p className="text-white/55 text-base leading-relaxed mb-10 max-w-lg mx-auto">
-            Talk to our team today. Get a quote, learn about our products, or file a claim — we're here to help.
-          </p>
+        <h2 className="font-display font-black text-white text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6">
+          Ready to Get<br />
+          <span className="text-gold">Covered?</span>
+        </h2>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <Link
-              to="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-navy font-bold px-8 py-4 rounded-xl text-sm transition-all duration-200"
-            >
-              Contact Us <ArrowRight size={16} />
-            </Link>
-            <a
-              href="tel:111765111"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/8 hover:bg-white/14 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm transition-all duration-200"
-            >
-              <Phone size={15} /> Call 111-765-111
-            </a>
-          </div>
-        </motion.div>
+        <p className="text-white/50 text-base leading-relaxed mb-10 max-w-lg mx-auto">
+          Talk to our team today. Get a quote, learn about our products, or file a claim — we're here to help.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            to="/contact"
+            className="cta-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-navy font-bold px-8 py-4 rounded-xl text-sm transition-all duration-200"
+          >
+            Contact Us <ArrowRight size={16} />
+          </Link>
+          <a
+            href="tel:111765111"
+            className="cta-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/8 hover:bg-white/14 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm transition-all duration-200"
+          >
+            <Phone size={15} /> Call 111-765-111
+          </a>
+        </div>
+
+        {/* Trust badge row */}
+        <div className="mt-12 flex items-center justify-center gap-6 opacity-30">
+          <div className="h-px w-12 bg-white/40" />
+          <span className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">SECP Regulated</span>
+          <div className="w-1 h-1 rounded-full bg-gold/60" />
+          <span className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">PACRA A++</span>
+          <div className="w-1 h-1 rounded-full bg-gold/60" />
+          <span className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">PAF Sponsored</span>
+          <div className="h-px w-12 bg-white/40" />
+        </div>
       </div>
     </section>
   )

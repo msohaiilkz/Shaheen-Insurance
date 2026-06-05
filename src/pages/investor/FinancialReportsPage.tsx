@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import PageHero from '../../components/layout/PageHero'
-import ContactSidebar from '../../components/layout/ContactSidebar'
-import PageSEO from '../../components/shared/PageSEO'
 import { FileText, Download, ChevronDown, Mail } from 'lucide-react'
+import InnerPageHero from '../../components/layout/InnerPageHero'
+import PageSEO from '../../components/shared/PageSEO'
+import ScrollReveal from '../../components/shared/ScrollReveal'
 
 type Report = { label: string; period?: string; url: string }
 type YearGroup = { year: string | number; reports: Report[] }
@@ -194,11 +193,39 @@ const REPORTS: YearGroup[] = [
 
 const DEFAULT_OPEN = new Set([2026, 2025, 2024])
 
+const ReportsSVG = () => (
+  <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    {/* Annual report stacked pages */}
+    <rect x="75" y="38" width="90" height="115" rx="6" fill="#D6A65A" opacity="0.07" stroke="#D6A65A" strokeWidth="1.5" />
+    <rect x="80" y="32" width="90" height="115" rx="6" fill="#D6A65A" opacity="0.05" stroke="#D6A65A" strokeWidth="1" />
+    <rect x="85" y="26" width="90" height="115" rx="6" fill="#D6A65A" opacity="0.04" stroke="#D6A65A" strokeWidth="0.8" />
+    {/* Content lines */}
+    <rect x="88" y="54" width="65" height="6" rx="2" fill="#D6A65A" opacity="0.3" />
+    <rect x="88" y="66" width="52" height="4" rx="2" fill="#D6A65A" opacity="0.2" />
+    <rect x="88" y="75" width="58" height="4" rx="2" fill="#D6A65A" opacity="0.2" />
+    {/* Mini chart */}
+    <rect x="88" y="88" width="8" height="20" rx="1" fill="#D6A65A" opacity="0.25" />
+    <rect x="100" y="80" width="8" height="28" rx="1" fill="#D6A65A" opacity="0.3" />
+    <rect x="112" y="72" width="8" height="36" rx="1" fill="#D6A65A" opacity="0.38" />
+    <rect x="124" y="66" width="8" height="42" rx="1" fill="#D6A65A" opacity="0.45" />
+    <rect x="136" y="58" width="8" height="50" rx="1" fill="#D6A65A" opacity="0.5" />
+    {/* Year label */}
+    <rect x="88" y="120" width="40" height="10" rx="3" fill="#D6A65A" opacity="0.25" />
+    {/* PSX badge */}
+    <rect x="198" y="65" width="60" height="32" rx="6" fill="#D6A65A" opacity="0.12" stroke="#D6A65A" strokeWidth="1" />
+    <text x="208" y="79" fill="#D6A65A" fontSize="8" fontFamily="sans-serif" opacity="0.7">PSX: SHNI</text>
+    <text x="212" y="90" fill="#D6A65A" fontSize="7" fontFamily="sans-serif" opacity="0.5">A++ Rating</text>
+    {/* Checkmark badge */}
+    <circle cx="265" cy="25" r="12" fill="#D6A65A" opacity="0.5" stroke="#D6A65A" strokeWidth="1" />
+    <path d="M262 28 L265 32 L270 21" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 export default function FinancialReportsPage() {
   const [openYears, setOpenYears] = useState<Set<string | number>>(DEFAULT_OPEN)
 
   const toggle = (year: string | number) => {
-    setOpenYears((prev) => {
+    setOpenYears(prev => {
       const next = new Set(prev)
       next.has(year) ? next.delete(year) : next.add(year)
       return next
@@ -213,130 +240,87 @@ export default function FinancialReportsPage() {
         keywords="Shaheen Insurance annual report, financial statements, SHNI PSX financial, insurance company accounts Pakistan"
         path="/investor/reports"
       />
-      <PageHero
+      <InnerPageHero
+        category="Investor Relations"
         title="Financial Reports"
         subtitle="Complete archive of annual reports, quarterly statements, and half-yearly accounts — transparently published for shareholders and investors"
         breadcrumbs={[{ label: 'Investor Information', path: '/investor' }, { label: 'Financial Reports' }]}
-        videoCategory="investor"
+        stats={[{ value: '20+', label: 'Years of Reports' }, { value: '2006', label: 'Archive From' }, { value: 'BDO', label: 'Audited By' }]}
+        svgIllustration={<ReportsSVG />}
       />
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-10">
-
-            {/* Visual Collage */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
-              className="grid grid-cols-3 gap-3 h-44 md:h-52">
-              <div className="col-span-2 relative rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80&auto=format&fit=crop"
-                  alt="Financial Reports" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
-                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Annual Reports</span>
-                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">2006 – Present</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3">
-                <div className="relative rounded-2xl overflow-hidden flex-1">
-                  <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=400&q=80&auto=format&fit=crop"
-                    alt="Finance" className="w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-navy/40" />
-                </div>
-                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
-                  <div className="text-gold font-display font-bold text-lg">20+</div>
-                  <div className="text-white/60 text-[10px]">Years of Reports</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-3xl font-bold text-navy mb-4">Financial Report Archive</h2>
-              <p className="text-gray-600 leading-relaxed">
+      {/* Archive */}
+      <section className="py-20 md:py-28 bg-[#f8f7f5]">
+        <div className="max-w-4xl mx-auto px-5 lg:px-10">
+          <ScrollReveal>
+            <div className="text-center mb-10">
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Archive</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Financial Report Archive</h2>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">
                 Shaheen Insurance (PSX: SHNI) publishes its financial statements in compliance with SECP regulations and the Companies Act 2017. All reports are available in PDF format. Contact{' '}
                 <a href="mailto:info@shaheeninsurance.com" className="text-gold hover:underline">info@shaheeninsurance.com</a> if you require a report not listed below.
               </p>
-            </motion.div>
-
-            <div className="space-y-3">
-              {REPORTS.map(({ year, reports }, groupIdx) => {
-                const isOpen = openYears.has(year)
-                return (
-                  <motion.div
-                    key={String(year)}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.03 + groupIdx * 0.02 }}
-                    className="border border-navy/10 rounded-2xl overflow-hidden"
-                  >
-                    <button
-                      onClick={() => toggle(year)}
-                      className="w-full flex items-center justify-between px-5 py-4 bg-navy hover:bg-navy/90 transition-colors"
-                    >
-                      <div className="flex items-center gap-3">
-                        <FileText size={16} className="text-gold" />
-                        <span className="font-display font-bold text-white text-base">{year}</span>
-                        <span className="text-white/40 text-xs font-normal">{reports.length} report{reports.length !== 1 ? 's' : ''}</span>
-                      </div>
-                      <ChevronDown
-                        size={18}
-                        className={`text-gold transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                      />
-                    </button>
-
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="divide-y divide-navy/5">
-                            {reports.map(({ label, period, url }) => (
-                              <div key={label} className="flex items-center gap-3 px-5 py-3.5 hover:bg-gold/5 transition-colors group">
-                                <div className="flex-1">
-                                  <span className="text-navy text-sm font-medium">{label}</span>
-                                  {period && <span className="text-gray-400 text-xs ml-2">— {period}</span>}
-                                </div>
-                                <a
-                                  href={url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  download
-                                  className="flex items-center gap-1.5 bg-gold text-navy font-bold text-xs px-3 py-1.5 rounded-lg hover:bg-gold/85 transition-colors shrink-0 opacity-0 group-hover:opacity-100 duration-200"
-                                >
-                                  <Download size={12} />
-                                  PDF
-                                </a>
-                              </div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                )
-              })}
             </div>
+          </ScrollReveal>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-              <div className="bg-navy rounded-2xl p-7 text-white">
-                <h3 className="font-display font-bold text-xl mb-2">Need a Specific Report?</h3>
-                <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                  If you require a financial report not listed above, or wish to receive a physical copy of our Annual Report, please contact our investor relations team.
-                </p>
-                <a href="mailto:info@shaheeninsurance.com" className="flex items-center gap-2 text-gold font-semibold text-sm hover:underline">
-                  <Mail size={15} />
-                  info@shaheeninsurance.com
-                </a>
-              </div>
-            </motion.div>
-
+          <div className="space-y-3">
+            {REPORTS.map(({ year, reports }) => {
+              const isOpen = openYears.has(year)
+              return (
+                <div key={String(year)} className="border border-navy/10 rounded-2xl overflow-hidden bg-white">
+                  <button onClick={() => toggle(year)}
+                    className="w-full flex items-center justify-between px-5 py-4 bg-navy hover:bg-navy/90 transition-colors">
+                    <div className="flex items-center gap-3">
+                      <FileText size={16} className="text-gold" />
+                      <span className="font-display font-bold text-white text-base">{year}</span>
+                      <span className="text-white/40 text-xs font-normal">{reports.length} report{reports.length !== 1 ? 's' : ''}</span>
+                    </div>
+                    <ChevronDown size={18} className={`text-gold transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <div className="divide-y divide-navy/5">
+                      {reports.map(({ label, period, url }) => (
+                        <div key={label} className="flex items-center gap-3 px-5 py-3.5 hover:bg-gold/5 transition-colors group">
+                          <div className="flex-1">
+                            <span className="text-navy text-sm font-medium">{label}</span>
+                            {period && <span className="text-gray-400 text-xs ml-2">— {period}</span>}
+                          </div>
+                          <a href={url} target="_blank" rel="noopener noreferrer" download
+                            className="flex items-center gap-1.5 bg-gold text-navy font-bold text-xs px-3 py-1.5 rounded-lg hover:bg-gold/85 transition-colors shrink-0">
+                            <Download size={12} />PDF
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
-          <div><ContactSidebar /></div>
         </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-navy relative overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="reports-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
+          </pattern></defs>
+          <rect width="100%" height="100%" fill="url(#reports-cg)" />
+        </svg>
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+        <ScrollReveal>
+          <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
+            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Need More?</p>
+            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Request a <span className="text-gold">Specific Report</span>
+            </h2>
+            <p className="text-white/50 mb-8 text-sm leading-relaxed">If you require a financial report not listed above, or wish to receive a physical copy of our Annual Report, please contact our investor relations team.</p>
+            <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Mail size={15} />info@shaheeninsurance.com
+            </a>
+          </div>
+        </ScrollReveal>
       </section>
     </>
   )

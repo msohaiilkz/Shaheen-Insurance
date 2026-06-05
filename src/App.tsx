@@ -38,6 +38,7 @@ const IntimationFormPage = lazy(() => import('./pages/claims/IntimationFormPage'
 const BranchNetworkPage  = lazy(() => import('./pages/BranchNetworkPage'))
 
 const InvestorPage       = lazy(() => import('./pages/investor/InvestorPage'))
+const InvestorRelationsPage = lazy(() => import('./pages/investor/InvestorRelationsPage'))
 const FinancialReportsPage = lazy(() => import('./pages/investor/FinancialReportsPage'))
 const ElectionPage       = lazy(() => import('./pages/investor/ElectionPage'))
 
@@ -126,6 +127,7 @@ export default function App() {
               {/* Investor */}
               <Route path="/investor" element={<InvestorPage />} />
               <Route path="/investor/reports" element={<FinancialReportsPage />} />
+              <Route path="/investor/relations" element={<InvestorRelationsPage />} />
               <Route path="/investor/election" element={<ElectionPage />} />
 
               {/* Other */}

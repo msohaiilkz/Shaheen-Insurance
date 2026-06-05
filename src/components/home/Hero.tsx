@@ -1,25 +1,55 @@
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowRight, Shield, TrendingUp, Star, MapPin } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { gsap } from '../../lib/gsap'
 
 const TICKER_ITEMS = [
-  { icon: Shield, text: 'PACRA A++ Rated' },
-  { icon: Star, text: 'PAF Sponsored' },
+  { icon: Shield,    text: 'PACRA A++ Rated' },
+  { icon: Star,      text: 'PAF Sponsored' },
   { icon: TrendingUp, text: 'Rs. 600M Capital' },
-  { icon: MapPin, text: '12 Branches' },
-  { icon: Shield, text: 'Since 1996' },
-  { icon: Star, text: 'SECP Regulated' },
+  { icon: MapPin,    text: '12 Branches' },
+  { icon: Shield,    text: 'Since 1996' },
+  { icon: Star,      text: 'SECP Regulated' },
   { icon: TrendingUp, text: 'Window Takaful' },
-  { icon: Shield, text: 'PACRA A++ Rated' },
-  { icon: Star, text: 'PAF Sponsored' },
+  { icon: Shield,    text: 'PACRA A++ Rated' },
+  { icon: Star,      text: 'PAF Sponsored' },
   { icon: TrendingUp, text: 'Rs. 600M Capital' },
-  { icon: MapPin, text: '12 Branches' },
-  { icon: Shield, text: 'Since 1996' },
+  { icon: MapPin,    text: '12 Branches' },
+  { icon: Shield,    text: 'Since 1996' },
 ]
 
 export default function Hero() {
+  const heroRef = useRef<HTMLElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const word1Ref = useRef<HTMLSpanElement>(null)
+  const word2Ref = useRef<HTMLSpanElement>(null)
+  const word3Ref = useRef<HTMLSpanElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+      // Badge slides down
+      tl.from(badgeRef.current, { opacity: 0, y: -20, duration: 0.6 })
+
+      // Words reveal from bottom (clip + translate)
+      tl.from(word1Ref.current, { opacity: 0, y: '100%', duration: 0.7 }, '-=0.3')
+      tl.from(word2Ref.current, { opacity: 0, y: '100%', duration: 0.7 }, '-=0.5')
+      tl.from(word3Ref.current, { opacity: 0, y: '100%', duration: 0.7 }, '-=0.5')
+
+      // Subtitle + CTA
+      tl.from(subtitleRef.current, { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+      tl.from(ctaRef.current, { opacity: 0, y: 16, duration: 0.5 }, '-=0.3')
+    }, heroRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="relative h-screen min-h-[600px] flex flex-col overflow-hidden">
+    <section ref={heroRef} className="relative h-screen min-h-[600px] flex flex-col overflow-hidden">
 
       {/* ── Video background ── */}
       <div className="absolute inset-0 z-0">
@@ -27,63 +57,64 @@ export default function Hero() {
           autoPlay loop muted playsInline
           className="absolute inset-0 w-full h-full object-cover scale-105"
         >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-city-buildings-41723-large.mp4" type="video/mp4" />
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-business-people-walking-in-a-corporate-building-4357-large.mp4" type="video/mp4" />
+          <source src="/hero1.mp4" type="video/mp4" />
+          <source src="/hero2.mp4" type="video/mp4" />
         </video>
-        {/* Dark overlay — strong at bottom, lighter at top */}
         <div className="absolute inset-0 bg-gradient-to-b from-navy/70 via-navy/60 to-navy/85" />
-        {/* Subtle vignette */}
-        <div className="absolute inset-0 bg-radial-vignette" style={{
-          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(13,20,64,0.6) 100%)'
-        }} />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(13,20,64,0.6) 100%)' }}
+        />
       </div>
 
-      {/* ── Main content — centered ── */}
+      {/* ── SVG decorative lines ── */}
+      <svg className="absolute inset-0 w-full h-full opacity-[0.06] pointer-events-none z-[1]" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+        <line x1="0" y1="450" x2="1440" y2="450" stroke="#D6A65A" strokeWidth="0.5" />
+        <line x1="720" y1="0" x2="720" y2="900" stroke="#D6A65A" strokeWidth="0.5" />
+        <circle cx="720" cy="450" r="200" stroke="#D6A65A" strokeWidth="0.5" />
+        <circle cx="720" cy="450" r="350" stroke="#D6A65A" strokeWidth="0.3" />
+      </svg>
+
+      {/* ── Main content ── */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5">
 
         {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2.5 mb-7"
-        >
+        <div ref={badgeRef} className="inline-flex items-center gap-2.5 mb-7">
           <div className="h-px w-8 bg-gold/70" />
           <span className="text-gold/90 text-[11px] font-bold tracking-[0.3em] uppercase">
             Shaheen Foundation — Pakistan Air Force
           </span>
           <div className="h-px w-8 bg-gold/70" />
-        </motion.div>
+        </div>
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
+        {/* Headline — clipped word reveal */}
+        <h1
           className="font-display font-black text-white uppercase leading-[0.95] tracking-tight mb-6"
           style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
         >
-          A Sign of<br />
-          <span className="text-gold">Protection</span>
-        </motion.h1>
+          <span className="block overflow-hidden">
+            <span ref={word1Ref} className="block">A Sign of</span>
+          </span>
+          <span className="block overflow-hidden">
+            <span ref={word2Ref} className="block">
+              <span className="text-gold">Protection</span>
+            </span>
+          </span>
+        </h1>
+
+        {/* Hidden word3 for symmetry */}
+        <span ref={word3Ref} className="hidden" aria-hidden />
 
         {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
+        <p
+          ref={subtitleRef}
           className="text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-10 font-light"
         >
           Pakistan's trusted general insurance company since 1996. Motor, Health, Travel, Fire, Marine & more.
-        </motion.p>
+        </p>
 
         {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap items-center justify-center gap-3"
-        >
+        <div ref={ctaRef} className="flex flex-wrap items-center justify-center gap-3">
           <Link
             to="/products"
             className="group inline-flex items-center gap-2 bg-gold hover:bg-gold/90 text-navy font-bold px-7 py-3.5 rounded-xl text-sm transition-all duration-200"
@@ -97,17 +128,16 @@ export default function Hero() {
           >
             File a Claim
           </Link>
-        </motion.div>
+        </div>
       </div>
 
-      {/* ── Stats ticker — bottom bar ── */}
+      {/* ── Stats ticker ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
         className="relative z-10 bg-white/5 backdrop-blur-md border-t border-white/10 py-3.5 overflow-hidden"
       >
-        {/* Fade edges */}
         <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-navy/50 to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-navy/50 to-transparent z-10 pointer-events-none" />
 

@@ -1,208 +1,218 @@
-﻿import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import PageHero from '../../components/layout/PageHero'
-import ContactSidebar from '../../components/layout/ContactSidebar'
+import { CheckCircle2, Phone, FileText, Shield, Heart, Wallet, Download, Mail, Globe, Star } from 'lucide-react'
+import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
-import { Shield, Heart, Wallet, Download, Mail, CheckCircle2, Globe, Star } from 'lucide-react'
+import ScrollReveal from '../../components/shared/ScrollReveal'
+import { StaggerReveal } from '../../components/shared/ScrollReveal'
 
 const PRODUCTS = [
   {
     icon: Heart,
     title: 'Shaheen Takaful Health Care',
-    desc: 'Primary health coverage under our Shariah-compliant Window Takaful framework. Provides comprehensive inpatient coverage including hospitalization, surgery, and intensive care — with all operations governed by Takaful Rules 2012.',
-    features: ['Inpatient hospitalization coverage', 'Surgical and ICU benefits', 'Shariah-compliant Waqf-based fund structure', 'SECP authorized operations'],
+    desc: 'Primary health coverage under our Shariah-compliant Window Takaful framework. Provides comprehensive inpatient coverage including hospitalization, surgery, and intensive care.',
+    features: ['Inpatient hospitalization coverage', 'Surgical and ICU benefits', 'Shariah-compliant Waqf-based fund', 'SECP authorized operations'],
   },
   {
     icon: Shield,
     title: 'Shaheen Takaful Health Care Plus',
-    desc: 'An enhanced version of our core Takaful health plan with expanded coverage limits and additional benefits. Ideal for individuals and families seeking higher protection thresholds under a Shariah-compliant structure.',
+    desc: 'Enhanced version with expanded coverage limits and additional benefits. Ideal for individuals and families seeking higher protection under a Shariah-compliant structure.',
     features: ['Higher room and board limits', 'Expanded surgical benefit schedule', 'Enhanced maternity coverage (optional)', 'Wider panel hospital access'],
   },
   {
     icon: Wallet,
     title: 'Shaheen Takaful Wallet',
-    desc: 'A flexible health wallet product designed for outpatient expenses — doctor consultations, diagnostic tests, medicines, and specialist visits. Provides a defined annual wallet amount that participants can draw from as needed.',
+    desc: 'A flexible health wallet for outpatient expenses — doctor consultations, diagnostic tests, medicines, and specialist visits. Draw from a defined annual wallet amount as needed.',
     features: ['Outpatient consultations', 'Diagnostic and lab tests', 'Prescribed medicines', 'Specialist referrals'],
   },
 ]
 
-const RE_TAKAFUL_PARTNERS = [
-  { name: 'Labuan Re', country: 'Malaysia', flag: '🇲🇾' },
-  { name: 'GIC Re', country: 'India', flag: '🇮🇳' },
-  { name: 'Africa Re', country: 'Africa', flag: '🌍' },
+const RE_TAKAFUL = [
+  { name: 'Labuan Re', country: 'Malaysia' },
+  { name: 'GIC Re', country: 'India' },
+  { name: 'Africa Re', country: 'Africa' },
 ]
+
+const WAQF_STRUCTURE = [
+  { icon: Star, title: 'Participant Contributions (Tabarru)', desc: 'Participants contribute to the Waqf fund with intention of mutual assistance — charitable donations for the common good, not insurance premiums.' },
+  { icon: Shield, title: 'Shariah-Compliant Investments', desc: 'Waqf fund assets invested only in Shariah-compliant instruments as approved by our Shariah Advisor. No interest-bearing instruments.' },
+  { icon: Globe, title: 'Surplus Distribution', desc: 'Any surplus remaining in the Waqf fund after claims and expenses is distributed back to participants — not retained by shareholders.' },
+]
+
+const TakafulSVG = () => (
+  <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <path d="M160 40 L175 55 L192 50 L190 67 L205 75 L195 90 L205 105 L190 113 L192 130 L175 125 L160 140 L145 125 L128 130 L130 113 L115 105 L125 90 L115 75 L130 67 L128 50 L145 55 Z" fill="#D6A65A" opacity="0.1" stroke="#D6A65A" strokeWidth="1.2" />
+    <path d="M160 58 C152 66 140 72 140 83 C140 94 148 100 160 107 C172 100 180 94 180 83 C180 72 168 66 160 58 Z" fill="#D6A65A" opacity="0.25" />
+    <circle cx="265" cy="25" r="12" fill="#D6A65A" opacity="0.5" stroke="#D6A65A" strokeWidth="1" />
+    <path d="M262 28 L265 32 L270 21" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <text x="160" y="95" textAnchor="middle" fill="#D6A65A" fontSize="9" fontWeight="bold" opacity="0.6">TAKAFUL</text>
+    <circle cx="50" cy="90" r="18" stroke="#D6A65A" strokeWidth="1" opacity="0.2" />
+    <circle cx="50" cy="90" r="10" stroke="#D6A65A" strokeWidth="0.8" opacity="0.15" />
+    <circle cx="270" cy="130" r="18" stroke="#D6A65A" strokeWidth="1" opacity="0.2" />
+    <circle cx="270" cy="130" r="10" stroke="#D6A65A" strokeWidth="0.8" opacity="0.15" />
+  </svg>
+)
 
 export default function TakafulHealthPage() {
   return (
     <>
       <PageSEO
         title="Takaful Health Care"
-        description="Shaheen Insurance Takaful Health Care — Shariah-compliant health insurance plans under SECP-authorized Window Takaful Operations. Health Care, Health Care Plus, and Takaful Wallet plans."
+        description="Shaheen Insurance Takaful Health Care — Shariah-compliant health insurance plans under SECP-authorized Window Takaful Operations since April 2018."
         keywords="Takaful health insurance Pakistan, Islamic health insurance, Window Takaful, Shariah health cover, halal insurance Pakistan"
         path="/health-care/takaful"
         schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Takaful Health Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
       />
-      <PageHero
+      <InnerPageHero
+        category="Window Takaful"
         title="Takaful Health Care"
-        subtitle="Shariah-compliant health insurance solutions under our SECP-authorized Window Takaful Operations — launched April 2018"
+        subtitle="Shariah-compliant health insurance under our SECP-authorized Window Takaful Operations — Waqf-based fund structure, launched April 2018"
         breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: 'Takaful Health Care' }]}
-        badge="Window Takaful" videoCategory="takaful"
+        stats={[{ value: '2018', label: 'WTO Launched' }, { value: 'SECP', label: 'Authorized' }, { value: '3 Plans', label: 'Available' }]}
+        svgIllustration={<TakafulSVG />}
       />
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-12">
-
-            {/* Visual Collage */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
-              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
-              <div className="col-span-2 relative rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&q=80&auto=format&fit=crop"
-                  alt="Takaful Health Insurance" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex gap-2">
-                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Window Takaful</span>
-                  <span className="bg-white/20 backdrop-blur-sm text-white font-semibold text-xs px-3 py-1 rounded-full">SECP Authorized</span>
-                </div>
+      <section className="py-20 md:py-28 bg-[#f8f7f5]">
+        <div className="max-w-7xl mx-auto px-5 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-14 items-center">
+            <ScrollReveal>
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Window Takaful</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
+                Window Takaful<br /><span className="text-gold">Operations</span>
+              </h2>
+              <p className="text-gray-600 leading-relaxed mb-5">Shaheen Insurance launched its Window Takaful Operations (WTO) in April 2018 following authorization from SECP. Our Takaful operations are governed by the Takaful Rules 2012 and operate on a Waqf-based fund structure — ensuring full Shariah compliance.</p>
+              <p className="text-gray-600 leading-relaxed mb-5">Participants contribute to a Waqf fund managed separately from shareholders' funds. Any surplus is distributed back to participants in line with Islamic finance principles of mutual assistance (Ta'awun).</p>
+              <div className="bg-gold/8 border border-gold/20 rounded-xl p-4">
+                <p className="text-navy font-semibold text-sm">SECP Authorized · Takaful Rules 2012 · Waqf-Based Structure · Shariah Advisor Oversight</p>
               </div>
-              <div className="flex flex-col gap-3">
-                <div className="relative rounded-2xl overflow-hidden flex-1">
-                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&q=80&auto=format&fit=crop"
-                    alt="Medical care" className="w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-navy/40" />
-                </div>
-                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
-                  <div className="text-gold font-display font-bold text-sm">Since</div>
-                  <div className="text-gold font-display font-bold text-xl">2018</div>
-                  <div className="text-white/60 text-[10px]">WTO Operations</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Intro */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-3xl font-bold text-navy mb-4">Window Takaful Operations</h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  Shaheen Insurance launched its <strong className="text-navy">Window Takaful Operations (WTO)</strong> in <strong className="text-navy">April 2018</strong> following authorization from the Securities and Exchange Commission of Pakistan (SECP). Our Takaful operations are governed by the <strong className="text-navy">Takaful Rules 2012</strong> and operate on a <strong className="text-navy">Waqf-based fund structure</strong> — ensuring full Shariah compliance.
-                </p>
-                <p>
-                  Under the Window Takaful model, participants contribute to a Waqf fund managed separately from shareholders' funds. The Waqf fund is used exclusively for the benefit of participants, with any surplus distributed back to participants — in line with Islamic finance principles of mutual assistance (Ta'awun).
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Three Products */}
-            <div>
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
-                <div className="gold-line mb-4" />
-                <h2 className="font-display text-3xl font-bold text-navy mb-2">Takaful Health Products</h2>
-                <p className="text-gray-500 mb-6">Three comprehensive health coverage options under our Shariah-compliant framework.</p>
-              </motion.div>
-
-              <div className="space-y-6">
-                {PRODUCTS.map(({ icon: Icon, title, desc, features }, i) => (
-                  <motion.div
-                    key={title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
-                    className="p-6 bg-surface rounded-2xl border border-navy/8"
-                  >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-navy flex items-center justify-center shrink-0">
-                        <Icon size={22} className="text-gold" />
-                      </div>
-                      <div>
-                        <h3 className="font-display font-bold text-navy text-xl mb-2">{title}</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-                      </div>
+            </ScrollReveal>
+            <ScrollReveal from="right">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-navy/15">
+                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=900&q=80&auto=format&fit=crop"
+                  alt="Takaful Health Care" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
+                <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gold/15 rounded-xl flex items-center justify-center shrink-0">
+                      <Shield size={18} className="text-gold" />
                     </div>
-                    <div className="pl-16">
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {features.map((f) => (
-                          <li key={f} className="flex items-center gap-2 text-sm text-gray-600">
-                            <CheckCircle2 size={14} className="text-gold shrink-0" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
+                    <div>
+                      <p className="font-black text-navy text-lg leading-none">Shariah Compliant</p>
+                      <p className="text-gray-500 text-xs mt-0.5">SECP Authorized · Since 2018</p>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Re-Takaful Partners */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-2xl font-bold text-navy mb-6">Re-Takaful Partners</h2>
-              <p className="text-gray-500 mb-5 text-sm leading-relaxed">
-                Our Window Takaful Operations are supported by reputable international Re-Takaful partners, ensuring our participants benefit from global risk-sharing capacity.
-              </p>
-              <div className="grid grid-cols-3 gap-4">
-                {RE_TAKAFUL_PARTNERS.map(({ name, country, flag }) => (
-                  <div key={name} className="bg-navy rounded-xl p-5 text-center text-white">
-                    <div className="text-3xl mb-2">{flag}</div>
-                    <div className="font-display font-bold text-gold text-lg">{name}</div>
-                    <div className="text-white/60 text-xs mt-1">{country}</div>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Waqf Fund Structure */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-2xl font-bold text-navy mb-4">Waqf Fund Structure</h2>
-              <div className="bg-surface rounded-2xl p-6 border border-navy/8">
-                <div className="space-y-4">
-                  {[
-                    { icon: Star, title: 'Participant Contributions (Tabarru)', desc: 'Participants make contributions to the Waqf fund with the intention of mutual assistance. These are not insurance premiums — they are charitable donations for the common good.' },
-                    { icon: Shield, title: 'Shariah-Compliant Investments', desc: 'Waqf fund assets are invested only in Shariah-compliant instruments as approved by our Shariah Advisor. No investment in interest-bearing instruments.' },
-                    { icon: Globe, title: 'Surplus Distribution', desc: 'Any surplus remaining in the Waqf fund after claims and expenses is distributed back to participants — not retained by shareholders.' },
-                  ].map(({ icon: Icon, title, desc }) => (
-                    <div key={title} className="flex gap-4">
-                      <div className="w-9 h-9 rounded-lg bg-gold/15 flex items-center justify-center shrink-0">
-                        <Icon size={16} className="text-gold" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-navy text-sm mb-1">{title}</h4>
-                        <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
-            </motion.div>
-
-            {/* Downloads & Contact */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
-              <div className="bg-navy rounded-2xl p-7 text-white">
-                <h3 className="font-display font-bold text-xl mb-2">Documents & Enquiries</h3>
-                <p className="text-white/70 text-sm mb-5 leading-relaxed">
-                  Download the WTO PTF Policies (Waqf Rules) document or contact us for detailed Takaful health plan brochures.
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link to="/downloads" className="flex items-center gap-2 bg-gold text-navy font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-gold/90 transition-colors">
-                    <Download size={15} />
-                    Download WTO PTF Policies
-                  </Link>
-                  <a href="mailto:info@shaheeninsurance.com" className="flex items-center gap-2 border border-white/30 text-white font-semibold px-5 py-2.5 rounded-lg text-sm hover:bg-white/10 transition-colors">
-                    <Mail size={15} />
-                    info@shaheeninsurance.com
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
+            </ScrollReveal>
           </div>
-
-          <div><ContactSidebar /></div>
         </div>
+      </section>
+
+      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="tak-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
+            <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
+          </pattern></defs>
+          <rect width="100%" height="100%" fill="url(#tak-hex)" />
+        </svg>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-gold/6 rounded-full blur-[80px] pointer-events-none" />
+        <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Our Plans</p>
+              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Takaful Health Products</h2>
+              <p className="text-white/45 text-sm mt-3">Three comprehensive health coverage options under our Shariah-compliant framework.</p>
+            </div>
+          </ScrollReveal>
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+            {PRODUCTS.map(({ icon: Icon, title, desc, features }) => (
+              <div key={title} className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
+                <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
+                  <Icon size={20} className="text-gold" />
+                </div>
+                <h4 className="font-display font-bold text-white text-base mb-3 group-hover:text-gold transition-colors">{title}</h4>
+                <p className="text-white/50 text-xs leading-relaxed mb-4">{desc}</p>
+                <ul className="space-y-2 border-t border-white/10 pt-4">
+                  {features.map((f) => (
+                    <li key={f} className="flex gap-2 text-xs text-white/40">
+                      <CheckCircle2 size={12} className="text-gold/70 shrink-0 mt-0.5" />{f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </StaggerReveal>
+
+          <ScrollReveal>
+            <div className="text-center mb-8">
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Re-Takaful Partners</p>
+              <h3 className="font-display font-black text-white text-3xl uppercase">Global Partners</h3>
+              <p className="text-white/40 text-xs mt-2">International Re-Takaful partners providing global risk-sharing capacity</p>
+            </div>
+          </ScrollReveal>
+          <StaggerReveal className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+            {RE_TAKAFUL.map(({ name, country }) => (
+              <div key={name} className="bg-white/8 border border-gold/20 rounded-xl p-5 text-center">
+                <p className="font-display font-bold text-gold text-base">{name}</p>
+                <p className="text-white/50 text-xs mt-1">{country}</p>
+              </div>
+            ))}
+          </StaggerReveal>
+        </div>
+      </section>
+
+      <section className="py-20 md:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-5 lg:px-10">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Structure</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Waqf Fund Structure</h2>
+            </div>
+          </ScrollReveal>
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {WAQF_STRUCTURE.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="p-6 bg-[#f8f7f5] rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all">
+                <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
+                  <Icon size={20} className="text-gold" />
+                </div>
+                <h4 className="font-display font-bold text-navy text-sm mb-2">{title}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </StaggerReveal>
+        </div>
+      </section>
+
+      <section className="py-20 bg-navy relative overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="tak-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
+          </pattern></defs>
+          <rect width="100%" height="100%" fill="url(#tak-cg)" />
+        </svg>
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+        <ScrollReveal>
+          <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
+            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Started</p>
+            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Shariah-Compliant <span className="text-gold">Health Cover</span>
+            </h2>
+            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">SECP-authorized Takaful health plans since 2018. Download the WTO PTF Policies document or contact us for detailed plan brochures.</p>
+            <div className="flex justify-center gap-3 flex-wrap">
+              <Link to="/downloads" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+                <Download size={15} /> Download WTO Policies
+              </Link>
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+                <Mail size={15} /> info@shaheeninsurance.com
+              </a>
+            </div>
+            <div className="mt-6">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm">
+                <Phone size={14} /> 111-765-111
+              </a>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
     </>
   )
 }
-

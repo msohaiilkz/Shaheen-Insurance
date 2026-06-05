@@ -1,7 +1,8 @@
-﻿import { motion } from 'framer-motion'
-import PageHero from '../../components/layout/PageHero'
+import AboutHero from '../../components/layout/AboutHero'
 import ContactSidebar from '../../components/layout/ContactSidebar'
 import PageSEO from '../../components/shared/PageSEO'
+import ScrollReveal from '../../components/shared/ScrollReveal'
+import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { CheckCircle2 } from 'lucide-react'
 
 const CORE_VALUES = [
@@ -24,98 +25,75 @@ export default function CoreValuesPage() {
         keywords="Shaheen Insurance values, quality policy, integrity insurance Pakistan"
         path="/about/core-values"
       />
-      <PageHero
+      <AboutHero
+        category="About Shaheen Insurance"
         title="Core Values & Quality Policy"
         subtitle="The principles that guide every decision, interaction, and commitment at Shaheen Insurance"
         breadcrumbs={[{ label: 'About Us', path: '/about' }, { label: 'Core Values & Quality Policy' }]}
-        videoCategory="about"
+        accent={{ value: '8', label: 'Core Values' }}
       />
 
-      <section className="py-16 bg-white">
+      <section className="py-16 md:py-24 bg-[#f8f7f5]">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-2 space-y-8">
 
-            {/* Visual Collage */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
-              className="grid grid-cols-3 gap-3 h-52 md:h-64 overflow-hidden">
-              <div className="col-span-2 relative rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop"
-                  alt="Core Values" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
-                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">Integrity</span>
-                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Commitment</span>
-                </div>
+            {/* Section header */}
+            <ScrollReveal>
+              <div className="bg-white rounded-2xl p-7 border border-gray-100">
+                <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-2">Our Values</p>
+                <h2 className="font-display font-black text-navy text-2xl md:text-3xl uppercase leading-tight tracking-tight mb-4">Our 8 Core Values</h2>
+                <p className="text-gray-600 text-sm leading-relaxed">These core values define who we are and how we operate — from every customer interaction to every business decision. They are the foundation of trust that Shaheen Insurance has built over 28+ years.</p>
               </div>
-              <div className="flex flex-col gap-3">
-                <div className="relative rounded-2xl overflow-hidden flex-1">
-                  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=400&q=80&auto=format&fit=crop"
-                    alt="Team Values" className="w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-navy/40" />
-                </div>
-                <div className="bg-gold rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
-                  <div className="text-navy font-display font-bold text-lg">8</div>
-                  <div className="text-navy/70 text-[10px]">Core Values</div>
-                </div>
-              </div>
-            </motion.div>
+            </ScrollReveal>
 
-            {/* Core Values Grid */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-3xl font-bold text-navy mb-8">Our 8 Core Values</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {CORE_VALUES.map(({ num, value, desc }, i) => (
-                  <motion.div key={num} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: i * 0.07 }}
-                    className="group p-6 bg-surface rounded-2xl border border-navy/5 hover:border-gold/30 hover:shadow-gold transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <span className="font-display font-bold text-3xl text-gold/30 group-hover:text-gold/60 transition-colors leading-none shrink-0">{num}</span>
-                      <div>
-                        <h3 className="font-display font-bold text-navy text-lg mb-2 group-hover:text-gold transition-colors">{value}</h3>
-                        <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-                      </div>
+            {/* Core values grid */}
+            <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {CORE_VALUES.map(({ num, value, desc }) => (
+                <div key={num} className="group p-6 bg-white rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all duration-300">
+                  <div className="flex items-start gap-4">
+                    <span className="font-display font-bold text-3xl text-gold/30 group-hover:text-gold/60 transition-colors leading-none shrink-0">{num}</span>
+                    <div>
+                      <h3 className="font-display font-bold text-navy text-base mb-2 group-hover:text-gold transition-colors">{value}</h3>
+                      <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Quality Policy */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-3xl font-bold text-navy mb-5">Quality Policy</h2>
-
-              <div className="bg-hero-gradient rounded-2xl p-8 mb-6">
-                <h3 className="text-gold font-display font-bold text-2xl mb-3">Honesty · Dedication · Commitment</h3>
-                <p className="text-white/70 leading-relaxed">
-                  These three foundational themes serve as the cornerstone of every interaction and process at Shaheen Insurance — protecting the interests of all stakeholders.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-3 p-5 bg-gold/5 border border-gold/20 rounded-xl">
-                  <CheckCircle2 size={20} className="text-gold shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-semibold text-navy mb-1">"We invest in quality…"</p>
-                    <p className="text-gray-600 text-sm leading-relaxed">When it comes to certain things, compromise is out of the question. Shaheen Insurance commits to delivering superior client services without any justification for complaints regarding claims or any other matter.</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-5 bg-surface rounded-xl">
-                  <CheckCircle2 size={20} className="text-gold shrink-0 mt-0.5" />
-                  <p className="text-gray-600 text-sm leading-relaxed">Making optimal efforts to deliver superior client services at all times — in claims handling, policy issuance, and customer support.</p>
-                </div>
-                <div className="flex items-start gap-3 p-5 bg-surface rounded-xl">
-                  <CheckCircle2 size={20} className="text-gold shrink-0 mt-0.5" />
-                  <p className="text-gray-600 text-sm leading-relaxed">This framework is designed to protect the interests of all parties involved — policyholders, shareholders, employees, and society at large.</p>
+              ))}
+            </StaggerReveal>
+
+            {/* Quality Policy header */}
+            <ScrollReveal>
+              <div className="bg-white rounded-2xl p-7 border border-gray-100">
+                <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-2">Quality</p>
+                <h2 className="font-display font-black text-navy text-2xl md:text-3xl uppercase leading-tight tracking-tight mb-5">Quality Policy</h2>
+                <div className="bg-hero-gradient rounded-xl p-6 mb-5">
+                  <h3 className="text-gold font-display font-bold text-xl mb-2">Honesty · Dedication · Commitment</h3>
+                  <p className="text-white/70 leading-relaxed text-sm">These three foundational themes serve as the cornerstone of every interaction and process at Shaheen Insurance — protecting the interests of all stakeholders.</p>
                 </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
+
+            {/* Quality commitments */}
+            <StaggerReveal className="space-y-3">
+              {[
+                { title: '"We invest in quality…"', desc: 'When it comes to certain things, compromise is out of the question. Shaheen Insurance commits to delivering superior client services without any justification for complaints regarding claims or any other matter.', highlight: true },
+                { title: null, desc: 'Making optimal efforts to deliver superior client services at all times — in claims handling, policy issuance, and customer support.', highlight: false },
+                { title: null, desc: 'This framework is designed to protect the interests of all parties involved — policyholders, shareholders, employees, and society at large.', highlight: false },
+              ].map(({ title, desc, highlight }, i) => (
+                <div key={i} className={`flex items-start gap-3 p-5 rounded-xl border ${highlight ? 'bg-gold/5 border-gold/20' : 'bg-white border-gray-100'}`}>
+                  <CheckCircle2 size={18} className="text-gold shrink-0 mt-0.5" />
+                  <div>
+                    {title && <p className="font-semibold text-navy mb-1 text-sm">{title}</p>}
+                    <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </StaggerReveal>
           </div>
 
-          <div><ContactSidebar /></div>
+          <div className="sticky top-24 self-start"><ContactSidebar /></div>
         </div>
       </section>
     </>
   )
 }
-

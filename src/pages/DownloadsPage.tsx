@@ -1,31 +1,28 @@
-import { motion } from 'framer-motion'
-import PageHero from '../components/layout/PageHero'
-import ContactSidebar from '../components/layout/ContactSidebar'
-import PageSEO from '../components/shared/PageSEO'
 import { FileText, Download, AlertCircle, Mail } from 'lucide-react'
+import InnerPageHero from '../components/layout/InnerPageHero'
+import PageSEO from '../components/shared/PageSEO'
+import ScrollReveal from '../components/shared/ScrollReveal'
+import { StaggerReveal } from '../components/shared/ScrollReveal'
 
 type DocItem = { title: string; desc?: string; url: string }
 type DocCategory = { category: string; icon: React.ElementType; docs: DocItem[] }
 
 const CATEGORIES: DocCategory[] = [
   {
-    category: 'Policy Documents',
-    icon: FileText,
+    category: 'Policy Documents', icon: FileText,
     docs: [
       { title: 'WTO PTF Policies (Waqf Rules)', desc: 'Official Takaful Policy Document governing Window Takaful Operations — Waqf Fund Rules and Participant Takaful Fund (PTF) structure.', url: 'http://www.shaheeninsurance.com/new/wp-content/uploads/2017/09/WTO-PTF-Policies-Waqf-Rules.pdf' },
     ],
   },
   {
-    category: 'Corporate Governance',
-    icon: FileText,
+    category: 'Corporate Governance', icon: FileText,
     docs: [
       { title: 'Profile of Candidates — Election of Directors', desc: 'Individual candidate profiles for the election of directors.', url: 'http://shaheeninsurance.com/pdf/Profile%20of%20Candidates%20-%20Election%20of%20Directors.pdf' },
       { title: 'Web Compliance Certificate', desc: 'SECP-mandated web compliance certificate for PSX-listed companies.', url: 'http://www.shaheeninsurance.com/new/wp-content/uploads/2019/04/Website_Compliance_Certificate.pdf' },
     ],
   },
   {
-    category: 'Administrative Forms',
-    icon: FileText,
+    category: 'Administrative Forms', icon: FileText,
     docs: [
       { title: 'Request Form for Printed Annual Report', desc: 'Use this form to request a physical copy of the Shaheen Insurance Annual Report.', url: 'http://shaheeninsurance.com/pdf/Request%20Form%20for%20Printed%20Annual%20Report.pdf' },
       { title: 'Consent Form for Electronic Transmission of Annual Report and Notice of AGM', desc: 'Provide your consent to receive annual reports and AGM notices electronically.', url: 'http://www.shaheeninsurance.com/new/wp-content/uploads/2017/11/Consent-Form-for-Electronic-Transmission-of-Annual-Report.pdf' },
@@ -33,15 +30,13 @@ const CATEGORIES: DocCategory[] = [
     ],
   },
   {
-    category: 'Insurance Application Forms',
-    icon: FileText,
+    category: 'Insurance Application Forms', icon: FileText,
     docs: [
       { title: "Shaheen's Secure Travel Application Form", desc: 'Application form for Shaheen Secure Travel Insurance — applicable for international travel.', url: 'http://shaheeninsurance.com/pdf/SecureTravelApplicationForm.pdf' },
     ],
   },
   {
-    category: 'Investor Relations',
-    icon: FileText,
+    category: 'Investor Relations', icon: FileText,
     docs: [
       { title: 'Pattern of Share Holding (as of December 31, 2018)', desc: 'Shareholding pattern disclosing major shareholders and categories as of 31 December 2018.', url: 'http://www.shaheeninsurance.com/new/wp-content/uploads/2019/04/Pattern_of_Share_Holding_Dec-31-2018.pdf' },
       { title: 'Financial Highlights — Last Ten Years', desc: 'Historical financial highlights covering a ten-year period for performance comparison.', url: 'http://www.shaheeninsurance.com/new/wp-content/uploads/2019/04/Financial_Highlights_for_last_ten_years.pdf' },
@@ -50,8 +45,7 @@ const CATEGORIES: DocCategory[] = [
     ],
   },
   {
-    category: 'Claim Forms',
-    icon: FileText,
+    category: 'Claim Forms', icon: FileText,
     docs: [
       { title: 'Motor / Auto Claim Form', desc: 'For motor vehicle claims — accidental damage, theft, fire, and third-party liability.', url: '/claims/forms' },
       { title: 'Fire Claim Form', desc: 'For fire, explosion, riot, strike, and allied perils claims.', url: '/claims/forms' },
@@ -60,6 +54,26 @@ const CATEGORIES: DocCategory[] = [
     ],
   },
 ]
+
+const DownloadsSVG = () => (
+  <svg viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    {/* Stack of documents */}
+    <rect x="90" y="25" width="80" height="105" rx="5" fill="#D6A65A" opacity="0.07" stroke="#D6A65A" strokeWidth="1.5" />
+    <rect x="100" y="45" width="60" height="6" rx="2" fill="#D6A65A" opacity="0.3" />
+    <rect x="100" y="58" width="48" height="5" rx="2" fill="#D6A65A" opacity="0.2" />
+    <rect x="100" y="69" width="52" height="5" rx="2" fill="#D6A65A" opacity="0.2" />
+    <rect x="100" y="80" width="40" height="5" rx="2" fill="#D6A65A" opacity="0.15" />
+    <rect x="100" y="95" width="55" height="5" rx="2" fill="#D6A65A" opacity="0.2" />
+    <rect x="100" y="106" width="45" height="5" rx="2" fill="#D6A65A" opacity="0.15" />
+    {/* Download arrow */}
+    <circle cx="215" cy="90" r="30" fill="#D6A65A" opacity="0.08" stroke="#D6A65A" strokeWidth="1.2" />
+    <path d="M215 72 L215 95 M205 85 L215 97 L225 85" stroke="#D6A65A" strokeWidth="2" opacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
+    <rect x="203" y="100" width="24" height="4" rx="1.5" fill="#D6A65A" opacity="0.4" />
+    {/* Checkmark badge */}
+    <circle cx="265" cy="25" r="12" fill="#D6A65A" opacity="0.5" stroke="#D6A65A" strokeWidth="1" />
+    <path d="M262 28 L265 32 L270 21" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
 
 export default function DownloadsPage() {
   return (
@@ -70,129 +84,93 @@ export default function DownloadsPage() {
         keywords="Shaheen Insurance forms download, policy wording, claim forms PDF, insurance application form Pakistan"
         path="/downloads"
       />
-      <PageHero
+      <InnerPageHero
+        category="Document Center"
         title="Downloads"
         subtitle="All policy documents, governance forms, claim forms, and investor documents in one place — available as downloadable PDFs"
         breadcrumbs={[{ label: 'Downloads' }]}
-        badge="Documents & Forms" videoCategory="downloads"
+        stats={[{ value: '6', label: 'Categories' }, { value: '15+', label: 'Documents' }, { value: 'PDF', label: 'Format' }]}
+        svgIllustration={<DownloadsSVG />}
       />
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-10">
-
-            {/* Visual Collage */}
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
-              className="grid grid-cols-3 gap-3 h-44 md:h-52">
-              <div className="col-span-2 relative rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=80&auto=format&fit=crop"
-                  alt="Downloads — Policy Documents & Forms" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex gap-2 flex-wrap">
-                  <span className="bg-gold text-navy font-bold text-xs px-3 py-1 rounded-full">PDF Forms</span>
-                  <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full">Policy Documents</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-3">
-                <div className="relative rounded-2xl overflow-hidden flex-1">
-                  <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&q=80&auto=format&fit=crop"
-                    alt="Documents" className="w-full h-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-navy/40" />
-                </div>
-                <div className="bg-navy rounded-2xl flex-1 flex flex-col items-center justify-center p-3 text-center">
-                  <div className="text-gold font-display font-bold text-lg">5+</div>
-                  <div className="text-white/60 text-[10px]">Document Types</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Intro */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <div className="gold-line mb-4" />
-              <h2 className="font-display text-3xl font-bold text-navy mb-4">Document Center</h2>
-              <p className="text-gray-600 leading-relaxed">
-                Browse and download official Shaheen Insurance documents organized by category. All files are in PDF format. If you require assistance, contact us at <a href="mailto:info@shaheeninsurance.com" className="text-gold hover:underline">info@shaheeninsurance.com</a>.
+      {/* Document Center */}
+      <section className="py-20 md:py-28 bg-[#f8f7f5]">
+        <div className="max-w-7xl mx-auto px-5 lg:px-10">
+          <ScrollReveal>
+            <div className="text-center mb-10">
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Documents</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Document Center</h2>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">
+                Browse and download official Shaheen Insurance documents organized by category. All files are in PDF format. If you require assistance, contact us at{' '}
+                <a href="mailto:info@shaheeninsurance.com" className="text-gold hover:underline">info@shaheeninsurance.com</a>.
               </p>
-            </motion.div>
+            </div>
+          </ScrollReveal>
 
-            {/* Adobe Reader Note */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-xl"
-            >
+          <ScrollReveal>
+            <div className="flex items-start gap-3 p-5 bg-amber-50 border border-amber-200 rounded-xl mb-12 max-w-3xl mx-auto">
               <AlertCircle size={18} className="text-amber-600 shrink-0 mt-0.5" />
               <div>
                 <p className="text-amber-800 text-sm font-semibold mb-1">Adobe Acrobat Reader Required</p>
-                <p className="text-amber-700 text-xs leading-relaxed">
-                  All documents are in PDF format. Please ensure you have Adobe Acrobat Reader installed. It is available free from <strong>adobe.com</strong>.
-                </p>
+                <p className="text-amber-700 text-xs leading-relaxed">All documents are in PDF format. Please ensure you have Adobe Acrobat Reader installed. It is available free from <strong>adobe.com</strong>.</p>
               </div>
-            </motion.div>
-
-            {/* Categories */}
-            <div className="space-y-8">
-              {CATEGORIES.map(({ category, docs }, catIdx) => (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: 0.15 + catIdx * 0.07 }}
-                >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="gold-line flex-1" />
-                    <h2 className="font-display font-bold text-navy text-lg whitespace-nowrap px-2">{category}</h2>
-                    <div className="gold-line flex-1" />
-                  </div>
-
-                  <div className="space-y-2">
-                    {docs.map(({ title, desc, url }) => (
-                      <div
-                        key={title}
-                        className="flex items-center gap-4 p-4 bg-surface rounded-xl border border-navy/5 hover:border-gold/30 hover:bg-gold/5 transition-all duration-200 group"
-                      >
-                        <div className="w-9 h-9 rounded-lg bg-navy/8 flex items-center justify-center shrink-0 group-hover:bg-navy transition-colors duration-200">
-                          <FileText size={15} className="text-gold" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-navy text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</p>
-                          {desc && <p className="text-gray-400 text-xs mt-0.5 leading-relaxed">{desc}</p>}
-                        </div>
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          download
-                          className="flex items-center gap-1.5 bg-gold text-navy font-bold text-xs px-3 py-2 rounded-lg hover:bg-gold/85 transition-colors shrink-0 opacity-0 group-hover:opacity-100 duration-200"
-                        >
-                          <Download size={12} />
-                          PDF
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
             </div>
+          </ScrollReveal>
 
-            {/* Request Physical Copies */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
-              <div className="bg-navy rounded-2xl p-7 text-white">
-                <h3 className="font-display font-bold text-xl mb-2">Request Physical Copies</h3>
-                <p className="text-white/70 text-sm mb-4 leading-relaxed">
-                  If you are unable to download documents or require certified physical copies for official purposes, please contact us and we will arrange to deliver them to you.
-                </p>
-                <a href="mailto:info@shaheeninsurance.com" className="flex items-center gap-2 text-gold font-semibold text-sm hover:underline">
-                  <Mail size={15} />
-                  info@shaheeninsurance.com
-                </a>
-              </div>
-            </motion.div>
-
+          <div className="space-y-12">
+            {CATEGORIES.map(({ category, docs }) => (
+              <ScrollReveal key={category} delay={0.05}>
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="h-px flex-1 bg-gold/25" />
+                  <h2 className="font-display font-bold text-navy text-lg whitespace-nowrap px-3">{category}</h2>
+                  <div className="h-px flex-1 bg-gold/25" />
+                </div>
+                <StaggerReveal className="space-y-3">
+                  {docs.map(({ title, desc, url }) => (
+                    <div key={title} className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-100 hover:border-gold/30 hover:shadow-sm transition-all duration-200 group">
+                      <div className="w-10 h-10 rounded-xl bg-navy/8 flex items-center justify-center shrink-0 group-hover:bg-navy transition-colors duration-200">
+                        <FileText size={16} className="text-gold" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-navy text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</p>
+                        {desc && <p className="text-gray-400 text-xs mt-0.5 leading-relaxed">{desc}</p>}
+                      </div>
+                      <a href={url} target="_blank" rel="noopener noreferrer" download
+                        className="flex items-center gap-1.5 bg-gold text-navy font-bold text-xs px-3 py-2 rounded-lg hover:bg-gold/85 transition-colors shrink-0">
+                        <Download size={12} />PDF
+                      </a>
+                    </div>
+                  ))}
+                </StaggerReveal>
+              </ScrollReveal>
+            ))}
           </div>
-          <div><ContactSidebar /></div>
         </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-navy relative overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="downloads-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
+          </pattern></defs>
+          <rect width="100%" height="100%" fill="url(#downloads-cg)" />
+        </svg>
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+        <ScrollReveal>
+          <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
+            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Need More?</p>
+            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Request <span className="text-gold">Physical Copies</span>
+            </h2>
+            <p className="text-white/50 mb-8 text-sm leading-relaxed">If you are unable to download documents or require certified physical copies for official purposes, please contact us and we will arrange delivery.</p>
+            <div className="flex justify-center gap-3 flex-wrap">
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+                <Mail size={15} /> Email Us
+              </a>
+            </div>
+          </div>
+        </ScrollReveal>
       </section>
     </>
   )

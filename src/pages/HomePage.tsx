@@ -3,6 +3,7 @@ import Hero from '../components/home/Hero'
 import ProductsSection from '../components/home/ProductsSection'
 import StatsSection from '../components/home/StatsSection'
 import ClaimsProcess from '../components/home/ClaimsProcess'
+import PhoneMockupSection from '../components/home/PhoneMockupSection'
 import HealthBand from '../components/home/HealthBand'
 import CTASection from '../components/home/CTASection'
 
@@ -26,6 +27,7 @@ export default function HomePage() {
       <ProductsSection />
       <StatsSection />
       <ClaimsProcess />
+      <PhoneMockupSection />
       <HealthBand />
       <CTASection />
     </main>
