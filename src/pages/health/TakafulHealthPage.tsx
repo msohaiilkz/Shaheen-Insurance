@@ -87,7 +87,7 @@ export default function TakafulHealthPage() {
             </ScrollReveal>
             <ScrollReveal from="right">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-navy/15">
-                <img src="https://images.unsplash.com/photo-GBcLdqOBbXE?w=900&q=80&auto=format&fit=crop"
+                <img src="https://images.unsplash.com/photo-1612531386530-97286d97c2d2?w=900&q=80&auto=format&fit=crop"
                   alt="Takaful Health Care" className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
