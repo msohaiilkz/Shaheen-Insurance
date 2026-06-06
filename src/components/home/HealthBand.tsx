@@ -160,7 +160,7 @@ export default function HealthBand() {
             {/* Decorative offset card */}
             <div className="absolute -top-6 -right-6 w-32 h-32 rounded-2xl overflow-hidden shadow-xl border-4 border-white hidden lg:block">
               <img
-                src="https://images.unsplash.com/photo-1590435503787-79dc0144d126?w=300&q=80&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=300&q=80&auto=format&fit=crop"
                 alt="Medical care"
                 className="w-full h-full object-cover"
                 loading="lazy"
