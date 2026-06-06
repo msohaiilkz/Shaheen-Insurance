@@ -80,7 +80,7 @@ export default function GroupHealthPage() {
             </ScrollReveal>
             <ScrollReveal from="right">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-navy/15">
-                <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=900&q=80&auto=format&fit=crop"
+                <img src="https://images.unsplash.com/photo-7HK4Oi0n17g?w=900&q=80&auto=format&fit=crop"
                   alt="Group Health Insurance" className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
