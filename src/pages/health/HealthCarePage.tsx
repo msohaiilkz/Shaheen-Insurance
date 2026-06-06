@@ -81,7 +81,7 @@ export default function HealthCarePage() {
             </ScrollReveal>
             <ScrollReveal from="right">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-navy/15">
-                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=900&q=80&auto=format&fit=crop"
+                <img src="https://images.unsplash.com/photo-1683792337566-e305745c15ee?w=900&q=80&auto=format&fit=crop"
                   alt="Health Care Insurance" className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
