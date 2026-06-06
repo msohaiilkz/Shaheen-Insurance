@@ -122,7 +122,7 @@ export default function HealthBand() {
             {/* Main image */}
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl shadow-navy/15">
               <img
-                src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=900&q=80&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?w=900&q=80&auto=format&fit=crop"
                 alt="Healthcare"
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -160,7 +160,7 @@ export default function HealthBand() {
             {/* Decorative offset card */}
             <div className="absolute -top-6 -right-6 w-32 h-32 rounded-2xl overflow-hidden shadow-xl border-4 border-white hidden lg:block">
               <img
-                src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=300&q=80&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1676552055618-22ec8cde399a?w=300&q=80&auto=format&fit=crop"
                 alt="Medical care"
                 className="w-full h-full object-cover"
                 loading="lazy"

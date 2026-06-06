@@ -81,7 +81,7 @@ export default function IndividualHealthPage() {
             </ScrollReveal>
             <ScrollReveal from="right">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-navy/15">
-                <img src="https://images.unsplash.com/photo-1612349316228-5942a9b489c2?w=900&q=80&auto=format&fit=crop"
+                <img src="https://images.unsplash.com/photo-1529180979161-06b8b6d6f2be?w=900&q=80&auto=format&fit=crop"
                   alt="Family Health Insurance" className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">

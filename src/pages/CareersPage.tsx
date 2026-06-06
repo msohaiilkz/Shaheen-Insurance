@@ -75,7 +75,7 @@ export default function CareersPage() {
             <ScrollReveal from="right">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-navy/15">
                 <img
-                  src="https://images.unsplash.com/photo-1681569685386-b7bda397672e?w=900&q=80&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1565019011521-b0575cbb57c8?w=900&q=80&auto=format&fit=crop"
                   alt="Careers at Shaheen Insurance Pakistan"
                   className="w-full h-full object-cover"
                   loading="lazy"
