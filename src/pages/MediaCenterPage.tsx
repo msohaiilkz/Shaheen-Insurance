@@ -3,6 +3,8 @@ import InnerPageHero from '../components/layout/InnerPageHero'
 import PageSEO from '../components/shared/PageSEO'
 import ScrollReveal from '../components/shared/ScrollReveal'
 import { StaggerReveal } from '../components/shared/ScrollReveal'
+import { useJourney } from '../context/JourneyContext'
+import { takafulize } from '../lib/wording'
 
 type EventItem = { date: string; title: string; desc: string; tags: string[]; link?: string }
 
@@ -97,6 +99,7 @@ const MediaSVG = () => (
 )
 
 export default function MediaCenterPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -136,7 +139,7 @@ export default function MediaCenterPage() {
                   </div>
                 </div>
                 <h3 className={`font-display font-bold text-navy leading-snug mb-3 ${idx === 0 ? 'text-xl md:text-2xl' : 'text-lg'}`}>{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{desc}</p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">{takafulize(desc, isTakaful)}</p>
                 <div className="flex items-center justify-between flex-wrap gap-3">
                   <div className="flex items-center gap-2 flex-wrap">
                     <Tag size={12} className="text-gray-400" />
@@ -157,7 +160,7 @@ export default function MediaCenterPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="media-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -167,16 +170,16 @@ export default function MediaCenterPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Press Queries</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Media <span className="text-gold">Inquiries</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Press Queries</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Media <span className="text-gold-dark">Inquiries</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">For press releases, media inquiries, or corporate announcements, please contact our head office directly.</p>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">For press releases, media inquiries, or corporate announcements, please contact our head office directly.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <Mail size={15} /> Email Us
               </a>
-              <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 021-32630370-75
               </a>
             </div>

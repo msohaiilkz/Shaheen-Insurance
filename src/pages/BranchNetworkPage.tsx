@@ -212,7 +212,7 @@ export default function BranchNetworkPage() {
       </section>
 
       {/* Branches Grid */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="branches-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -223,42 +223,42 @@ export default function BranchNetworkPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Branches</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Regional Offices</h2>
-              <p className="text-white/50 text-sm mt-3">Contact your nearest Shaheen Insurance branch directly.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Branches</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Regional Offices</h2>
+              <p className="text-gray-500 text-sm mt-3">Contact your nearest Shaheen Insurance branch directly.</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {branches.map(branch => (
-              <div key={branch.name} className="p-5 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all duration-300 group">
-                <h3 className="font-display font-bold text-white text-base mb-3 group-hover:text-gold transition-colors">{branch.name}</h3>
+              <div key={branch.name} className="p-5 bg-white border border-navy/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all duration-300 group shadow-card">
+                <h3 className="font-display font-bold text-navy text-base mb-3 group-hover:text-gold-dark transition-colors">{branch.name}</h3>
                 {branch.person && (
                   <div className="flex items-start gap-2 mb-3">
                     <User size={12} className="text-gold shrink-0 mt-0.5" />
                     <div>
-                      <span className="text-white/80 text-xs font-semibold">{branch.person}</span>
-                      {branch.title && <p className="text-white/40 text-xs">{branch.title}</p>}
+                      <span className="text-gray-700 text-xs font-semibold">{branch.person}</span>
+                      {branch.title && <p className="text-gray-500 text-xs">{branch.title}</p>}
                     </div>
                   </div>
                 )}
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
                     <MapPin size={11} className="text-gold shrink-0 mt-0.5" />
-                    <p className="text-white/50 text-xs leading-relaxed">{branch.address}</p>
+                    <p className="text-gray-500 text-xs leading-relaxed">{branch.address}</p>
                   </div>
                   {branch.phones.length > 0 && (
                     <div className="flex items-start gap-2">
                       <Phone size={11} className="text-gold shrink-0 mt-0.5" />
                       <div>
-                        {branch.phones.map(p => <p key={p} className="text-white/60 text-xs">{p}</p>)}
-                        {branch.fax && <p className="text-white/30 text-xs">Fax: {branch.fax}</p>}
+                        {branch.phones.map(p => <p key={p} className="text-gray-500 text-xs">{p}</p>)}
+                        {branch.fax && <p className="text-gray-500 text-xs">Fax: {branch.fax}</p>}
                       </div>
                     </div>
                   )}
                   {branch.email && (
                     <div className="flex items-center gap-2">
                       <Mail size={11} className="text-gold shrink-0" />
-                      <a href={`mailto:${branch.email}`} className="text-gold/70 text-xs hover:text-gold transition-colors truncate">{branch.email}</a>
+                      <a href={`mailto:${branch.email}`} className="text-gold-dark text-xs hover:text-gold-dark transition-colors truncate">{branch.email}</a>
                     </div>
                   )}
                 </div>
@@ -344,7 +344,7 @@ export default function BranchNetworkPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="branches-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -354,21 +354,21 @@ export default function BranchNetworkPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Connect</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Call or <span className="text-gold">Email Us</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Connect</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Call or <span className="text-gold-dark">Email Us</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">Reach our main office or your nearest branch directly. Our team is ready to assist with quotes, queries, and claims.</p>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">Reach our main office or your nearest branch directly. Our team is ready to assist with quotes, queries, and claims.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
-              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Mail size={15} /> info@shaheeninsurance.com
               </a>
             </div>
             <div className="mt-5">
-              <Link to="/contact" className="inline-flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm">
+              <Link to="/contact" className="inline-flex items-center gap-2 text-gray-500 hover:text-gold-dark transition-colors text-sm">
                 <MapPin size={13} /> Or send us a message online
               </Link>
             </div>

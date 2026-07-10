@@ -2,6 +2,35 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useJourney, type JourneyMode } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
+
+/** Compact segmented control to switch between Conventional and Takaful. */
+function JourneySwitch() {
+  const { mode, setMode } = useJourney()
+  if (!mode) return null
+
+  const opts: { value: JourneyMode; label: string }[] = [
+    { value: 'conventional', label: 'Conventional' },
+    { value: 'takaful', label: 'Takaful' },
+  ]
+
+  return (
+    <div className="hidden md:inline-flex items-center rounded-full bg-navy/5 p-0.5" role="group" aria-label="Journey mode">
+      {opts.map((o) => (
+        <button
+          key={o.value}
+          onClick={() => setMode(o.value)}
+          className={`px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide rounded-full transition-colors ${
+            mode === o.value ? 'bg-navy text-white shadow-sm' : 'text-navy/60 hover:text-navy'
+          }`}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  )
+}
 
 const NAV_ITEMS = [
   {
@@ -60,7 +89,7 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const location = useLocation()
-  const isHome = location.pathname === '/'
+  const { isTakaful } = useJourney()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -79,10 +108,12 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  const navBg = isHome && !scrolled ? 'bg-transparent' : 'bg-white shadow-sm'
-  const logoFilter = isHome && !scrolled ? 'brightness-0 invert' : 'none'
-  const linkColor = isHome && !scrolled ? 'text-white/80 hover:text-white' : 'text-gray-700 hover:text-navy'
-  const activeLinkColor = isHome && !scrolled ? 'text-gold' : 'text-navy font-semibold'
+  // Navbar sits over a light entry gate at the top of every page now, so it
+  // stays solid (was transparent over the old dark hero).
+  const navBg = scrolled ? 'bg-white shadow-sm' : 'bg-white/90 backdrop-blur-sm'
+  const logoFilter = 'none'
+  const linkColor = 'text-gray-700 hover:text-navy'
+  const activeLinkColor = 'text-navy font-semibold'
 
   return (
     <>
@@ -114,7 +145,7 @@ export default function Navbar() {
                     to={item.path}
                     className={`flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium tracking-wide transition-colors duration-150 ${isActive ? activeLinkColor : linkColor}`}
                   >
-                    {item.label}
+                    {takafulize(item.label, isTakaful)}
                     {item.children && <ChevronDown size={11} className="opacity-60 mt-px" />}
                   </Link>
 
@@ -137,7 +168,7 @@ export default function Navbar() {
                                 : 'text-gray-600 hover:text-navy hover:bg-surface'
                             }`}
                           >
-                            {child.label}
+                            {takafulize(child.label, isTakaful)}
                           </Link>
                         ))}
                       </motion.div>
@@ -150,22 +181,17 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
+            <JourneySwitch />
             <Link
               to="/claims/intimation"
-              className={`hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold transition-all duration-200 rounded-lg ${
-                isHome && !scrolled
-                  ? 'bg-gold text-navy hover:bg-gold/90'
-                  : 'bg-navy text-white hover:bg-navy/90'
-              }`}
+              className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold transition-all duration-200 rounded-lg bg-navy text-white hover:bg-navy/90"
             >
               File a Claim
               <ArrowRight size={14} />
             </Link>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className={`lg:hidden p-2 rounded-lg transition-colors ${
-                isHome && !scrolled ? 'text-white hover:bg-white/10' : 'text-navy hover:bg-surface'
-              }`}
+              className="lg:hidden p-2 rounded-lg transition-colors text-navy hover:bg-surface"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -230,7 +256,7 @@ export default function Navbar() {
                           className="flex-1 text-sm font-medium"
                           onClick={(e) => item.children && e.preventDefault()}
                         >
-                          {item.label}
+                          {takafulize(item.label, isTakaful)}
                         </Link>
                         {item.children && (
                           <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -260,7 +286,7 @@ export default function Navbar() {
                                       : 'text-gray-500 hover:text-navy'
                                   }`}
                                 >
-                                  {child.label}
+                                  {takafulize(child.label, isTakaful)}
                                 </Link>
                               ))}
                             </div>

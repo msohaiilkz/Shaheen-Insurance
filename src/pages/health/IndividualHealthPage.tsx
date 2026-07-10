@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const KEY_BENEFITS = [
   { icon: Tag, title: 'Low Premium Rates', desc: 'Competitive per-head premium rates for comprehensive individual and family health coverage — making quality insurance accessible to everyone.' },
@@ -48,6 +50,7 @@ const IndividualSVG = () => (
 )
 
 export default function IndividualHealthPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -60,7 +63,7 @@ export default function IndividualHealthPage() {
       <InnerPageHero
         category="Health Care"
         title="Individual & Family Health"
-        subtitle="Affordable health packages with low premiums, no medical check-ups required, and generous no-claim discounts — up to 6 family members covered"
+        subtitle={takafulize("Affordable health packages with low premiums, no medical check-ups required, and generous no-claim discounts — up to 6 family members covered", isTakaful)}
         breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: 'Individual / Family' }]}
         stats={[{ value: '6', label: 'Members Covered' }, { value: '10%', label: 'No-Claim Bonus' }, { value: 'No Checkup', label: 'Required' }]}
         svgIllustration={<IndividualSVG />}
@@ -74,9 +77,9 @@ export default function IndividualHealthPage() {
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Shaheen Health<br /><span className="text-gold">Care Packages</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-5">Shaheen Insurance offers a comprehensive range of Individual and Family Health Care Packages, with basic premium rates charged per head. Our plans are designed to remove traditional barriers — making coverage accessible, affordable, and straightforward for all Pakistanis.</p>
+              <p className="text-gray-600 leading-relaxed mb-5">{takafulize("Shaheen Insurance offers a comprehensive range of Individual and Family Health Care Packages, with basic premium rates charged per head. Our plans are designed to remove traditional barriers — making coverage accessible, affordable, and straightforward for all Pakistanis.", isTakaful)}</p>
               <div className="bg-gold/8 border border-gold/20 rounded-xl p-4">
-                <p className="text-navy font-semibold text-sm">Premium Structure: Basic rates are charged Per Head — individual, spouse, and each dependent child enrolled separately or as a family package.</p>
+                <p className="text-navy font-semibold text-sm">{takafulize("Premium Structure: Basic rates are charged Per Head — individual, spouse, and each dependent child enrolled separately or as a family package.", isTakaful)}</p>
               </div>
             </ScrollReveal>
             <ScrollReveal from="right">
@@ -101,7 +104,7 @@ export default function IndividualHealthPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="ind-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -112,39 +115,39 @@ export default function IndividualHealthPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Key Benefits</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">What You Get</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Key Benefits</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">What You Get</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
             {KEY_BENEFITS.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all group">
+              <div key={title} className="p-6 bg-white border border-navy/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all group shadow-card">
                 <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
                   <Icon size={20} className="text-gold" />
                 </div>
-                <h3 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold transition-colors">{title}</h3>
-                <p className="text-white/50 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-display font-bold text-navy text-sm mb-2 group-hover:text-gold transition-colors">{takafulize(title, isTakaful)}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
 
           <ScrollReveal>
             <div className="mb-10 text-center">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Discounts</p>
-              <h3 className="font-display font-black text-white text-3xl uppercase">Discount Structure</h3>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Discounts</p>
+              <h3 className="font-display font-black text-navy text-3xl uppercase">Discount Structure</h3>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-2xl mx-auto">
             {DISCOUNTS.map(({ icon: Icon, title, items }) => (
-              <div key={title} className="p-6 bg-white/8 border border-gold/20 rounded-2xl">
+              <div key={title} className="p-6 bg-white border border-gold/20 rounded-2xl shadow-card">
                 <div className="flex items-center gap-2 mb-4">
                   <Icon size={18} className="text-gold" />
-                  <h4 className="font-display font-bold text-white">{title}</h4>
+                  <h4 className="font-display font-bold text-navy">{takafulize(title, isTakaful)}</h4>
                 </div>
                 <ul className="space-y-2">
                   {items.map((item) => (
-                    <li key={item} className="flex gap-2 text-xs text-white/60">
-                      <CheckCircle2 size={12} className="text-gold shrink-0 mt-0.5" />{item}
+                    <li key={item} className="flex gap-2 text-xs text-gray-500">
+                      <CheckCircle2 size={12} className="text-gold shrink-0 mt-0.5" />{takafulize(item, isTakaful)}
                     </li>
                   ))}
                 </ul>
@@ -195,7 +198,7 @@ export default function IndividualHealthPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="ind-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -205,21 +208,21 @@ export default function IndividualHealthPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Covered</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Protect Your <span className="text-gold">Family</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Covered</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Protect Your <span className="text-gold-dark">Family</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Affordable individual and family health plans with no medical check-up required. Up to 6 members covered, no-claim discounts, and nationwide panel hospitals.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Affordable individual and family health plans with no medical check-up required. Up to 6 members covered, no-claim discounts, and nationwide panel hospitals.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <FileText size={15} /> Get a Quote
               </Link>
-              <Link to="/health-care/panel-hospitals" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <Link to="/health-care/panel-hospitals" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <ArrowRight size={15} /> Panel Hospitals
               </Link>
             </div>
             <div className="mt-6">
-              <a href="tel:111765111" className="inline-flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 text-gray-500 hover:text-gold transition-colors text-sm">
                 <Phone size={14} /> 111-765-111
               </a>
             </div>

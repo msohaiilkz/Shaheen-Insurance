@@ -3,6 +3,8 @@ import ContactSidebar from '../../components/layout/ContactSidebar'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const STATS = [
   { label: 'Incorporated', value: '1996' },
@@ -24,6 +26,7 @@ const REGULATORY = [
 ]
 
 export default function CorporateProfilePage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -52,7 +55,7 @@ export default function CorporateProfilePage() {
                 <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
                   <p>Shaheen Insurance Company Limited (SICL) is a project of <strong className="text-navy font-bold">Shaheen Foundation</strong>, set up by Pakistan Air Force (PAF), incorporated as a public limited company in <strong className="text-navy font-bold">1996</strong> under the Companies Ordinance 1979.</p>
                   <p>The company commenced operations with a paid-up capital of <strong className="text-navy font-bold">Rs. 20 million</strong>, which has since expanded to <strong className="text-navy font-bold">Rs. 600 million</strong> — reflecting decades of sustained growth and investor confidence.</p>
-                  <p>Shaheen Insurance operates as a publicly listed entity on the <strong className="text-navy font-bold">Pakistan Stock Exchange (PSX Symbol: SHNI)</strong> and engages in general insurance operations across all major product lines. The Shaheen Foundation (PAF) maintains the primary shareholding position in the company.</p>
+                  <p>Shaheen Insurance operates as a publicly listed entity on the <strong className="text-navy font-bold">Pakistan Stock Exchange (PSX Symbol: SHNI)</strong>{takafulize(' and engages in general insurance operations across all major product lines. The Shaheen Foundation (PAF) maintains the primary shareholding position in the company.', isTakaful)}</p>
                   <p>The company serves <strong className="text-navy font-bold">corporate, multinational, and blue-chip clients</strong>, delivering personalized and efficient service through a compact, dedicated workforce structure.</p>
                 </div>
               </div>
@@ -76,7 +79,7 @@ export default function CorporateProfilePage() {
                   <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-2">Philosophy</p>
                   <h2 className="font-display font-black text-white text-xl uppercase mb-4">Corporate Philosophy</h2>
                   <blockquote className="text-gold font-display font-bold text-xl italic mb-4 border-l-4 border-gold pl-5 leading-tight">
-                    "A satisfied claimant is the most effective advertisement for an insurance company."
+                    {takafulize('"A satisfied claimant is the most effective advertisement for an insurance company."', isTakaful)}
                   </blockquote>
                   <p className="text-white/70 leading-relaxed text-sm">The leadership team delivers personalized, efficient service through a compact, dedicated workforce structure. Management expresses strong confidence in future expansion prospects, attributing growth potential to stable economic conditions and active institutional support from the Shaheen Foundation.</p>
                 </div>

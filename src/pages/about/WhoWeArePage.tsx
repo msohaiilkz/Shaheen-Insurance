@@ -4,6 +4,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { Shield, Star, TrendingUp, Users, Building2, Award } from 'lucide-react'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const MILESTONES = [
   { year: '1977', event: 'Shaheen Foundation established by PAF to promote welfare activities' },
@@ -24,6 +26,7 @@ const VALUES = [
 ]
 
 export default function WhoWeArePage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -36,7 +39,7 @@ export default function WhoWeArePage() {
       <AboutHero
         category="About Shaheen Insurance"
         title="Who We Are"
-        subtitle="Pakistan's trusted general insurance company since 1996 — sponsored by Shaheen Foundation (PAF)"
+        subtitle={takafulize("Pakistan's trusted general insurance company since 1996 — sponsored by Shaheen Foundation (PAF)", isTakaful)}
         breadcrumbs={[{ label: 'About Us', path: '/about' }, { label: 'Who We Are' }]}
         accent={{ value: 'A++', label: 'PACRA Rating' }}
       />
@@ -79,7 +82,7 @@ export default function WhoWeArePage() {
                 </div>
                 <div className="mt-5 space-y-3 text-gray-600 leading-relaxed text-sm">
                   <p>The company operates under the regulatory framework of SECP and is audited by <strong className="text-navy font-bold">BDO Ebrahim & Co. Chartered Accountants</strong>. Its legal affairs are managed by <strong className="text-navy font-bold">Allied Law Group</strong>, and shareholder services are provided by <strong className="text-navy font-bold">M/s Corplink (Pvt) Ltd, Lahore</strong>.</p>
-                  <p>In April 2018, Shaheen Insurance launched its <strong className="text-navy font-bold">Window Takaful Operations</strong> — an SECP-authorized Shariah-compliant alternative to conventional insurance.</p>
+                  <p>In April 2018, Shaheen Insurance launched its <strong className="text-navy font-bold">Window Takaful Operations</strong> — an SECP-authorized Shariah-compliant alternative to {takafulize('conventional insurance.', isTakaful)}</p>
                 </div>
               </div>
             </ScrollReveal>
@@ -91,7 +94,7 @@ export default function WhoWeArePage() {
                 <div className="relative z-10">
                   <h3 className="font-display font-black text-white text-xl uppercase mb-4">Our Core Philosophy</h3>
                   <blockquote className="text-lg text-gold font-display font-semibold mb-4 border-l-4 border-gold pl-5 leading-tight">
-                    "A satisfied claimant is the most effective advertisement for an insurance company."
+                    {takafulize('"A satisfied claimant is the most effective advertisement for an insurance company."', isTakaful)}
                   </blockquote>
                   <p className="text-white/70 leading-relaxed text-sm">The leadership team at Shaheen Insurance delivers personalized, efficient service through a compact, dedicated workforce. Management expresses strong confidence in future expansion, attributing growth potential to stable economic conditions and active institutional support from the Shaheen Foundation.</p>
                 </div>
@@ -114,7 +117,7 @@ export default function WhoWeArePage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-navy mb-1 text-sm group-hover:text-gold transition-colors">{title}</h4>
-                      <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
                     </div>
                   </div>
                 ))}

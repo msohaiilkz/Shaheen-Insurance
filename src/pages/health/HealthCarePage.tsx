@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const PRODUCTS = [
   { icon: Heart, title: 'Shaheen Takaful Health Care', desc: 'Shariah-compliant health coverage — Health Care, Health Care Plus, and Takaful Wallet with coverage up to Rs. 1,000,000.', link: '/health-care/takaful', badge: 'Window Takaful' },
@@ -46,6 +48,7 @@ const HealthSVG = () => (
 )
 
 export default function HealthCarePage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -58,7 +61,7 @@ export default function HealthCarePage() {
       <InnerPageHero
         category="Health Care Division"
         title="Health Care"
-        subtitle="We Care As You Prosper — comprehensive health insurance solutions for individuals, families, and corporates across Pakistan"
+        subtitle={takafulize("We Care As You Prosper — comprehensive health insurance solutions for individuals, families, and corporates across Pakistan", isTakaful)}
         breadcrumbs={[{ label: 'Health Care' }]}
         stats={[{ value: '4', label: 'Plan Types' }, { value: 'Rs. 1M+', label: 'Max Coverage' }, { value: '50+', label: 'Panel Hospitals' }]}
         svgIllustration={<HealthSVG />}
@@ -72,11 +75,11 @@ export default function HealthCarePage() {
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 We Care<br /><span className="text-gold">As You Prosper</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">Our Health Care Division provides dedicated coverage for individuals, families, and organizations across Pakistan — tailored to meet real needs at accessible premiums. With conventional and Takaful options, we cover every Pakistani's healthcare needs.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize("Our Health Care Division provides dedicated coverage for individuals, families, and organizations across Pakistan — tailored to meet real needs at accessible premiums. With conventional and Takaful options, we cover every Pakistani's healthcare needs.", isTakaful)}</p>
               <div className="bg-navy rounded-xl p-5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-2xl" />
                 <p className="font-display text-lg font-bold text-gold italic mb-2 leading-tight">"We Care As You Prosper"</p>
-                <p className="text-white/65 text-sm leading-relaxed">Health insurance that removes the financial burden of medical emergencies — keeping your family protected and your savings intact.</p>
+                <p className="text-white/65 text-sm leading-relaxed">{takafulize("Health insurance that removes the financial burden of medical emergencies — keeping your family protected and your savings intact.", isTakaful)}</p>
               </div>
             </ScrollReveal>
             <ScrollReveal from="right">
@@ -101,7 +104,7 @@ export default function HealthCarePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="health-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -112,22 +115,22 @@ export default function HealthCarePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Health Products</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Our Coverage Range</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Health Products</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Our Coverage Range</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {PRODUCTS.map(({ icon: Icon, title, desc, link, badge }) => (
               <Link key={title} to={link}
-                className="group flex flex-col p-6 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300">
+                className="group flex flex-col p-6 bg-white border border-navy/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 shadow-card">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center">
                     <Icon size={20} className="text-gold" />
                   </div>
                   <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-gold/10 px-2 py-1 rounded-full border border-gold/20">{badge}</span>
                 </div>
-                <h3 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold transition-colors">{title}</h3>
-                <p className="text-white/45 text-xs leading-relaxed flex-grow mb-4">{desc}</p>
+                <h3 className="font-display font-bold text-navy text-sm mb-2 group-hover:text-gold transition-colors">{takafulize(title, isTakaful)}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed flex-grow mb-4">{takafulize(desc, isTakaful)}</p>
                 <div className="flex items-center gap-2 text-gold/70 text-xs font-bold group-hover:text-gold transition-colors">
                   <span>Learn More</span>
                   <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
@@ -143,7 +146,7 @@ export default function HealthCarePage() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Benefits</p>
-              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Why Health Insurance Matters</h2>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">{takafulize("Why Health Insurance Matters", isTakaful)}</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -153,8 +156,8 @@ export default function HealthCarePage() {
                   <Icon size={22} className="text-gold group-hover:text-navy transition-colors duration-300" />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-navy text-base mb-1 group-hover:text-gold transition-colors">{title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                  <h3 className="font-display font-bold text-navy text-base mb-1 group-hover:text-gold transition-colors">{takafulize(title, isTakaful)}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               </div>
             ))}
@@ -162,7 +165,7 @@ export default function HealthCarePage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="health-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -173,32 +176,32 @@ export default function HealthCarePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Services</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight">Health Care Services</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Services</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight">Health Care Services</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-14">
             {SERVICES.map(({ icon: Icon, text }) => (
-              <div key={text} className="flex flex-col items-center text-center p-5 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all">
+              <div key={text} className="flex flex-col items-center text-center p-5 bg-white border border-navy/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all shadow-card">
                 <div className="w-10 h-10 bg-gold/15 rounded-xl flex items-center justify-center mb-3">
                   <Icon size={18} className="text-gold" />
                 </div>
-                <p className="text-white/65 text-xs leading-relaxed">{text}</p>
+                <p className="text-gray-600 text-xs leading-relaxed">{text}</p>
               </div>
             ))}
           </StaggerReveal>
           <ScrollReveal>
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
-              <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-                Ready to <span className="text-gold">Get Covered?</span>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
+              <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+                Ready to <span className="text-gold-dark">Get Covered?</span>
               </h2>
-              <p className="text-white/50 mb-8 text-sm leading-relaxed">Contact our Health Care Division for personalized plans — individual, family, group or Takaful.</p>
+              <p className="text-gray-500 mb-8 text-sm leading-relaxed">Contact our Health Care Division for personalized plans — individual, family, group or Takaful.</p>
               <div className="flex justify-center gap-3 flex-wrap">
-                <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+                <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                   Contact Health Division
                 </Link>
-                <Link to="/health-care/panel-hospitals" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+                <Link to="/health-care/panel-hospitals" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                   View Panel Hospitals
                 </Link>
               </div>

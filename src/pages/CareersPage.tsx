@@ -3,6 +3,8 @@ import InnerPageHero from '../components/layout/InnerPageHero'
 import PageSEO from '../components/shared/PageSEO'
 import ScrollReveal from '../components/shared/ScrollReveal'
 import { StaggerReveal } from '../components/shared/ScrollReveal'
+import { useJourney } from '../context/JourneyContext'
+import { takafulize } from '../lib/wording'
 
 const CULTURE_POINTS = [
   { icon: Users, title: 'Team Oriented', desc: 'A collaborative, professional work environment backed by institutional stability of Shaheen Foundation (PAF).' },
@@ -36,6 +38,7 @@ const CareersSVG = () => (
 )
 
 export default function CareersPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -48,7 +51,7 @@ export default function CareersPage() {
       <InnerPageHero
         category="Join Our Team"
         title="Careers"
-        subtitle="Build your career with one of Pakistan's most trusted insurance institutions — backed by Shaheen Foundation (PAF)"
+        subtitle={takafulize("Build your career with one of Pakistan's most trusted insurance institutions — backed by Shaheen Foundation (PAF)", isTakaful)}
         breadcrumbs={[{ label: 'Careers' }]}
         stats={[{ value: 'A++', label: 'PACRA Rated' }, { value: '28+', label: 'Years of Growth' }, { value: 'PAF', label: 'Sponsored' }]}
         svgIllustration={<CareersSVG />}
@@ -92,7 +95,7 @@ export default function CareersPage() {
       </section>
 
       {/* Why Join + Departments */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="careers-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -103,32 +106,32 @@ export default function CareersPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Culture</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Why Work at Shaheen Insurance</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Culture</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Why Work at Shaheen Insurance</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-14">
             {CULTURE_POINTS.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all group">
+              <div key={title} className="p-6 bg-white border border-navy/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all group shadow-card">
                 <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
                   <Icon size={20} className="text-gold" />
                 </div>
-                <h3 className="font-display font-bold text-white text-base mb-2 group-hover:text-gold transition-colors">{title}</h3>
-                <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-display font-bold text-navy text-base mb-2 group-hover:text-gold-dark transition-colors">{title}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
 
           <ScrollReveal>
             <div className="text-center mb-8">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Departments</p>
-              <h3 className="font-display font-black text-white text-2xl uppercase">We Hire Across All Departments</h3>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Departments</p>
+              <h3 className="font-display font-black text-navy text-2xl uppercase">We Hire Across All Departments</h3>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {DEPARTMENTS.map(dept => (
-              <div key={dept} className="p-3 bg-white/6 border border-white/10 rounded-xl hover:border-gold/30 transition-all text-center">
-                <span className="text-white/70 text-xs font-medium">{dept}</span>
+              <div key={dept} className="p-3 bg-white border border-navy/10 rounded-xl hover:border-gold/30 transition-all text-center shadow-card">
+                <span className="text-gray-600 text-xs font-medium">{dept}</span>
               </div>
             ))}
           </StaggerReveal>
@@ -142,7 +145,7 @@ export default function CareersPage() {
             <div className="text-center mb-10">
               <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Apply</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Send Your CV Anyway</h2>
-              <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">Shaheen Insurance hires across underwriting, claims, sales, marketing, finance, IT, and administration. Experienced insurance professionals are particularly valued.</p>
+              <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">{takafulize('Shaheen Insurance hires across underwriting, claims, sales, marketing, finance, IT, and administration. Experienced insurance professionals are particularly valued.', isTakaful)}</p>
             </div>
           </ScrollReveal>
 
@@ -156,7 +159,7 @@ export default function CareersPage() {
                 ].map(point => (
                   <div key={point} className="flex items-start gap-3">
                     <CheckCircle2 size={16} className="text-gold shrink-0 mt-0.5" />
-                    <p className="text-gray-700 text-sm leading-relaxed">{point}</p>
+                    <p className="text-gray-700 text-sm leading-relaxed">{takafulize(point, isTakaful)}</p>
                   </div>
                 ))}
               </div>
@@ -180,7 +183,7 @@ export default function CareersPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="careers-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -190,16 +193,16 @@ export default function CareersPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get In Touch</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Questions About <span className="text-gold">Careers?</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get In Touch</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Questions About <span className="text-gold-dark">Careers?</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">Contact our HR department or head office for any career-related queries. We look forward to hearing from talented professionals.</p>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">Contact our HR department or head office for any career-related queries. We look forward to hearing from talented professionals.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="mailto:info@shaheeninsurance.com?subject=Career Inquiry" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="mailto:info@shaheeninsurance.com?subject=Career Inquiry" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <Mail size={15} /> Email HR Team
               </a>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>

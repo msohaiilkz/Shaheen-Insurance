@@ -6,6 +6,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const PRODUCTS = [
   {
@@ -77,6 +79,7 @@ const EngineeringSVG = () => (
 )
 
 export default function EngineeringPage() {
+  const { isTakaful } = useJourney()
   const stepsRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -107,10 +110,10 @@ export default function EngineeringPage() {
         schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Engineering Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
       />
       <InnerPageHero
-        category="Insurance Products"
-        title="Engineering Insurance"
+        category={takafulize('Insurance Products', isTakaful)}
+        title={takafulize('Engineering Insurance', isTakaful)}
         subtitle="Comprehensive coverage for construction projects, machinery, and industrial operations — CAR, EAR, CPM, Machinery & MLOP"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Engineering Insurance' }]}
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: takafulize('Engineering Insurance', isTakaful) }]}
         stats={[{ value: '5', label: 'Products' }, { value: '28+', label: 'Years' }, { value: 'All Phases', label: 'Coverage' }]}
         svgIllustration={<EngineeringSVG />}
       />
@@ -119,11 +122,11 @@ export default function EngineeringPage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <ScrollReveal>
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">About Engineering Insurance</p>
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">{takafulize('About Engineering Insurance', isTakaful)}</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Construction &<br /><span className="text-gold">Industrial Cover</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">Shaheen Insurance provides five specialized engineering insurance products covering every phase of construction and industrial operations — from groundbreaking to commissioning and ongoing machinery operations.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize('Shaheen Insurance provides five specialized engineering insurance products covering every phase of construction and industrial operations — from groundbreaking to commissioning and ongoing machinery operations.', isTakaful)}</p>
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { val: 'CAR', lbl: "Contractor's All Risks" },
@@ -160,7 +163,7 @@ export default function EngineeringPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="eng-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -171,22 +174,22 @@ export default function EngineeringPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Products</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Engineering Products</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Products</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Engineering Products</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {PRODUCTS.map(({ icon: Icon, title, desc, features }) => (
-              <div key={title} className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
+              <div key={title} className="p-6 bg-white border border-navy/10 shadow-card rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
                 <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
                   <Icon size={20} className="text-gold" />
                 </div>
-                <h4 className="font-display font-bold text-white text-base mb-2 group-hover:text-gold transition-colors">{title}</h4>
-                <p className="text-white/50 text-xs leading-relaxed mb-4">{desc}</p>
+                <h4 className="font-display font-bold text-navy text-base mb-2 group-hover:text-gold transition-colors">{takafulize(title, isTakaful)}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed mb-4">{takafulize(desc, isTakaful)}</p>
                 <ul className="space-y-1.5">
                   {features.map((f) => (
-                    <li key={f} className="flex gap-2 text-xs text-white/40">
-                      <CheckCircle2 size={12} className="text-gold/70 shrink-0 mt-0.5" />{f}
+                    <li key={f} className="flex gap-2 text-xs text-gray-500">
+                      <CheckCircle2 size={12} className="text-gold/70 shrink-0 mt-0.5" />{takafulize(f, isTakaful)}
                     </li>
                   ))}
                 </ul>
@@ -195,11 +198,11 @@ export default function EngineeringPage() {
           </StaggerReveal>
 
           <ScrollReveal>
-            <div className="mt-10 bg-white/6 border border-gold/20 rounded-2xl p-6 max-w-3xl mx-auto">
-              <p className="text-gold font-bold text-sm mb-3">Key Benefits Across All Products:</p>
+            <div className="mt-10 bg-white border border-gold/20 shadow-card rounded-2xl p-6 max-w-3xl mx-auto">
+              <p className="text-gold-dark font-bold text-sm mb-3">Key Benefits Across All Products:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {['Comprehensive construction protection', 'Third-party property and liability', 'Fire, burglary & natural calamities', 'Repair or replacement options', 'Business interruption protection', 'Coverage for testing & trial runs'].map((b) => (
-                  <div key={b} className="flex gap-2 text-white/60 text-sm">
+                  <div key={b} className="flex gap-2 text-gray-600 text-sm">
                     <CheckCircle2 size={13} className="text-gold shrink-0 mt-0.5" />{b}
                   </div>
                 ))}
@@ -232,7 +235,7 @@ export default function EngineeringPage() {
                 <div key={num} className="claim-step group p-5 bg-[#f8f7f5] rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all duration-300">
                   <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
                   <h4 className="font-display font-bold text-navy text-base mb-2">{title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               ))}
             </div>
@@ -240,7 +243,7 @@ export default function EngineeringPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="eng-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -250,16 +253,16 @@ export default function EngineeringPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Protect Your <span className="text-gold">Project</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Protect Your <span className="text-gold-dark">Project</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Comprehensive engineering insurance from groundbreaking to commissioning. CAR, EAR, CPM, Machinery and MLOP — all under one roof.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">{takafulize('Comprehensive engineering insurance from groundbreaking to commissioning. CAR, EAR, CPM, Machinery and MLOP — all under one roof.', isTakaful)}</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <FileText size={15} /> Get a Quote
               </Link>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>

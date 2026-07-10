@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, ExternalLink, Shield } from 'lucide-react'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const PRODUCT_LINKS = [
   { label: 'Motor Insurance', path: '/products/motor' },
@@ -24,6 +26,7 @@ const QUICK_LINKS = [
 ]
 
 export default function Footer() {
+  const { isTakaful } = useJourney()
   return (
     <footer className="bg-navy-gradient text-white">
       {/* Main footer */}
@@ -86,7 +89,7 @@ export default function Footer() {
                     className="text-white/55 text-sm hover:text-gold transition-colors flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-gold/40 group-hover:bg-gold transition-colors" />
-                    {link.label}
+                    {takafulize(link.label, isTakaful)}
                   </Link>
                 </li>
               ))}
@@ -104,7 +107,7 @@ export default function Footer() {
                     className="text-white/55 text-sm hover:text-gold transition-colors flex items-center gap-1.5 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-gold/40 group-hover:bg-gold transition-colors" />
-                    {link.label}
+                    {takafulize(link.label, isTakaful)}
                   </Link>
                 </li>
               ))}

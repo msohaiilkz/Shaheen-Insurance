@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const CLAIM_STEPS = [
   { num: '01', title: 'Report & Intimate', desc: 'Notify Shaheen Insurance immediately after any loss. Submit claim intimation online, by phone (021-32630370-75), or by email.' },
@@ -55,6 +57,7 @@ const ClaimsSVG = () => (
 )
 
 export default function ClaimsPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -81,10 +84,10 @@ export default function ClaimsPage() {
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Claims<br /><span className="text-gold">Commitment</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">At Shaheen Insurance, our claims process is designed to be transparent, efficient, and fair. We are committed to prompt response and equitable settlement for every policyholder — no unnecessary delays, no complications.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize('At Shaheen Insurance, our claims process is designed to be transparent, efficient, and fair. We are committed to prompt response and equitable settlement for every policyholder — no unnecessary delays, no complications.', isTakaful)}</p>
               <div className="bg-navy rounded-xl p-5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-2xl" />
-                <p className="font-display text-base font-bold text-gold italic mb-2 leading-tight">"A satisfied claimant is the most effective advertisement for an insurance company."</p>
+                <p className="font-display text-base font-bold text-gold italic mb-2 leading-tight">{takafulize('"A satisfied claimant is the most effective advertisement for an insurance company."', isTakaful)}</p>
                 <div className="flex items-center gap-3 mt-4">
                   <Clock size={16} className="text-gold shrink-0" />
                   <p className="text-white/65 text-xs">All claims acknowledged within <strong className="text-gold">5 business days</strong> of intimation</p>
@@ -113,7 +116,7 @@ export default function ClaimsPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="claims-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -124,32 +127,32 @@ export default function ClaimsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Process</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">How Claims Work</h2>
-              <p className="text-white/45 text-sm mt-3">Five transparent steps from intimation to settlement — so you always know where your claim stands.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Process</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">How Claims Work</h2>
+              <p className="text-gray-500 text-sm mt-3">Five transparent steps from intimation to settlement — so you always know where your claim stands.</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-14">
             {CLAIM_STEPS.map(({ num, title, desc }) => (
-              <div key={num} className="p-5 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all group">
+              <div key={num} className="p-5 bg-white border border-navy/10 rounded-2xl shadow-card hover:bg-white/10 hover:border-gold/30 transition-all group">
                 <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
-                <h4 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold transition-colors">{title}</h4>
-                <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
+                <h4 className="font-display font-bold text-navy text-sm mb-2 group-hover:text-gold transition-colors">{title}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
 
           <ScrollReveal>
             <div className="text-center mb-8">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Claim Types</p>
-              <h3 className="font-display font-black text-white text-3xl uppercase">Claim Types We Handle</h3>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Claim Types</p>
+              <h3 className="font-display font-black text-navy text-3xl uppercase">Claim Types We Handle</h3>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-3">
             {CLAIM_TYPES.map(({ icon: Icon, label }) => (
-              <div key={label} className="flex flex-col items-center gap-2 p-4 bg-white/6 border border-white/10 rounded-xl hover:border-gold/30 hover:bg-white/10 transition-all text-center">
+              <div key={label} className="flex flex-col items-center gap-2 p-4 bg-white border border-navy/10 rounded-xl shadow-card hover:border-gold/30 hover:bg-white/10 transition-all text-center">
                 <Icon size={20} className="text-gold" />
-                <span className="text-white/65 text-xs font-medium leading-tight">{label}</span>
+                <span className="text-gray-600 text-xs font-medium leading-tight">{label}</span>
               </div>
             ))}
           </StaggerReveal>
@@ -172,7 +175,7 @@ export default function ClaimsPage() {
                   <Icon size={20} className="text-gold group-hover:text-navy transition-colors duration-300" />
                 </div>
                 <h3 className="font-display font-bold text-navy text-lg mb-2">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{desc}</p>
+                <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{takafulize(desc, isTakaful)}</p>
                 <div className="flex items-center gap-1 text-gold text-sm font-semibold">
                   {cta} <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -198,7 +201,7 @@ export default function ClaimsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="claims-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -209,28 +212,28 @@ export default function ClaimsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-12">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Contact</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">Intimation Channels</h2>
-              <p className="text-white/45 text-sm">Always retain a reference number or acknowledgment when submitting.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Contact</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">Intimation Channels</h2>
+              <p className="text-gray-500 text-sm">Always retain a reference number or acknowledgment when submitting.</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto mb-10">
             {INTIMATION_CHANNELS.map(({ icon: Icon, label, detail, href }) => (
-              <a key={label} href={href} className="flex flex-col items-center text-center p-6 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all">
+              <a key={label} href={href} className="flex flex-col items-center text-center p-6 bg-white border border-navy/10 rounded-2xl shadow-card hover:border-gold/30 hover:bg-white/10 transition-all">
                 <div className="w-10 h-10 rounded-xl bg-gold/15 flex items-center justify-center mb-3">
                   <Icon size={18} className="text-gold" />
                 </div>
-                <span className="font-semibold text-white text-sm mb-1">{label}</span>
-                <span className="text-white/50 text-xs">{detail}</span>
+                <span className="font-semibold text-navy text-sm mb-1">{label}</span>
+                <span className="text-gray-500 text-xs">{detail}</span>
               </a>
             ))}
           </StaggerReveal>
           <ScrollReveal>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/claims/intimation" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/claims/intimation" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <AlertCircle size={15} /> Submit Claim Intimation
               </Link>
-              <Link to="/claims/procedure" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <Link to="/claims/procedure" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <ClipboardList size={15} /> View Procedures
               </Link>
             </div>

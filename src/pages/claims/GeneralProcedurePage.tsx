@@ -5,6 +5,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const GENERAL_STEPS = [
   { num: '01', title: 'Notification', desc: 'Intimate the claim immediately via phone, letter, fax, or email to the relevant Shaheen Insurance branch. Prompt notification is essential.' },
@@ -76,6 +78,7 @@ const ProcedureSVG = () => (
 
 export default function GeneralProcedurePage() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
+  const { isTakaful } = useJourney()
 
   return (
     <>
@@ -88,7 +91,7 @@ export default function GeneralProcedurePage() {
       <InnerPageHero
         category="Claims"
         title="General Claim Procedure"
-        subtitle="Step-by-step guidance for filing claims across all insurance types — auto, fire, burglary, machinery, electronics, health, and more"
+        subtitle={takafulize("Step-by-step guidance for filing claims across all insurance types — auto, fire, burglary, machinery, electronics, health, and more", isTakaful)}
         breadcrumbs={[{ label: 'Claims', path: '/claims' }, { label: 'General Procedure' }]}
         stats={[{ value: '5', label: 'General Steps' }, { value: '7', label: 'Claim Types' }, { value: '5 Days', label: 'SLA' }]}
         svgIllustration={<ProcedureSVG />}
@@ -108,7 +111,7 @@ export default function GeneralProcedurePage() {
               <div key={num} className="p-5 bg-white rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all group">
                 <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
                 <h4 className="font-display font-bold text-navy text-sm mb-2">{title}</h4>
-                <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
@@ -158,7 +161,7 @@ export default function GeneralProcedurePage() {
                           {steps.map((step, idx) => (
                             <div key={idx} className="flex gap-3 text-sm text-gray-600">
                               <span className="font-bold text-gold/70 shrink-0 w-5">{idx + 1}.</span>
-                              <span className="leading-relaxed">{step}</span>
+                              <span className="leading-relaxed">{takafulize(step, isTakaful)}</span>
                             </div>
                           ))}
                         </div>
@@ -178,7 +181,7 @@ export default function GeneralProcedurePage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="proc-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -188,16 +191,16 @@ export default function GeneralProcedurePage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Take Action</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Ready to <span className="text-gold">File?</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Take Action</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Ready to <span className="text-gold-dark">File?</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Submit your claim intimation or download the required claim forms to get started.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Submit your claim intimation or download the required claim forms to get started.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/claims/intimation" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/claims/intimation" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <AlertCircle size={15} /> Submit Intimation
               </Link>
-              <Link to="/claims/forms" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <Link to="/claims/forms" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <FileText size={15} /> Download Forms
               </Link>
             </div>

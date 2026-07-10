@@ -3,6 +3,8 @@ import InnerPageHero from '../components/layout/InnerPageHero'
 import PageSEO from '../components/shared/PageSEO'
 import ScrollReveal from '../components/shared/ScrollReveal'
 import { StaggerReveal } from '../components/shared/ScrollReveal'
+import { useJourney } from '../context/JourneyContext'
+import { takafulize } from '../lib/wording'
 
 type DocItem = { title: string; desc?: string; url: string }
 type DocCategory = { category: string; icon: React.ElementType; docs: DocItem[] }
@@ -76,6 +78,7 @@ const DownloadsSVG = () => (
 )
 
 export default function DownloadsPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -122,7 +125,7 @@ export default function DownloadsPage() {
               <ScrollReveal key={category} delay={0.05}>
                 <div className="flex items-center gap-4 mb-5">
                   <div className="h-px flex-1 bg-gold/25" />
-                  <h2 className="font-display font-bold text-navy text-lg whitespace-nowrap px-3">{category}</h2>
+                  <h2 className="font-display font-bold text-navy text-lg whitespace-nowrap px-3">{takafulize(category, isTakaful)}</h2>
                   <div className="h-px flex-1 bg-gold/25" />
                 </div>
                 <StaggerReveal className="space-y-3">
@@ -133,7 +136,7 @@ export default function DownloadsPage() {
                       </div>
                       <div className="flex-1">
                         <p className="text-navy text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</p>
-                        {desc && <p className="text-gray-400 text-xs mt-0.5 leading-relaxed">{desc}</p>}
+                        {desc && <p className="text-gray-400 text-xs mt-0.5 leading-relaxed">{takafulize(desc, isTakaful)}</p>}
                       </div>
                       <a href={url} target="_blank" rel="noopener noreferrer" download
                         className="flex items-center gap-1.5 bg-gold text-navy font-bold text-xs px-3 py-2 rounded-lg hover:bg-gold/85 transition-colors shrink-0">
@@ -149,7 +152,7 @@ export default function DownloadsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="downloads-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -159,13 +162,13 @@ export default function DownloadsPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Need More?</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Request <span className="text-gold">Physical Copies</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Need More?</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Request <span className="text-gold-dark">Physical Copies</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">If you are unable to download documents or require certified physical copies for official purposes, please contact us and we will arrange delivery.</p>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">If you are unable to download documents or require certified physical copies for official purposes, please contact us and we will arrange delivery.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <Mail size={15} /> Email Us
               </a>
             </div>

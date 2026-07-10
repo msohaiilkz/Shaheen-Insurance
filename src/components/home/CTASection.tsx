@@ -45,13 +45,13 @@ export default function CTASection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 bg-navy relative overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-light-cream relative overflow-hidden">
 
       {/* SVG grid background */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="absolute inset-0 w-full h-full opacity-[0.05] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="cta-grid" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#28368F" strokeWidth="0.8" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#cta-grid)" />
@@ -70,43 +70,43 @@ export default function CTASection() {
       <div className="relative z-10 max-w-3xl mx-auto px-5 text-center" ref={contentRef}>
         <div className="inline-flex items-center gap-3 mb-6">
           <div className="h-px w-8 bg-gold/60" />
-          <span className="text-gold text-[11px] font-bold tracking-[0.3em] uppercase">Get Protected Today</span>
+          <span className="text-gold-dark text-[11px] font-bold tracking-[0.3em] uppercase">Get Protected Today</span>
           <div className="h-px w-8 bg-gold/60" />
         </div>
 
-        <h2 className="font-display font-black text-white text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6">
+        <h2 className="font-display font-black text-navy text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6">
           Ready to Get<br />
-          <span className="text-gold">Covered?</span>
+          <span className="text-gold-dark">Covered?</span>
         </h2>
 
-        <p className="text-white/50 text-base leading-relaxed mb-10 max-w-lg mx-auto">
+        <p className="text-gray-500 text-base leading-relaxed mb-10 max-w-lg mx-auto">
           Talk to our team today. Get a quote, learn about our products, or file a claim — we're here to help.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             to="/contact"
-            className="cta-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-navy font-bold px-8 py-4 rounded-xl text-sm transition-all duration-200"
+            className="cta-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-navy hover:bg-navy/90 text-white font-bold px-8 py-4 rounded-xl text-sm transition-all duration-200"
           >
             Contact Us <ArrowRight size={16} />
           </Link>
           <a
             href="tel:111765111"
-            className="cta-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/8 hover:bg-white/14 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm transition-all duration-200"
+            className="cta-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-white/80 border border-navy/15 text-navy font-semibold px-8 py-4 rounded-xl text-sm transition-all duration-200 shadow-card"
           >
             <Phone size={15} /> Call 111-765-111
           </a>
         </div>
 
         {/* Trust badge row */}
-        <div className="mt-12 flex items-center justify-center gap-6 opacity-30">
-          <div className="h-px w-12 bg-white/40" />
-          <span className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">SECP Regulated</span>
-          <div className="w-1 h-1 rounded-full bg-gold/60" />
-          <span className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">PACRA A++</span>
-          <div className="w-1 h-1 rounded-full bg-gold/60" />
-          <span className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">PAF Sponsored</span>
-          <div className="h-px w-12 bg-white/40" />
+        <div className="mt-12 flex items-center justify-center gap-6 opacity-60">
+          <div className="h-px w-12 bg-navy/20" />
+          <span className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">SECP Regulated</span>
+          <div className="w-1 h-1 rounded-full bg-gold-dark/60" />
+          <span className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">PACRA A++</span>
+          <div className="w-1 h-1 rounded-full bg-gold-dark/60" />
+          <span className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">PAF Sponsored</span>
+          <div className="h-px w-12 bg-navy/20" />
         </div>
       </div>
     </section>

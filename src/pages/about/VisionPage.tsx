@@ -4,8 +4,11 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { Eye, Target, Heart, Globe } from 'lucide-react'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 export default function VisionPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -17,7 +20,7 @@ export default function VisionPage() {
       <AboutHero
         category="About Shaheen Insurance"
         title="Vision & Mission"
-        subtitle="Our guiding principles — delivering insurance at its best while caring for society and our customers"
+        subtitle={takafulize("Our guiding principles — delivering insurance at its best while caring for society and our customers", isTakaful)}
         breadcrumbs={[{ label: 'About Us', path: '/about' }, { label: 'Vision & Mission' }]}
         accent={{ value: '1996', label: 'Incorporated' }}
       />
@@ -40,7 +43,7 @@ export default function VisionPage() {
                 </div>
                 <div className="bg-hero-gradient rounded-xl p-6 mb-5">
                   <p className="text-white text-lg font-display font-semibold leading-relaxed italic">
-                    "To deliver general insurance at its best and to contribute positively and proactively for the welfare of our society at large as well as for the preservation of our environment, culture and ethics."
+                    {takafulize('"To deliver general insurance at its best and to contribute positively and proactively for the welfare of our society at large as well as for the preservation of our environment, culture and ethics."', isTakaful)}
                   </p>
                 </div>
               </div>
@@ -57,8 +60,8 @@ export default function VisionPage() {
                   <div className="w-10 h-10 bg-gold/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Icon size={18} className="text-gold" />
                   </div>
-                  <h4 className="font-semibold text-navy text-sm mb-1">{label}</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                  <h4 className="font-semibold text-navy text-sm mb-1">{takafulize(label, isTakaful)}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               ))}
             </StaggerReveal>
@@ -76,7 +79,7 @@ export default function VisionPage() {
                   </div>
                 </div>
                 <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
-                  <p>We aim to continuously improve and become a <strong className="text-navy">leading, profitable organization</strong> by meeting customer needs and enhancing shareholder value. This is accomplished through the strengths of our employees and innovative approaches to developing competitive, high-quality insurance products.</p>
+                  <p>We aim to continuously improve and become a <strong className="text-navy">leading, profitable organization</strong>{takafulize(' by meeting customer needs and enhancing shareholder value. This is accomplished through the strengths of our employees and innovative approaches to developing competitive, high-quality insurance products.', isTakaful)}</p>
                   <div className="bg-gold/8 border border-gold/20 rounded-xl p-5">
                     <p className="text-navy font-semibold text-base">"The interest of the policyholder is supreme."</p>
                     <p className="text-gray-500 text-sm mt-2">We commit to rendering exceptional service while providing comprehensive protection and peace of mind to all our policyholders.</p>
@@ -116,7 +119,7 @@ export default function VisionPage() {
                   <div className="w-6 h-6 bg-gold/20 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-gold font-bold text-xs">{i + 1}</span>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed">{item}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{takafulize(item, isTakaful)}</p>
                 </div>
               ))}
             </StaggerReveal>
@@ -124,7 +127,7 @@ export default function VisionPage() {
             {/* Health Insurance Benefits */}
             <div>
               <ScrollReveal>
-                <h3 className="font-display font-black text-navy text-xl md:text-2xl uppercase mb-5 tracking-tight">Three Primary Benefits of Health Insurance</h3>
+                <h3 className="font-display font-black text-navy text-xl md:text-2xl uppercase mb-5 tracking-tight">{takafulize('Three Primary Benefits of Health Insurance', isTakaful)}</h3>
               </ScrollReveal>
               <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
@@ -135,7 +138,7 @@ export default function VisionPage() {
                   <div key={num} className="bg-navy p-6 text-white rounded-2xl">
                     <div className="text-gold font-display font-bold text-4xl mb-3 opacity-40">{num}</div>
                     <h4 className="font-display font-bold text-lg mb-2">{title}</h4>
-                    <p className="text-white/60 text-sm leading-relaxed">{desc}</p>
+                    <p className="text-white/60 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                   </div>
                 ))}
               </StaggerReveal>

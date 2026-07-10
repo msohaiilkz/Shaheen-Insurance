@@ -3,6 +3,8 @@ import { CheckCircle2, Clock, Send, Phone, Mail, AlertCircle } from 'lucide-reac
 import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const NATURE_OPTIONS = ['Auto / Motor', 'Fire', 'Marine', 'Health', 'Burglary', 'Engineering / Machinery', 'Miscellaneous']
 
@@ -22,6 +24,7 @@ const IntimationSVG = () => (
 )
 
 export default function IntimationFormPage() {
+  const { isTakaful } = useJourney()
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     policyNumber: '', claimantName: '', phone: '', email: '',
@@ -139,7 +142,7 @@ export default function IntimationFormPage() {
                   </div>
 
                   <div className="p-4 bg-[#f8f7f5] rounded-xl border border-gray-100 text-xs text-gray-500 leading-relaxed">
-                    By submitting this form, you confirm that the information provided is accurate and complete. Shaheen Insurance will contact you within 5 business days with acknowledgment and next steps.
+                    {takafulize('By submitting this form, you confirm that the information provided is accurate and complete. Shaheen Insurance will contact you within 5 business days with acknowledgment and next steps.', isTakaful)}
                   </div>
 
                   <button type="submit" className="flex items-center gap-2 bg-gold text-navy font-bold px-8 py-3.5 rounded-xl hover:bg-gold/90 transition-colors text-sm">
@@ -165,7 +168,7 @@ export default function IntimationFormPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="int-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -175,21 +178,21 @@ export default function IntimationFormPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Prefer Phone?</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Call or <span className="text-gold">Email Us</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Prefer Phone?</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Call or <span className="text-gold-dark">Email Us</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">You can also intimate your claim directly by phone or email. Our claims team is ready to assist.</p>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">You can also intimate your claim directly by phone or email. Our claims team is ready to assist.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <Phone size={15} /> 021-32630370-75
               </a>
-              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Mail size={15} /> info@shaheeninsurance.com
               </a>
             </div>
             <div className="mt-6">
-              <a href="tel:111765111" className="inline-flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 text-gray-500 hover:text-gold transition-colors text-sm">
                 <AlertCircle size={13} /> UAN: 111-765-111
               </a>
             </div>

@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const SHAREHOLDER_DOCS = [
   { title: 'Pattern of Share Holding (December 31, 2018)', desc: 'Disclosure of major shareholders and shareholder categories.' },
@@ -43,6 +45,7 @@ const RelationsSVG = () => (
 )
 
 export default function InvestorRelationsPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -54,7 +57,7 @@ export default function InvestorRelationsPage() {
       <InnerPageHero
         category="Investor Relations"
         title="Investor Relations"
-        subtitle="Shareholder services, corporate disclosures, and investor communications for Shaheen Insurance (PSX: SHNI)"
+        subtitle={takafulize("Shareholder services, corporate disclosures, and investor communications for Shaheen Insurance (PSX: SHNI)", isTakaful)}
         breadcrumbs={[{ label: 'Investor Information', path: '/investor' }, { label: 'Investor Relations' }]}
         stats={[{ value: 'SHNI', label: 'PSX Symbol' }, { value: 'A++', label: 'PACRA Stable' }, { value: 'Rs. 600M', label: 'Paid-up Capital' }]}
         svgIllustration={<RelationsSVG />}
@@ -68,7 +71,7 @@ export default function InvestorRelationsPage() {
               <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Shareholders</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Shareholder Information</h2>
               <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">
-                Shaheen Insurance Company Limited (PSX: SHNI) is committed to maintaining transparent and open communication with its shareholders and the investing public.
+                {takafulize('Shaheen Insurance Company Limited (PSX: SHNI) is committed to maintaining transparent and open communication with its shareholders and the investing public.', isTakaful)}
               </p>
             </div>
           </ScrollReveal>
@@ -115,7 +118,7 @@ export default function InvestorRelationsPage() {
       </section>
 
       {/* Documents */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="ir-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -126,33 +129,33 @@ export default function InvestorRelationsPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-10">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Documents</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Shareholder Documents</h2>
-              <p className="text-white/50 text-sm">Key documents for Shaheen Insurance shareholders, available in PDF format.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Documents</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Shareholder Documents</h2>
+              <p className="text-gray-500 text-sm">{takafulize('Key documents for Shaheen Insurance shareholders, available in PDF format.', isTakaful)}</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="space-y-3 mb-10">
             {SHAREHOLDER_DOCS.map(({ title, desc }) => (
               <Link key={title} to="/downloads"
-                className="flex items-center gap-4 p-4 bg-white/6 border border-white/10 rounded-xl hover:border-gold/30 hover:bg-white/10 transition-all duration-200 group">
+                className="flex items-center gap-4 p-4 bg-white border border-navy/10 rounded-xl shadow-card hover:border-gold/30 hover:bg-white/10 transition-all duration-200 group">
                 <div className="w-9 h-9 rounded-lg bg-gold/15 flex items-center justify-center shrink-0">
                   <FileText size={15} className="text-gold" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-white text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</p>
-                  <p className="text-white/40 text-xs mt-0.5">{desc}</p>
+                  <p className="text-navy text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</p>
+                  <p className="text-gray-500 text-xs mt-0.5">{desc}</p>
                 </div>
-                <Download size={14} className="text-white/30 group-hover:text-gold shrink-0 transition-colors duration-200" />
+                <Download size={14} className="text-gray-500 group-hover:text-gold shrink-0 transition-colors duration-200" />
               </Link>
             ))}
           </StaggerReveal>
 
           <ScrollReveal>
-            <div className="p-5 bg-white/6 border border-white/10 rounded-2xl">
-              <h3 className="font-semibold text-white mb-2">SECP Investor Complaints</h3>
-              <p className="text-white/50 text-sm mb-3 leading-relaxed">Investors may submit formal complaints to the Securities and Exchange Commission of Pakistan via their official complaints portal.</p>
+            <div className="p-5 bg-white border border-navy/10 rounded-2xl shadow-card">
+              <h3 className="font-semibold text-navy mb-2">SECP Investor Complaints</h3>
+              <p className="text-gray-500 text-sm mb-3 leading-relaxed">Investors may submit formal complaints to the Securities and Exchange Commission of Pakistan via their official complaints portal.</p>
               <a href="http://secp.gov.pk/ComplaintForm1.asp" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-gold font-semibold text-sm hover:underline">
+                className="inline-flex items-center gap-2 text-gold-dark font-semibold text-sm hover:underline">
                 <ExternalLink size={14} />SECP Investor Complaint Form
               </a>
             </div>

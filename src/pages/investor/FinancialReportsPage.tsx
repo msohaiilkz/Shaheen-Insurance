@@ -3,6 +3,8 @@ import { FileText, Download, ChevronDown, Mail } from 'lucide-react'
 import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 type Report = { label: string; period?: string; url: string }
 type YearGroup = { year: string | number; reports: Report[] }
@@ -222,6 +224,7 @@ const ReportsSVG = () => (
 )
 
 export default function FinancialReportsPage() {
+  const { isTakaful } = useJourney()
   const [openYears, setOpenYears] = useState<Set<string | number>>(DEFAULT_OPEN)
 
   const toggle = (year: string | number) => {
@@ -257,7 +260,7 @@ export default function FinancialReportsPage() {
               <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Archive</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Financial Report Archive</h2>
               <p className="text-gray-600 text-sm leading-relaxed max-w-xl mx-auto">
-                Shaheen Insurance (PSX: SHNI) publishes its financial statements in compliance with SECP regulations and the Companies Act 2017. All reports are available in PDF format. Contact{' '}
+                {takafulize('Shaheen Insurance (PSX: SHNI) publishes its financial statements in compliance with SECP regulations and the Companies Act 2017. All reports are available in PDF format. Contact', isTakaful)}{' '}
                 <a href="mailto:info@shaheeninsurance.com" className="text-gold hover:underline">info@shaheeninsurance.com</a> if you require a report not listed below.
               </p>
             </div>
@@ -301,7 +304,7 @@ export default function FinancialReportsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="reports-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -311,12 +314,12 @@ export default function FinancialReportsPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Need More?</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Request a <span className="text-gold">Specific Report</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Need More?</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Request a <span className="text-gold-dark">Specific Report</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">If you require a financial report not listed above, or wish to receive a physical copy of our Annual Report, please contact our investor relations team.</p>
-            <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">If you require a financial report not listed above, or wish to receive a physical copy of our Annual Report, please contact our investor relations team.</p>
+            <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
               <Mail size={15} />info@shaheeninsurance.com
             </a>
           </div>

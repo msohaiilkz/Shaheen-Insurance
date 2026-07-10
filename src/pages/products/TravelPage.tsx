@@ -6,6 +6,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const COVERAGE = [
   { icon: Shield, label: 'Emergency Medical', desc: 'Medical treatment abroad up to USD 50,000 per policy' },
@@ -54,6 +56,7 @@ const TravelSVG = () => (
 )
 
 export default function TravelPage() {
+  const { isTakaful } = useJourney()
   const stepsRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -84,10 +87,10 @@ export default function TravelPage() {
         schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Travel Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: { '@type': 'GeoShape', description: 'Worldwide' } }}
       />
       <InnerPageHero
-        category="Insurance Products"
-        title="Travel Insurance"
+        category={takafulize('Insurance Products', isTakaful)}
+        title={takafulize('Travel Insurance', isTakaful)}
         subtitle="Worldwide coverage with up to USD 50,000 medical limit — your protection partner from takeoff to landing"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Travel Insurance' }]}
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: takafulize('Travel Insurance', isTakaful) }]}
         stats={[{ value: 'USD 50K', label: 'Medical Limit' }, { value: '92 Days', label: 'Max Duration' }, { value: 'Worldwide', label: 'Coverage' }]}
         svgIllustration={<TravelSVG />}
       />
@@ -100,7 +103,7 @@ export default function TravelPage() {
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Travel<br /><span className="text-gold">With Confidence</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">Shaheen Insurance's Secure Travel product provides comprehensive international travel insurance with worldwide medical coverage, emergency assistance, and 24/7 support — backed by global reinsurance partners rated A+ by Standard & Poor's.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize("Shaheen Insurance's Secure Travel product provides comprehensive international travel insurance with worldwide medical coverage, emergency assistance, and 24/7 support — backed by global reinsurance partners rated A+ by Standard & Poor's.", isTakaful)}</p>
               <div className="grid grid-cols-3 gap-4">
                 {[
                   { val: 'USD 50K', lbl: 'Medical Cover' },
@@ -136,7 +139,7 @@ export default function TravelPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="travel-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -147,19 +150,19 @@ export default function TravelPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">What's Covered</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Coverage Highlights</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">What's Covered</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Coverage Highlights</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {COVERAGE.map(({ icon: Icon, label, desc }) => (
-              <div key={label} className="flex gap-4 p-5 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
+              <div key={label} className="flex gap-4 p-5 bg-white border border-navy/10 shadow-card rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
                 <div className="w-10 h-10 bg-gold/15 rounded-xl flex items-center justify-center shrink-0">
                   <Icon size={18} className="text-gold" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-white text-sm mb-1 group-hover:text-gold transition-colors">{label}</h4>
-                  <p className="text-white/50 text-xs leading-relaxed">{desc}</p>
+                  <h4 className="font-display font-bold text-navy text-sm mb-1 group-hover:text-gold transition-colors">{label}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
@@ -167,27 +170,27 @@ export default function TravelPage() {
 
           <ScrollReveal>
             <div className="mt-14 mb-8 text-center">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Plan Options</p>
-              <h3 className="font-display font-black text-white text-3xl md:text-4xl uppercase">Choose Your Plan</h3>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Plan Options</p>
+              <h3 className="font-display font-black text-navy text-3xl md:text-4xl uppercase">Choose Your Plan</h3>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {PLANS.map(({ title, duration, limit, age, desc }) => (
-              <div key={title} className="p-6 bg-white/8 border border-white/15 rounded-2xl hover:border-gold/40 hover:bg-white/12 transition-all duration-300 group">
-                <h4 className="font-display font-bold text-white text-base mb-3 group-hover:text-gold transition-colors">{title}</h4>
-                <p className="text-white/55 text-xs leading-relaxed mb-4">{desc}</p>
-                <div className="space-y-2 border-t border-white/10 pt-4">
+              <div key={title} className="p-6 bg-white border border-navy/15 shadow-card rounded-2xl hover:border-gold/40 hover:bg-white/12 transition-all duration-300 group">
+                <h4 className="font-display font-bold text-navy text-base mb-3 group-hover:text-gold transition-colors">{title}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed mb-4">{desc}</p>
+                <div className="space-y-2 border-t border-navy/10 pt-4">
                   <div className="flex justify-between text-xs">
-                    <span className="text-white/40">Medical Limit</span>
-                    <span className="text-gold font-bold">{limit}</span>
+                    <span className="text-gray-500">Medical Limit</span>
+                    <span className="text-gold-dark font-bold">{limit}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-white/40">Duration</span>
-                    <span className="text-white font-semibold">{duration}</span>
+                    <span className="text-gray-500">Duration</span>
+                    <span className="text-navy font-semibold">{duration}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <span className="text-white/40">Age Limit</span>
-                    <span className="text-white font-semibold">{age}</span>
+                    <span className="text-gray-500">Age Limit</span>
+                    <span className="text-navy font-semibold">{age}</span>
                   </div>
                 </div>
               </div>
@@ -196,31 +199,31 @@ export default function TravelPage() {
 
           <ScrollReveal>
             <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="bg-white/6 border border-gold/20 rounded-2xl p-6">
+              <div className="bg-white border border-gold/20 shadow-card rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <Globe size={18} className="text-gold" />
-                  <p className="text-gold font-bold text-sm">Global Assistance Partner</p>
+                  <p className="text-gold-dark font-bold text-sm">Global Assistance Partner</p>
                 </div>
-                <p className="text-white font-semibold text-sm">MidEast Assistance International S.A.L</p>
-                <p className="text-white/50 text-xs mt-1">Worldwide emergency medical assistance and coordination</p>
+                <p className="text-navy font-semibold text-sm">MidEast Assistance International S.A.L</p>
+                <p className="text-gray-500 text-xs mt-1">Worldwide emergency medical assistance and coordination</p>
                 <div className="mt-3 flex gap-4">
                   <div>
-                    <p className="text-white/35 text-[10px] uppercase tracking-wider">Middle East</p>
-                    <a href="tel:+9614548348" className="text-gold font-bold text-sm hover:text-gold/80 transition-colors">+961 4 548348</a>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-wider">Middle East</p>
+                    <a href="tel:+9614548348" className="text-gold-dark font-bold text-sm hover:text-gold/80 transition-colors">+961 4 548348</a>
                   </div>
                   <div>
-                    <p className="text-white/35 text-[10px] uppercase tracking-wider">Worldwide 24/7</p>
-                    <a href="tel:+420296339623" className="text-gold font-bold text-sm hover:text-gold/80 transition-colors">+420 296 339 623</a>
+                    <p className="text-gray-500 text-[10px] uppercase tracking-wider">Worldwide 24/7</p>
+                    <a href="tel:+420296339623" className="text-gold-dark font-bold text-sm hover:text-gold/80 transition-colors">+420 296 339 623</a>
                   </div>
                 </div>
               </div>
-              <div className="bg-white/6 border border-gold/20 rounded-2xl p-6">
+              <div className="bg-white border border-gold/20 shadow-card rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <Shield size={18} className="text-gold" />
-                  <p className="text-gold font-bold text-sm">Reinsurance Partner</p>
+                  <p className="text-gold-dark font-bold text-sm">Reinsurance Partner</p>
                 </div>
-                <p className="text-white font-semibold text-sm">Eurocross Assistance</p>
-                <p className="text-white/50 text-xs mt-1">Dutch company rated A+ by Standard & Poor's — one of Europe's leading assistance companies</p>
+                <p className="text-navy font-semibold text-sm">Eurocross Assistance</p>
+                <p className="text-gray-500 text-xs mt-1">Dutch company rated A+ by Standard & Poor's — one of Europe's leading assistance companies</p>
                 <div className="mt-3">
                   <span className="inline-flex items-center gap-1.5 bg-gold/15 text-gold text-xs font-bold px-3 py-1.5 rounded-full">
                     <CheckCircle2 size={11} /> S&P A+ Rated
@@ -255,7 +258,7 @@ export default function TravelPage() {
                 <div key={num} className="claim-step group p-5 bg-[#f8f7f5] rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all duration-300">
                   <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
                   <h4 className="font-display font-bold text-navy text-base mb-2">{title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               ))}
             </div>
@@ -275,7 +278,7 @@ export default function TravelPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="travel-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -285,16 +288,16 @@ export default function TravelPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Ready to <span className="text-gold">Travel?</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Ready to <span className="text-gold-dark">Travel?</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Get comprehensive travel insurance before your next trip. Schengen compliant, worldwide coverage, 24/7 emergency assistance.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">{takafulize('Get comprehensive travel insurance before your next trip. Schengen compliant, worldwide coverage, 24/7 emergency assistance.', isTakaful)}</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <FileText size={15} /> Get a Quote
               </Link>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>

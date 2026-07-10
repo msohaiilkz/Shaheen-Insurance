@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from '../../lib/gsap'
 import { Shield, Car, Heart, FileCheck, Bell, ChevronRight, Wifi, Battery } from 'lucide-react'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const STEPS = [
   {
@@ -262,6 +264,7 @@ const SCREEN_MAP = {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function PhoneMockupSection() {
+  const { isTakaful } = useJourney()
   const outerRef = useRef<HTMLDivElement>(null)
   const stickyRef = useRef<HTMLDivElement>(null)
   const phoneRef = useRef<HTMLDivElement>(null)
@@ -343,14 +346,14 @@ export default function PhoneMockupSection() {
   const ScreenComponent = SCREEN_MAP[step.screen as keyof typeof SCREEN_MAP]
 
   return (
-    <div ref={outerRef} className="relative bg-navy" style={{ height: '400vh' }}>
+    <div ref={outerRef} className="relative bg-light-blue2" style={{ height: '400vh' }}>
       <div ref={stickyRef} className="sticky top-0 h-screen flex items-center overflow-hidden">
 
         {/* Background texture */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.05] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="phone-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#D6A65A" strokeWidth="0.5" />
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#28368F" strokeWidth="0.5" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#phone-grid)" />
@@ -376,7 +379,7 @@ export default function PhoneMockupSection() {
                   style={{
                     width: i === activeStep ? '24px' : '6px',
                     height: '6px',
-                    background: i === activeStep ? '#D6A65A' : 'rgba(255,255,255,0.2)',
+                    background: i === activeStep ? '#D6A65A' : 'rgba(40,54,143,0.2)',
                   }}
                 />
               ))}
@@ -385,22 +388,22 @@ export default function PhoneMockupSection() {
             {/* Tag */}
             <div
               key={step.tag}
-              className="inline-flex items-center gap-2 bg-gold/15 border border-gold/30 px-3 py-1.5 rounded-full mb-5"
+              className="inline-flex items-center gap-2 bg-gold/15 border border-gold/40 px-3 py-1.5 rounded-full mb-5"
               style={{ animation: 'fadeSlideUp 0.4s ease both' }}
             >
-              <div className="w-1.5 h-1.5 bg-gold rounded-full" />
-              <span className="text-gold text-[10px] font-bold tracking-[0.2em] uppercase">{step.tag}</span>
+              <div className="w-1.5 h-1.5 bg-gold-dark rounded-full" />
+              <span className="text-gold-dark text-[10px] font-bold tracking-[0.2em] uppercase">{takafulize(step.tag, isTakaful)}</span>
             </div>
 
             {/* Heading */}
             <h2
               key={step.heading}
-              className="font-display font-black text-white text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6"
+              className="font-display font-black text-navy text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6"
               style={{ animation: 'fadeSlideUp 0.5s ease 0.05s both' }}
             >
               {step.heading.split('\n').map((line, i) => (
                 <span key={i} className="block">
-                  {i === 1 ? <span className="text-gold">{line}</span> : line}
+                  {i === 1 ? <span className="text-gold-dark">{line}</span> : line}
                 </span>
               ))}
             </h2>
@@ -408,7 +411,7 @@ export default function PhoneMockupSection() {
             {/* Body */}
             <p
               key={step.body}
-              className="text-white/55 text-base leading-relaxed max-w-md"
+              className="text-gray-500 text-base leading-relaxed max-w-md"
               style={{ animation: 'fadeSlideUp 0.5s ease 0.1s both' }}
             >
               {step.body}
@@ -416,9 +419,9 @@ export default function PhoneMockupSection() {
 
             {/* Step number */}
             <div className="mt-10 flex items-center gap-3">
-              <span className="font-display font-black text-gold/30 text-6xl leading-none">{step.label}</span>
-              <div className="flex-1 h-px bg-white/10 max-w-[80px]" />
-              <span className="text-white/30 text-xs font-bold tracking-widest uppercase">of {String(STEPS.length).padStart(2, '0')}</span>
+              <span className="font-display font-black text-gold/40 text-6xl leading-none">{step.label}</span>
+              <div className="flex-1 h-px bg-navy/10 max-w-[80px]" />
+              <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">of {String(STEPS.length).padStart(2, '0')}</span>
             </div>
           </div>
 
@@ -477,10 +480,10 @@ export default function PhoneMockupSection() {
 
         {/* Scroll hint (only at step 0) */}
         {activeStep === 0 && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-40">
-            <span className="text-white text-[10px] font-bold tracking-[0.3em] uppercase">Scroll to explore</span>
-            <div className="w-5 h-8 border border-white/30 rounded-full flex items-start justify-center pt-1.5">
-              <div className="w-1 h-2 bg-white/60 rounded-full" style={{ animation: 'scrollBob 1.5s ease-in-out infinite' }} />
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span className="text-navy text-[10px] font-bold tracking-[0.3em] uppercase">Scroll to explore</span>
+            <div className="w-5 h-8 border border-navy/30 rounded-full flex items-start justify-center pt-1.5">
+              <div className="w-1 h-2 bg-navy/60 rounded-full" style={{ animation: 'scrollBob 1.5s ease-in-out infinite' }} />
             </div>
           </div>
         )}

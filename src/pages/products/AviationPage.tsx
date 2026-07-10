@@ -6,6 +6,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const COVERAGE = [
   { icon: Plane, label: 'Aircraft Hull', desc: 'Accidental loss or damage to aircraft body, engines, fixtures and fittings — in-flight and on ground' },
@@ -50,6 +52,7 @@ const AviationSVG = () => (
 )
 
 export default function AviationPage() {
+  const { isTakaful } = useJourney()
   const stepsRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -80,10 +83,10 @@ export default function AviationPage() {
         schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Aviation Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
       />
       <InnerPageHero
-        category="Insurance Products"
-        title="Aviation Insurance"
+        category={takafulize('Insurance Products', isTakaful)}
+        title={takafulize('Aviation Insurance', isTakaful)}
         subtitle="Comprehensive coverage for aircraft, airlines, cargo and passengers — hull and liability protection for aviation operations"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Aviation Insurance' }]}
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: takafulize('Aviation Insurance', isTakaful) }]}
         stats={[{ value: '6', label: 'Cover Types' }, { value: 'A++', label: 'PACRA Rating' }, { value: '28+', label: 'Years' }]}
         svgIllustration={<AviationSVG />}
       />
@@ -92,13 +95,13 @@ export default function AviationPage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <ScrollReveal>
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">About Aviation Insurance</p>
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">{takafulize('About Aviation Insurance', isTakaful)}</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Aircraft &<br /><span className="text-gold">Airline Cover</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">Aviation insurance covers aircraft and airlines, providing protection against loss or damage to aircraft, cargo, and passengers during flight operations and ground activities. Shaheen Insurance offers hull, liability, passenger, and cargo coverage for all aviation operators in Pakistan.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize('Aviation insurance covers aircraft and airlines, providing protection against loss or damage to aircraft, cargo, and passengers during flight operations and ground activities. Shaheen Insurance offers hull, liability, passenger, and cargo coverage for all aviation operators in Pakistan.', isTakaful)}</p>
               <div className="bg-gold/8 border border-gold/20 rounded-xl p-5">
-                <p className="text-navy font-semibold text-sm leading-relaxed">"Aviation Insurance provides protection against loss of and/or damage to the Aircraft and/or cargo and/or passengers during flight operations and ground activities."</p>
+                <p className="text-navy font-semibold text-sm leading-relaxed">{takafulize('"Aviation Insurance provides protection against loss of and/or damage to the Aircraft and/or cargo and/or passengers during flight operations and ground activities."', isTakaful)}</p>
               </div>
             </ScrollReveal>
             <ScrollReveal from="right">
@@ -123,7 +126,7 @@ export default function AviationPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="avi-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -134,19 +137,19 @@ export default function AviationPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Aviation Cover Types</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Aviation Cover Types</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
             {COVERAGE.map(({ icon: Icon, label, desc }) => (
-              <div key={label} className="flex gap-4 p-5 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
+              <div key={label} className="flex gap-4 p-5 bg-white border border-navy/10 shadow-card rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
                 <div className="w-10 h-10 bg-gold/15 rounded-xl flex items-center justify-center shrink-0">
                   <Icon size={18} className="text-gold" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-white text-sm mb-1 group-hover:text-gold transition-colors">{label}</h4>
-                  <p className="text-white/50 text-xs leading-relaxed">{desc}</p>
+                  <h4 className="font-display font-bold text-navy text-sm mb-1 group-hover:text-gold transition-colors">{takafulize(label, isTakaful)}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               </div>
             ))}
@@ -154,14 +157,14 @@ export default function AviationPage() {
 
           <ScrollReveal>
             <div className="mb-8 text-center">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Clients</p>
-              <h3 className="font-display font-black text-white text-3xl uppercase">Who We Cover</h3>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Clients</p>
+              <h3 className="font-display font-black text-navy text-3xl uppercase">Who We Cover</h3>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {CLIENTS.map((client) => (
-              <div key={client} className="p-4 bg-white/8 border border-white/10 rounded-xl text-center hover:border-gold/30 hover:bg-white/12 transition-all">
-                <p className="text-white text-xs font-semibold leading-tight">{client}</p>
+              <div key={client} className="p-4 bg-white border border-navy/10 shadow-card rounded-xl text-center hover:border-gold/30 hover:bg-white/12 transition-all">
+                <p className="text-navy text-xs font-semibold leading-tight">{takafulize(client, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
@@ -191,7 +194,7 @@ export default function AviationPage() {
                 <div key={num} className="claim-step group p-5 bg-[#f8f7f5] rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all duration-300">
                   <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
                   <h4 className="font-display font-bold text-navy text-base mb-2">{title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               ))}
             </div>
@@ -199,7 +202,7 @@ export default function AviationPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="avi-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -209,16 +212,16 @@ export default function AviationPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Protect Your <span className="text-gold">Aircraft</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Protect Your <span className="text-gold-dark">Aircraft</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Comprehensive aviation insurance for airlines, corporate operators, and private owners. Hull, liability, cargo, and passenger coverage — all from a PACRA A++ rated insurer.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">{takafulize('Comprehensive aviation insurance for airlines, corporate operators, and private owners. Hull, liability, cargo, and passenger coverage — all from a PACRA A++ rated insurer.', isTakaful)}</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <FileText size={15} /> Get a Quote
               </Link>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>

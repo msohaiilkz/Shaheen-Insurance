@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight } from 'lucide-react'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
+import { categoryWord } from '../../lib/wording'
 
 const PRODUCTS = [
   {
@@ -56,6 +58,7 @@ const PRODUCTS = [
 ]
 
 export default function ProductsSection() {
+  const { isTakaful } = useJourney()
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
@@ -105,7 +108,7 @@ export default function ProductsSection() {
           <div>
             <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Our Coverage</p>
             <h2 className="font-display font-black text-navy text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight">
-              Insurance<br />Products
+              {categoryWord(isTakaful)}<br />Products
             </h2>
           </div>
           <Link

@@ -6,6 +6,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const COVERAGE = [
   { icon: Flame, label: 'Fire & Lightning', desc: 'Direct damage caused by fire and lightning strikes' },
@@ -50,6 +52,7 @@ const BuildingSVG = () => (
 )
 
 export default function FirePage() {
+  const { isTakaful } = useJourney()
   const stepsRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -80,10 +83,10 @@ export default function FirePage() {
         schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Fire Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
       />
       <InnerPageHero
-        category="Insurance Products"
-        title="Fire & Property Insurance"
+        category={takafulize('Insurance Products', isTakaful)}
+        title={takafulize('Fire & Property Insurance', isTakaful)}
         subtitle="Comprehensive protection for your property against fire, lightning, explosion, earthquake, riot and 9 allied perils"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Fire Insurance' }]}
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: takafulize('Fire Insurance', isTakaful) }]}
         stats={[{ value: '9 Perils', label: 'Covered' }, { value: '28+', label: 'Years' }, { value: '5 Days', label: 'Settlement' }]}
         svgIllustration={<BuildingSVG />}
       />
@@ -93,11 +96,11 @@ export default function FirePage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <ScrollReveal>
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">About Fire Insurance</p>
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">{takafulize('About Fire Insurance', isTakaful)}</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Property<br /><span className="text-gold">Protection</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">Shaheen Insurance's Fire & Property policy provides wide-ranging protection to residential and commercial properties against fire and a host of allied perils. Whether it's your home, factory, warehouse, or commercial establishment — you are protected.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize("Shaheen Insurance's Fire & Property policy provides wide-ranging protection to residential and commercial properties against fire and a host of allied perils. Whether it's your home, factory, warehouse, or commercial establishment — you are protected.", isTakaful)}</p>
               <div className="space-y-3">
                 {['Residential homes and apartments', 'Commercial buildings and offices', 'Factories, warehouses and stores', 'Stocks, machinery and equipment', 'Furniture and fixtures'].map(item => (
                   <div key={item} className="flex gap-2.5">
@@ -130,7 +133,7 @@ export default function FirePage() {
       </section>
 
       {/* Coverage grid */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="fire-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -141,20 +144,20 @@ export default function FirePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">What's Covered</h2>
-              <p className="text-white/40 mt-3 max-w-lg mx-auto text-sm">Nine comprehensive perils covered under the standard fire and allied perils policy.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">What's Covered</h2>
+              <p className="text-gray-500 mt-3 max-w-lg mx-auto text-sm">Nine comprehensive perils covered under the standard fire and allied perils policy.</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {COVERAGE.map(({ icon: Icon, label, desc }) => (
-              <div key={label} className="flex gap-4 p-5 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
+              <div key={label} className="flex gap-4 p-5 bg-white border border-navy/10 shadow-card rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all duration-300 group">
                 <div className="w-10 h-10 bg-gold/15 rounded-xl flex items-center justify-center shrink-0">
                   <Icon size={18} className="text-gold" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-white text-sm mb-1 group-hover:text-gold transition-colors">{label}</h4>
-                  <p className="text-white/50 text-xs leading-relaxed">{desc}</p>
+                  <h4 className="font-display font-bold text-navy text-sm mb-1 group-hover:text-gold transition-colors">{label}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
@@ -162,9 +165,9 @@ export default function FirePage() {
           <ScrollReveal>
             <div className="grid grid-cols-3 gap-4 mt-10 max-w-lg mx-auto">
               {[{ val: '28+', label: 'Years' }, { val: 'A++', label: 'PACRA' }, { val: '5 Days', label: 'SLA' }].map(({ val, label }) => (
-                <div key={label} className="bg-white/6 border border-white/10 rounded-xl p-4 text-center">
-                  <div className="font-display font-black text-gold text-xl leading-none mb-1">{val}</div>
-                  <div className="text-white/45 text-[10px] uppercase tracking-wider">{label}</div>
+                <div key={label} className="bg-white border border-navy/10 shadow-card rounded-xl p-4 text-center">
+                  <div className="font-display font-black text-gold-dark text-xl leading-none mb-1">{val}</div>
+                  <div className="text-gray-500 text-[10px] uppercase tracking-wider">{label}</div>
                 </div>
               ))}
             </div>
@@ -199,7 +202,7 @@ export default function FirePage() {
                 <div key={num} className="claim-step group p-5 bg-[#f8f7f5] rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all duration-300">
                   <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
                   <h4 className="font-display font-bold text-navy text-base mb-2">{title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               ))}
             </div>
@@ -208,7 +211,7 @@ export default function FirePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="fire-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -218,22 +221,22 @@ export default function FirePage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Protect Your <span className="text-gold">Property</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Protect Your <span className="text-gold-dark">Property</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Get fire and property insurance for your home or business. Fast quotes, reliable service.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">{takafulize('Get fire and property insurance for your home or business. Fast quotes, reliable service.', isTakaful)}</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <FileText size={15} /> Get a Quote
               </Link>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>
             <div className="mt-10 flex items-center justify-center gap-4 opacity-35 flex-wrap">
               {['SECP Regulated', 'PACRA A++', 'PAF Sponsored', 'PSX: SHNI'].map(b => (
-                <span key={b} className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">{b}</span>
+                <span key={b} className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">{b}</span>
               ))}
             </div>
           </div>

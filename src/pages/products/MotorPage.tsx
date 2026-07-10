@@ -6,6 +6,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const COMPREHENSIVE = [
   'Accidental external damage to the vehicle',
@@ -55,6 +57,7 @@ const CarSVG = () => (
 )
 
 export default function MotorPage() {
+  const { isTakaful } = useJourney()
   const stepsRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -85,10 +88,10 @@ export default function MotorPage() {
         schema={{ '@context': 'https://schema.org', '@type': 'Service', serviceType: 'Motor Insurance', provider: { '@type': 'InsuranceAgency', name: 'Shaheen Insurance Company Limited' }, areaServed: 'PK' }}
       />
       <InnerPageHero
-        category="Insurance Products"
-        title="Motor Insurance"
+        category={takafulize('Insurance Products', isTakaful)}
+        title={takafulize('Motor Insurance', isTakaful)}
         subtitle="Comprehensive protection for your vehicle — covering accidental damage, theft, fire, flood, and third-party liability nationwide"
-        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: 'Motor Insurance' }]}
+        breadcrumbs={[{ label: 'Products', path: '/products' }, { label: takafulize('Motor Insurance', isTakaful) }]}
         stats={[{ value: 'Rs. 5M+', label: 'Max Coverage' }, { value: '28+', label: 'Years' }, { value: '5 Days', label: 'Settlement' }]}
         svgIllustration={<CarSVG />}
       />
@@ -98,11 +101,11 @@ export default function MotorPage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-14 items-center">
             <ScrollReveal>
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">About Motor Insurance</p>
+              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">{takafulize('About Motor Insurance', isTakaful)}</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Drive with<br /><span className="text-gold">Full Confidence</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">Shaheen Insurance offers comprehensive motor vehicle insurance protecting your car against a wide range of risks. Whether it's an accident, fire, theft, or natural calamity — your vehicle is protected.</p>
+              <p className="text-gray-600 leading-relaxed mb-6">{takafulize("Shaheen Insurance offers comprehensive motor vehicle insurance protecting your car against a wide range of risks. Whether it's an accident, fire, theft, or natural calamity — your vehicle is protected.", isTakaful)}</p>
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { icon: Car, label: 'All Vehicle Types', desc: 'Cars, bikes, commercial vehicles' },
@@ -143,7 +146,7 @@ export default function MotorPage() {
       </section>
 
       {/* Coverage section */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="motor-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -154,24 +157,24 @@ export default function MotorPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">What's Covered</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">What's Covered</h2>
             </div>
           </ScrollReveal>
           <div className="grid lg:grid-cols-2 gap-8">
             <ScrollReveal>
-              <div className="bg-white/6 border border-white/10 rounded-2xl p-7">
+              <div className="bg-white border border-navy/10 shadow-card rounded-2xl p-7">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-gold/20 rounded-xl flex items-center justify-center">
                     <Car size={18} className="text-gold" />
                   </div>
-                  <h3 className="font-display font-bold text-white text-xl uppercase">Comprehensive Cover</h3>
+                  <h3 className="font-display font-bold text-navy text-xl uppercase">Comprehensive Cover</h3>
                 </div>
                 <div className="space-y-3">
                   {COMPREHENSIVE.map((item) => (
                     <div key={item} className="flex gap-3">
                       <CheckCircle2 size={15} className="text-gold shrink-0 mt-0.5" />
-                      <span className="text-white/70 text-sm">{item}</span>
+                      <span className="text-gray-600 text-sm">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -183,26 +186,26 @@ export default function MotorPage() {
                   <div className="w-10 h-10 bg-gold/20 rounded-xl flex items-center justify-center">
                     <Shield size={18} className="text-gold" />
                   </div>
-                  <h3 className="font-display font-bold text-white text-xl uppercase">Third-Party Liability</h3>
+                  <h3 className="font-display font-bold text-navy text-xl uppercase">Third-Party Liability</h3>
                 </div>
                 <div className="space-y-3 mb-6">
                   {THIRD_PARTY.map((item) => (
                     <div key={item} className="flex gap-3">
                       <CheckCircle2 size={15} className="text-gold shrink-0 mt-0.5" />
-                      <span className="text-white/70 text-sm">{item}</span>
+                      <span className="text-gray-600 text-sm">{item}</span>
                     </div>
                   ))}
                 </div>
-                <div className="bg-white/6 rounded-xl p-4 mt-4">
-                  <p className="text-white/50 text-xs italic">As required by Motor Vehicles Ordinance, 1965</p>
+                <div className="bg-white shadow-card rounded-xl p-4 mt-4">
+                  <p className="text-gray-500 text-xs italic">As required by Motor Vehicles Ordinance, 1965</p>
                 </div>
               </div>
               {/* Stats row */}
               <div className="grid grid-cols-3 gap-3 mt-5">
                 {[{ val: '28+', label: 'Years' }, { val: 'A++', label: 'PACRA' }, { val: '5 Days', label: 'SLA' }].map(({ val, label }) => (
-                  <div key={label} className="bg-white/6 border border-white/10 rounded-xl p-4 text-center">
-                    <div className="font-display font-black text-gold text-xl leading-none mb-1">{val}</div>
-                    <div className="text-white/45 text-[10px] uppercase tracking-wider">{label}</div>
+                  <div key={label} className="bg-white border border-navy/10 shadow-card rounded-xl p-4 text-center">
+                    <div className="font-display font-black text-gold-dark text-xl leading-none mb-1">{val}</div>
+                    <div className="text-gray-500 text-[10px] uppercase tracking-wider">{label}</div>
                   </div>
                 ))}
               </div>
@@ -238,7 +241,7 @@ export default function MotorPage() {
                 <div key={num} className="claim-step group p-5 bg-[#f8f7f5] rounded-2xl border border-gray-100 hover:border-gold/30 hover:shadow-md transition-all duration-300">
                   <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
                   <h4 className="font-display font-bold text-navy text-base mb-2">{title}</h4>
-                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
               ))}
             </div>
@@ -279,7 +282,7 @@ export default function MotorPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="motor-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -292,25 +295,25 @@ export default function MotorPage() {
         </svg>
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Ready to Get <span className="text-gold">Covered?</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get Protected</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Ready to Get <span className="text-gold-dark">Covered?</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Get a motor insurance quote today or file a claim. Our team is ready to help.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">{takafulize('Get a motor insurance quote today or file a claim. Our team is ready to help.', isTakaful)}</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <Link to="/contact" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <Link to="/contact" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <FileText size={15} /> Get a Quote
               </Link>
-              <Link to="/claims/intimation" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <Link to="/claims/intimation" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 File a Claim <ArrowRight size={15} />
               </Link>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>
             <div className="mt-10 flex items-center justify-center gap-6 opacity-35 flex-wrap">
               {['SECP Regulated', 'PACRA A++', 'PAF Sponsored', 'PSX: SHNI'].map((b, i, arr) => (
-                <span key={b} className="text-white/60 text-[10px] font-bold tracking-[0.2em] uppercase">
+                <span key={b} className="text-gray-500 text-[10px] font-bold tracking-[0.2em] uppercase">
                   {b}{i < arr.length - 1 && <span className="inline-block mx-3 w-1 h-1 bg-gold/60 rounded-full align-middle" />}
                 </span>
               ))}

@@ -70,20 +70,20 @@ export default function StatsSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-navy py-20 md:py-28 relative overflow-hidden">
+    <section ref={sectionRef} className="bg-light-blue py-20 md:py-28 relative overflow-hidden">
 
       {/* SVG background pattern */}
-      <svg className="absolute inset-0 w-full h-full opacity-[0.03] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+      <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
-            <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
+            <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#28368F" strokeWidth="1" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#hex)" />
       </svg>
 
       {/* Gold glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gold/8 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-gold/10 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
 
@@ -91,31 +91,31 @@ export default function StatsSection() {
         <div ref={headerRef} className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-gold/60" />
-            <span className="text-gold text-[11px] font-bold tracking-[0.3em] uppercase">By the Numbers</span>
+            <span className="text-gold-dark text-[11px] font-bold tracking-[0.3em] uppercase">By the Numbers</span>
             <div className="h-px w-8 bg-gold/60" />
           </div>
-          <h2 className="font-display font-black text-white text-3xl md:text-5xl uppercase tracking-tight">
+          <h2 className="font-display font-black text-navy text-3xl md:text-5xl uppercase tracking-tight">
             A Company Built on Trust
           </h2>
-          <p className="text-white/40 text-sm mt-3 max-w-md mx-auto">
+          <p className="text-gray-500 text-sm mt-3 max-w-md mx-auto">
             Two decades of consistent performance, financial strength, and customer trust.
           </p>
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5 rounded-2xl overflow-hidden">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-navy/10 border border-navy/10 rounded-2xl overflow-hidden shadow-card">
           {STATS.map(({ suffix, label, sub }, i) => (
-            <div key={label} className="stat-card px-8 py-10 text-center bg-navy relative group hover:bg-white/5 transition-colors duration-300">
+            <div key={label} className="stat-card px-8 py-10 text-center bg-white relative group hover:bg-light-blue2 transition-colors duration-300">
               {/* Gold accent top */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-gold/0 group-hover:bg-gold transition-all duration-300" />
 
-              <div className="font-display font-black text-gold text-5xl md:text-6xl lg:text-7xl leading-none mb-3 tabular-nums">
+              <div className="font-display font-black text-gold-dark text-5xl md:text-6xl lg:text-7xl leading-none mb-3 tabular-nums">
                 <span ref={(el) => { numbersRef.current[i] = el }}>
                   0{suffix}
                 </span>
               </div>
-              <div className="text-white font-bold text-sm mb-1.5 uppercase tracking-wider">{label}</div>
-              <div className="text-white/35 text-xs">{sub}</div>
+              <div className="text-navy font-bold text-sm mb-1.5 uppercase tracking-wider">{label}</div>
+              <div className="text-gray-400 text-xs">{sub}</div>
             </div>
           ))}
         </div>

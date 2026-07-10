@@ -4,6 +4,8 @@ import InnerPageHero from '../components/layout/InnerPageHero'
 import PageSEO from '../components/shared/PageSEO'
 import ScrollReveal from '../components/shared/ScrollReveal'
 import { StaggerReveal } from '../components/shared/ScrollReveal'
+import { useJourney } from '../context/JourneyContext'
+import { takafulize } from '../lib/wording'
 
 const SUBJECT_OPTIONS = [
   'General Inquiry', 'Motor Insurance', 'Health Insurance', 'Claims', 'Investor Relations', 'Other',
@@ -75,6 +77,7 @@ const ContactSVG = () => (
 )
 
 export default function ContactPage() {
+  const { isTakaful } = useJourney()
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     name: '', company: '', phone: '', email: '', subject: '', message: '',
@@ -119,7 +122,7 @@ export default function ContactPage() {
             <div className="text-center mb-12">
               <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Reach Us</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Get In Touch</h2>
-              <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">Multiple ways to connect — call, email, or visit. Our team is ready to assist with all insurance queries.</p>
+              <p className="text-gray-500 text-sm mt-3 max-w-xl mx-auto">{takafulize('Multiple ways to connect — call, email, or visit. Our team is ready to assist with all insurance queries.', isTakaful)}</p>
             </div>
           </ScrollReveal>
 
@@ -193,7 +196,7 @@ export default function ContactPage() {
       </section>
 
       {/* Offices */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="contact-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -204,43 +207,43 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Offices</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Our Offices</h2>
-              <p className="text-white/50 text-sm mt-3">Head office in Karachi with branches and representatives nationwide.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Offices</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Our Offices</h2>
+              <p className="text-gray-500 text-sm mt-3">Head office in Karachi with branches and representatives nationwide.</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {OFFICES.map(({ name, isMain, address, phones, uan, fax, email, contact }) => (
-              <div key={name} className={`p-6 rounded-2xl border transition-all hover:border-gold/40 ${isMain ? 'bg-gold/10 border-gold/30' : 'bg-white/6 border-white/10'}`}>
+              <div key={name} className={`p-6 rounded-2xl border transition-all hover:border-gold/40 ${isMain ? 'bg-gold/10 border-gold/30' : 'bg-white border-navy/10 shadow-card'}`}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-gold/15 rounded-xl flex items-center justify-center shrink-0">
                     <Building2 size={18} className="text-gold" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-display font-bold text-white text-sm leading-tight">{name}</h3>
-                    {isMain && <span className="text-xs text-gold font-semibold">Headquarters</span>}
+                    <h3 className="font-display font-bold text-navy text-sm leading-tight">{name}</h3>
+                    {isMain && <span className="text-xs text-gold-dark font-semibold">Headquarters</span>}
                   </div>
                 </div>
-                {contact && <p className="text-gold text-xs font-semibold mb-3">{contact}</p>}
+                {contact && <p className="text-gold-dark text-xs font-semibold mb-3">{contact}</p>}
                 <div className="space-y-2">
-                  <div className="flex items-start gap-2 text-xs text-white/60">
+                  <div className="flex items-start gap-2 text-xs text-gray-500">
                     <MapPin size={12} className="text-gold shrink-0 mt-0.5" />
                     <span className="leading-relaxed">{address}</span>
                   </div>
                   {phones.length > 0 && (
-                    <div className="flex items-start gap-2 text-xs text-white/60">
+                    <div className="flex items-start gap-2 text-xs text-gray-500">
                       <Phone size={12} className="text-gold shrink-0 mt-0.5" />
                       <div>
                         {phones.map(p => <p key={p}>{p}</p>)}
-                        {uan && <p className="font-semibold text-white/80">UAN: {uan}</p>}
-                        {fax && <p className="text-white/40">Fax: {fax}</p>}
+                        {uan && <p className="font-semibold text-gray-700">UAN: {uan}</p>}
+                        {fax && <p className="text-gray-500">Fax: {fax}</p>}
                       </div>
                     </div>
                   )}
                   {email && (
                     <div className="flex items-center gap-2 text-xs">
                       <Mail size={12} className="text-gold shrink-0" />
-                      <a href={`mailto:${email}`} className="text-gold hover:text-gold/80 transition-colors truncate">{email}</a>
+                      <a href={`mailto:${email}`} className="text-gold-dark hover:text-gold-dark transition-colors truncate">{email}</a>
                     </div>
                   )}
                 </div>
@@ -294,7 +297,7 @@ export default function ContactPage() {
                     <select name="subject" value={formData.subject} onChange={handleChange}
                       className="w-full border border-navy/15 rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all bg-white">
                       <option value="">Select a subject</option>
-                      {SUBJECT_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                      {SUBJECT_OPTIONS.map(opt => <option key={opt} value={opt}>{takafulize(opt, isTakaful)}</option>)}
                     </select>
                   </div>
                   <div>
@@ -328,7 +331,7 @@ export default function ContactPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="contact-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -338,16 +341,16 @@ export default function ContactPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-2xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Find Us</p>
-            <h2 className="font-display font-black text-white text-3xl md:text-4xl uppercase leading-tight mb-4">
-              Visit Our <span className="text-gold">Branch Network</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Find Us</p>
+            <h2 className="font-display font-black text-navy text-3xl md:text-4xl uppercase leading-tight mb-4">
+              Visit Our <span className="text-gold-dark">Branch Network</span>
             </h2>
-            <p className="text-white/50 mb-8 text-sm leading-relaxed">With 12+ branches across Pakistan, there's a Shaheen Insurance office near you. Find your nearest branch with full contact details.</p>
+            <p className="text-gray-500 mb-8 text-sm leading-relaxed">With 12+ branches across Pakistan, there's a Shaheen Insurance office near you. Find your nearest branch with full contact details.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="/branches" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="/branches" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <MapPin size={15} /> View All Branches
               </a>
-              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:111765111" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 111-765-111
               </a>
             </div>

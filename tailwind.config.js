@@ -23,6 +23,14 @@ export default {
         },
         // ── SURFACE ──────────────────────────────────
         surface: '#F8F9FA',
+        // ── LIGHT BACKGROUNDS (inspired by logo palette) ──
+        // Soft tints of the brand navy / gold for airy, light sections.
+        light: {
+          blue:  '#EEF1FB',  // faint navy wash
+          blue2: '#F4F6FD',  // even softer navy wash
+          cream: '#FBF7EF',  // warm off-white
+          gold:  '#FAF3E6',  // faint gold wash
+        },
       },
       fontFamily: {
         display: ['"Barlow Condensed"', 'Barlow', 'system-ui', 'sans-serif'],

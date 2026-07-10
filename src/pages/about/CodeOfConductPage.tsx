@@ -4,6 +4,8 @@ import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
 import { CheckCircle2, AlertCircle } from 'lucide-react'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const OBJECTIVES = [
   'Describe expected standard of good insurance practice',
@@ -31,6 +33,7 @@ const ETHICAL_STANDARDS = [
 ]
 
 export default function CodeOfConductPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -68,7 +71,7 @@ export default function CodeOfConductPage() {
               <div className="bg-white rounded-2xl p-7 border border-gray-100">
                 <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-2">Objectives</p>
                 <h2 className="font-display font-black text-navy text-2xl md:text-3xl uppercase leading-tight tracking-tight mb-1">Six Core Objectives</h2>
-                <p className="text-gray-500 text-sm">The Code is designed to uphold best practices in insurance service delivery and customer protection.</p>
+                <p className="text-gray-500 text-sm">{takafulize('The Code is designed to uphold best practices in insurance service delivery and customer protection.', isTakaful)}</p>
               </div>
             </ScrollReveal>
 
@@ -79,7 +82,7 @@ export default function CodeOfConductPage() {
                   <div className="w-7 h-7 rounded-full bg-gold/15 flex items-center justify-center shrink-0 mt-0.5">
                     <span className="text-gold font-bold text-xs">{i + 1}</span>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed">{item}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{takafulize(item, isTakaful)}</p>
                 </div>
               ))}
             </StaggerReveal>
@@ -131,7 +134,7 @@ export default function CodeOfConductPage() {
                 <div className="absolute -right-10 -bottom-10 w-48 h-48 border-[32px] border-white/5 rounded-full" />
                 <div className="relative z-10">
                   <h3 className="font-display font-bold text-gold text-xl mb-3">Good Faith Principle</h3>
-                  <p className="text-white/80 leading-relaxed text-sm">Insurance contracts require <strong className="text-white">"utmost good faith"</strong> from all parties. Breaches of this principle render contracts <strong className="text-gold">"void ab initio"</strong> — from the very beginning. Shaheen Insurance upholds this principle in every policy and interaction.</p>
+                  <p className="text-white/80 leading-relaxed text-sm">{takafulize('Insurance contracts require ', isTakaful)}<strong className="text-white">"utmost good faith"</strong> from all parties. Breaches of this principle render contracts <strong className="text-gold">"void ab initio"</strong> — from the very beginning. Shaheen Insurance upholds this principle in every policy and interaction.</p>
                 </div>
               </div>
             </ScrollReveal>

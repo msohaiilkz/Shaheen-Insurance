@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const KEY_INFO = [
   { icon: TrendingUp, label: 'PSX Symbol', value: 'SHNI' },
@@ -55,6 +57,7 @@ const InvestorSVG = () => (
 )
 
 export default function InvestorPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -67,7 +70,7 @@ export default function InvestorPage() {
       <InnerPageHero
         category="Investor Relations"
         title="Investor Information"
-        subtitle="Financial transparency, regulatory compliance, and shareholder services — Shaheen Insurance listed on PSX (SHNI)"
+        subtitle={takafulize("Financial transparency, regulatory compliance, and shareholder services — Shaheen Insurance listed on PSX (SHNI)", isTakaful)}
         breadcrumbs={[{ label: 'Investor Information' }]}
         stats={[{ value: 'SHNI', label: 'PSX Symbol' }, { value: 'A++', label: 'PACRA Stable' }, { value: 'Rs. 600M', label: 'Paid-up Capital' }]}
         svgIllustration={<InvestorSVG />}
@@ -108,7 +111,7 @@ export default function InvestorPage() {
       </section>
 
       {/* Resources */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="investor-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -119,20 +122,20 @@ export default function InvestorPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Resources</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Investor Resources</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Resources</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Investor Resources</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
             {INNER_PAGES.map(({ icon: Icon, title, desc, link }) => (
               <Link key={title} to={link}
-                className="group flex flex-col h-full p-6 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all duration-300">
+                className="group flex flex-col h-full p-6 bg-white border border-navy/10 rounded-2xl shadow-card hover:border-gold/30 hover:bg-white/10 transition-all duration-300">
                 <div className="w-11 h-11 rounded-xl bg-gold/15 flex items-center justify-center mb-4">
                   <Icon size={20} className="text-gold" />
                 </div>
-                <h3 className="font-display font-bold text-white text-base mb-2 group-hover:text-gold transition-colors">{title}</h3>
-                <p className="text-white/45 text-xs leading-relaxed flex-1 mb-4">{desc}</p>
-                <div className="flex items-center gap-1 text-gold text-sm font-semibold">
+                <h3 className="font-display font-bold text-navy text-base mb-2 group-hover:text-gold transition-colors">{title}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed flex-1 mb-4">{desc}</p>
+                <div className="flex items-center gap-1 text-gold-dark text-sm font-semibold">
                   View <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-200" />
                 </div>
               </Link>
@@ -141,14 +144,14 @@ export default function InvestorPage() {
 
           <ScrollReveal>
             <div className="p-6 bg-gold/10 border border-gold/30 rounded-2xl max-w-lg mx-auto text-center">
-              <h3 className="font-display font-bold text-white text-xl mb-1">Company Secretary</h3>
-              <p className="text-gold font-semibold text-lg mb-4">Aqeel Anwar Kamal</p>
-              <p className="text-white/60 text-sm mb-5 leading-relaxed">For investor queries, shareholder services, AGM notices, and corporate governance matters.</p>
+              <h3 className="font-display font-bold text-navy text-xl mb-1">Company Secretary</h3>
+              <p className="text-gold-dark font-semibold text-lg mb-4">Aqeel Anwar Kamal</p>
+              <p className="text-gray-500 text-sm mb-5 leading-relaxed">For investor queries, shareholder services, AGM notices, and corporate governance matters.</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="mailto:company.secretary@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-gold/90 transition-colors">
+                <a href="mailto:company.secretary@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-navy text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-navy/90 transition-colors">
                   <Mail size={14} />Email Secretary
                 </a>
-                <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-white/14 transition-colors">
+                <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold text-sm px-5 py-2.5 rounded-xl hover:bg-white/80 transition-colors">
                   <Phone size={14} />(92-21) 32630370-75
                 </a>
               </div>

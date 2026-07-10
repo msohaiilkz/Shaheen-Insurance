@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const BENEFITS = [
   { icon: TrendingUp, title: 'Higher Coverage Limits', desc: 'Group policies offer significantly higher coverage thresholds per employee compared to individual plans — ensuring comprehensive protection for your workforce.' },
@@ -49,6 +51,7 @@ const GroupSVG = () => (
 )
 
 export default function GroupHealthPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -60,10 +63,10 @@ export default function GroupHealthPage() {
       />
       <InnerPageHero
         category="Health Care"
-        title="Group Health Insurance"
-        subtitle="Corporate health solutions that protect your employees with higher coverage limits, lower per-head premiums, and simplified administration"
-        breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: 'Group Health Insurance' }]}
-        stats={[{ value: 'Lower', label: 'Per-Head Premium' }, { value: 'Cashless', label: 'Treatment' }, { value: '24/7', label: 'Helpline' }]}
+        title={takafulize("Group Health Insurance", isTakaful)}
+        subtitle={takafulize("Corporate health solutions that protect your employees with higher coverage limits, lower per-head premiums, and simplified administration", isTakaful)}
+        breadcrumbs={[{ label: 'Health Care', path: '/health-care' }, { label: takafulize('Group Health Insurance', isTakaful) }]}
+        stats={[{ value: 'Lower', label: takafulize('Per-Head Premium', isTakaful) }, { value: 'Cashless', label: 'Treatment' }, { value: '24/7', label: 'Helpline' }]}
         svgIllustration={<GroupSVG />}
       />
 
@@ -75,7 +78,7 @@ export default function GroupHealthPage() {
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-6">
                 Corporate Health<br /><span className="text-gold">Solutions</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-5">Shaheen Insurance's Group Health Insurance is designed for organizations that want to provide their employees with meaningful health coverage while managing costs effectively. Our group plans leverage collective risk-sharing to deliver superior benefits at competitive rates.</p>
+              <p className="text-gray-600 leading-relaxed mb-5">{takafulize("Shaheen Insurance's Group Health Insurance is designed for organizations that want to provide their employees with meaningful health coverage while managing costs effectively. Our group plans leverage collective risk-sharing to deliver superior benefits at competitive rates.", isTakaful)}</p>
               <p className="text-gray-600 leading-relaxed">Whether a small business, large corporation, or public sector entity — our dedicated corporate team will design a customized health plan that fits your workforce size, needs, and budget.</p>
             </ScrollReveal>
             <ScrollReveal from="right">
@@ -90,7 +93,7 @@ export default function GroupHealthPage() {
                     </div>
                     <div>
                       <p className="font-black text-navy text-lg leading-none">Corporate Plans</p>
-                      <p className="text-gray-500 text-xs mt-0.5">Higher limits · Lower premiums · Cashless</p>
+                      <p className="text-gray-500 text-xs mt-0.5">{takafulize("Higher limits · Lower premiums · Cashless", isTakaful)}</p>
                     </div>
                   </div>
                 </div>
@@ -100,7 +103,7 @@ export default function GroupHealthPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="grp-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -111,36 +114,36 @@ export default function GroupHealthPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Advantages</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">Key Advantages</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Advantages</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">Key Advantages</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
             {BENEFITS.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all group">
+              <div key={title} className="p-6 bg-white border border-navy/10 rounded-2xl hover:bg-white/10 hover:border-gold/30 transition-all group shadow-card">
                 <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
                   <Icon size={20} className="text-gold" />
                 </div>
-                <h3 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold transition-colors">{title}</h3>
-                <p className="text-white/50 text-xs leading-relaxed">{desc}</p>
+                <h3 className="font-display font-bold text-navy text-sm mb-2 group-hover:text-gold transition-colors">{takafulize(title, isTakaful)}</h3>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
 
           <ScrollReveal>
             <div className="text-center mb-10">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
-              <h3 className="font-display font-black text-white text-3xl uppercase">Coverage Options</h3>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Coverage</p>
+              <h3 className="font-display font-black text-navy text-3xl uppercase">Coverage Options</h3>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {COVERAGE.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="p-5 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 transition-all">
+              <div key={title} className="p-5 bg-white border border-navy/10 rounded-2xl hover:border-gold/30 transition-all shadow-card">
                 <div className="flex items-center gap-2 mb-2">
                   <Icon size={14} className="text-gold shrink-0" />
-                  <h4 className="font-bold text-white text-sm">{title}</h4>
+                  <h4 className="font-bold text-navy text-sm">{takafulize(title, isTakaful)}</h4>
                 </div>
-                <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>
@@ -186,7 +189,7 @@ export default function GroupHealthPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-navy relative overflow-hidden">
+      <section className="py-20 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="grp-cg" x="0" y="0" width="48" height="48" patternUnits="userSpaceOnUse">
             <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#D6A65A" strokeWidth="0.8" />
@@ -196,16 +199,16 @@ export default function GroupHealthPage() {
         <div className="absolute -top-24 -right-24 w-80 h-80 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
         <ScrollReveal>
           <div className="relative z-10 max-w-3xl mx-auto px-5 text-center">
-            <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-4">Get a Corporate Plan</p>
-            <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight mb-4">
-              Protect Your <span className="text-gold">Team</span>
+            <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-4">Get a Corporate Plan</p>
+            <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight mb-4">
+              Protect Your <span className="text-gold-dark">Team</span>
             </h2>
-            <p className="text-white/50 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Contact our Health Care Division for a customized group plan quotation tailored to your organization's size and requirements.</p>
+            <p className="text-gray-500 mb-8 max-w-lg mx-auto text-sm leading-relaxed">Contact our Health Care Division for a customized group plan quotation tailored to your organization's size and requirements.</p>
             <div className="flex justify-center gap-3 flex-wrap">
-              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold px-8 py-4 rounded-xl text-sm hover:bg-gold/90 transition-colors">
+              <a href="mailto:info@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-navy text-white font-bold px-8 py-4 rounded-xl text-sm hover:bg-navy/90 transition-colors">
                 <Mail size={15} /> Email Us
               </a>
-              <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-white/8 border border-white/15 text-white font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/14 transition-colors">
+              <a href="tel:02132630370" className="inline-flex items-center gap-2 bg-white border border-navy/15 text-navy shadow-card font-semibold px-8 py-4 rounded-xl text-sm hover:bg-white/80 transition-colors">
                 <Phone size={15} /> 021-32630370-75
               </a>
             </div>

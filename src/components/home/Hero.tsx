@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Shield, TrendingUp, Star, MapPin } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { gsap } from '../../lib/gsap'
+import { useJourney } from '../../context/JourneyContext'
 
 const TICKER_ITEMS = [
   { icon: Shield,    text: 'PACRA A++ Rated' },
@@ -20,6 +21,7 @@ const TICKER_ITEMS = [
 ]
 
 export default function Hero() {
+  const { isTakaful } = useJourney()
   const heroRef = useRef<HTMLElement>(null)
   const badgeRef = useRef<HTMLDivElement>(null)
   const word1Ref = useRef<HTMLSpanElement>(null)
@@ -110,7 +112,9 @@ export default function Hero() {
           ref={subtitleRef}
           className="text-white/65 text-base md:text-lg max-w-xl leading-relaxed mb-10 font-light"
         >
-          Pakistan's trusted general insurance company since 1996. Motor, Health, Travel, Fire, Marine & more.
+          {isTakaful
+            ? "Pakistan's trusted Window Takaful provider since 1996. Motor, Health, Travel, Fire, Marine & more — Shariah-compliant."
+            : "Pakistan's trusted general insurance company since 1996. Motor, Health, Travel, Fire, Marine & more."}
         </p>
 
         {/* CTAs */}

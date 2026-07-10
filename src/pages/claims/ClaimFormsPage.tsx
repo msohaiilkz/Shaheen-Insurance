@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const FORMS = [
   { icon: Car, title: 'Motor / Auto Claim Form', desc: 'For motor vehicle claims including accidental damage, theft, fire, and third-party liability.' },
@@ -45,6 +47,7 @@ const FormsSVG = () => (
 )
 
 export default function ClaimFormsPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -56,7 +59,7 @@ export default function ClaimFormsPage() {
       <InnerPageHero
         category="Claims"
         title="Claim Forms"
-        subtitle="Download the correct claim form for your insurance type — all forms available in PDF format for easy printing and submission"
+        subtitle={takafulize("Download the correct claim form for your insurance type — all forms available in PDF format for easy printing and submission", isTakaful)}
         breadcrumbs={[{ label: 'Claims', path: '/claims' }, { label: 'Claim Forms' }]}
         stats={[{ value: '5', label: 'Form Types' }, { value: 'PDF', label: 'Format' }, { value: 'Free', label: 'Download' }]}
         svgIllustration={<FormsSVG />}
@@ -82,7 +85,7 @@ export default function ClaimFormsPage() {
                     <h3 className="font-display font-bold text-navy text-sm">{title}</h3>
                     <span className="text-xs font-semibold text-gold bg-gold/10 px-2 py-0.5 rounded-full">PDF</span>
                   </div>
-                  <p className="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
                 </div>
                 <Link to="/downloads" className="flex items-center gap-2 bg-gold text-navy font-semibold text-xs px-4 py-2.5 rounded-lg hover:bg-gold/85 transition-colors shrink-0">
                   <Download size={13} />Download
@@ -101,7 +104,7 @@ export default function ClaimFormsPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="forms-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -112,16 +115,16 @@ export default function ClaimFormsPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Submission</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">How to Submit Your Claim Form</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Submission</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">How to Submit Your Claim Form</h2>
             </div>
           </ScrollReveal>
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {SUBMIT_STEPS.map(({ num, title, desc }) => (
-              <div key={num} className="p-5 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 hover:bg-white/10 transition-all group">
+              <div key={num} className="p-5 bg-white border border-navy/10 rounded-2xl shadow-card hover:border-gold/30 hover:bg-white/10 transition-all group">
                 <span className="font-display font-black text-gold/40 text-3xl leading-none block mb-3 group-hover:text-gold/70 transition-colors">{num}</span>
-                <h4 className="font-display font-bold text-white text-sm mb-2 group-hover:text-gold transition-colors">{title}</h4>
-                <p className="text-white/45 text-xs leading-relaxed">{desc}</p>
+                <h4 className="font-display font-bold text-navy text-sm mb-2 group-hover:text-gold transition-colors">{title}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">{takafulize(desc, isTakaful)}</p>
               </div>
             ))}
           </StaggerReveal>

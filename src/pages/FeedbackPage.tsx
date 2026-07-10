@@ -166,7 +166,7 @@ export default function FeedbackPage() {
       </section>
 
       {/* SECP + Direct Contact */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="feedback-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -177,38 +177,38 @@ export default function FeedbackPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Escalation</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight">SECP Investor Complaints</h2>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Escalation</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight">SECP Investor Complaints</h2>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <ScrollReveal>
-              <div className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 transition-all h-full">
+              <div className="p-6 bg-white border border-navy/10 rounded-2xl hover:border-gold/30 transition-all h-full shadow-card">
                 <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
                   <ExternalLink size={20} className="text-gold" />
                 </div>
-                <h3 className="font-display font-bold text-white text-lg mb-3">SECP Portal</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-5">
-                  Investors and shareholders with complaints related to securities regulations, corporate governance, or investor rights may file a formal complaint directly with the <strong className="text-white/80">Securities and Exchange Commission of Pakistan (SECP)</strong>.
+                <h3 className="font-display font-bold text-navy text-lg mb-3">SECP Portal</h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                  Investors and shareholders with complaints related to securities regulations, corporate governance, or investor rights may file a formal complaint directly with the <strong className="text-gray-700">Securities and Exchange Commission of Pakistan (SECP)</strong>.
                 </p>
                 <a href="http://secp.gov.pk/ComplaintForm1.asp" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-gold text-navy font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-gold/90 transition-colors">
+                  className="inline-flex items-center gap-2 bg-navy text-white font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-navy/90 transition-colors">
                   <ExternalLink size={14} />SECP Investor Complaint Form
                 </a>
               </div>
             </ScrollReveal>
             <ScrollReveal>
-              <div className="p-6 bg-white/6 border border-white/10 rounded-2xl hover:border-gold/30 transition-all h-full">
+              <div className="p-6 bg-white border border-navy/10 rounded-2xl hover:border-gold/30 transition-all h-full shadow-card">
                 <div className="w-11 h-11 bg-gold/15 rounded-xl flex items-center justify-center mb-4">
                   <Phone size={20} className="text-gold" />
                 </div>
-                <h3 className="font-display font-bold text-white text-lg mb-3">Contact Us Directly</h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-5">For urgent matters or if you prefer to speak with our team directly, please use the contact details below.</p>
+                <h3 className="font-display font-bold text-navy text-lg mb-3">Contact Us Directly</h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-5">For urgent matters or if you prefer to speak with our team directly, please use the contact details below.</p>
                 <div className="space-y-3">
-                  <a href="tel:02132630370" className="flex items-center gap-2 text-white/70 text-sm hover:text-gold transition-colors">
+                  <a href="tel:02132630370" className="flex items-center gap-2 text-gray-600 text-sm hover:text-gold-dark transition-colors">
                     <Phone size={14} className="text-gold" />021-32630370-75
                   </a>
-                  <a href="mailto:info@shaheeninsurance.com" className="flex items-center gap-2 text-white/70 text-sm hover:text-gold transition-colors">
+                  <a href="mailto:info@shaheeninsurance.com" className="flex items-center gap-2 text-gray-600 text-sm hover:text-gold-dark transition-colors">
                     <Mail size={14} className="text-gold" />info@shaheeninsurance.com
                   </a>
                 </div>

@@ -4,6 +4,8 @@ import InnerPageHero from '../../components/layout/InnerPageHero'
 import PageSEO from '../../components/shared/PageSEO'
 import ScrollReveal from '../../components/shared/ScrollReveal'
 import { StaggerReveal } from '../../components/shared/ScrollReveal'
+import { useJourney } from '../../context/JourneyContext'
+import { takafulize } from '../../lib/wording'
 
 const CANDIDATES = [
   { no: 1, name: 'Air Marshal Muhammad Arif Pervaiz (Retd.)', category: 'Independent Director' },
@@ -55,6 +57,7 @@ const ElectionSVG = () => (
 )
 
 export default function ElectionPage() {
+  const { isTakaful } = useJourney()
   return (
     <>
       <PageSEO
@@ -66,7 +69,7 @@ export default function ElectionPage() {
       <InnerPageHero
         category="Investor Relations"
         title="Election of Directors 2023"
-        subtitle="Documentation and candidate profiles for the Election of Directors — Extraordinary General Meeting of Shaheen Insurance Company Limited"
+        subtitle={takafulize("Documentation and candidate profiles for the Election of Directors — Extraordinary General Meeting of Shaheen Insurance Company Limited", isTakaful)}
         breadcrumbs={[{ label: 'Investor Information', path: '/investor' }, { label: 'Election of Directors 2023' }]}
         stats={[{ value: '8', label: 'Candidates' }, { value: 'EOGM', label: '2023' }, { value: 'PSX', label: 'Listed SHNI' }]}
         svgIllustration={<ElectionSVG />}
@@ -80,7 +83,7 @@ export default function ElectionPage() {
               <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Overview</p>
               <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Director Election Overview</h2>
               <p className="text-gray-600 text-sm leading-relaxed max-w-2xl mx-auto">
-                Shaheen Insurance Company Limited (PSX: SHNI) held an Extraordinary General Meeting (EOGM) for the election of its Board of Directors in 2023, in compliance with the <strong className="text-navy">Companies Act 2017</strong> and SECP requirements. Below are the eight candidates who stood for election.
+                {takafulize('Shaheen Insurance Company Limited (PSX: SHNI) held an Extraordinary General Meeting (EOGM) for the election of its Board of Directors in 2023, in compliance with the ', isTakaful)}<strong className="text-navy">Companies Act 2017</strong> and SECP requirements. Below are the eight candidates who stood for election.
               </p>
             </div>
           </ScrollReveal>
@@ -115,7 +118,7 @@ export default function ElectionPage() {
       </section>
 
       {/* Documents */}
-      <section className="py-20 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-light-blue relative overflow-hidden">
         <svg className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
           <defs><pattern id="election-hex" x="0" y="0" width="56" height="48" patternUnits="userSpaceOnUse">
             <polygon points="28,4 52,16 52,32 28,44 4,32 4,16" fill="none" stroke="#D6A65A" strokeWidth="1" />
@@ -126,35 +129,35 @@ export default function ElectionPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-5 lg:px-10">
           <ScrollReveal>
             <div className="text-center mb-10">
-              <p className="text-gold text-xs font-bold tracking-[0.25em] uppercase mb-3">Documents</p>
-              <h2 className="font-display font-black text-white text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Election Documents</h2>
-              <p className="text-white/50 text-sm">All documents related to the 2023 Election of Directors. Shareholders may also request physical copies from our Company Secretary.</p>
+              <p className="text-gold-dark text-xs font-bold tracking-[0.25em] uppercase mb-3">Documents</p>
+              <h2 className="font-display font-black text-navy text-4xl md:text-5xl uppercase leading-tight tracking-tight mb-4">Election Documents</h2>
+              <p className="text-gray-500 text-sm">All documents related to the 2023 Election of Directors. Shareholders may also request physical copies from our Company Secretary.</p>
             </div>
           </ScrollReveal>
           <StaggerReveal className="space-y-3 mb-10">
             {DOCUMENTS.map(({ title, desc }) => (
               <Link key={title} to="/downloads"
-                className="flex items-center gap-4 p-4 bg-white/6 border border-white/10 rounded-xl hover:border-gold/30 hover:bg-white/10 transition-all duration-200 group">
+                className="flex items-center gap-4 p-4 bg-white border border-navy/10 rounded-xl shadow-card hover:border-gold/30 hover:bg-white/10 transition-all duration-200 group">
                 <div className="w-9 h-9 rounded-lg bg-gold/15 flex items-center justify-center shrink-0">
                   <FileText size={15} className="text-gold" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-white text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</h4>
-                  <p className="text-white/40 text-xs mt-0.5">{desc}</p>
+                  <h4 className="text-navy text-sm font-semibold group-hover:text-gold transition-colors duration-200">{title}</h4>
+                  <p className="text-gray-500 text-xs mt-0.5">{desc}</p>
                 </div>
-                <Download size={14} className="text-white/30 group-hover:text-gold shrink-0 transition-colors duration-200" />
+                <Download size={14} className="text-gray-500 group-hover:text-gold shrink-0 transition-colors duration-200" />
               </Link>
             ))}
           </StaggerReveal>
 
           <ScrollReveal>
             <div className="p-6 bg-gold/10 border border-gold/30 rounded-2xl max-w-lg mx-auto text-center">
-              <h3 className="font-display font-bold text-white text-xl mb-1">Company Secretary</h3>
-              <p className="text-gold font-semibold mb-3">Aqeel Anwar Kamal</p>
-              <p className="text-white/60 text-sm mb-4 leading-relaxed">
+              <h3 className="font-display font-bold text-navy text-xl mb-1">Company Secretary</h3>
+              <p className="text-gold-dark font-semibold mb-3">Aqeel Anwar Kamal</p>
+              <p className="text-gray-500 text-sm mb-4 leading-relaxed">
                 For queries about the election process, proxy submission, or to request physical copies of any election documents.
               </p>
-              <a href="mailto:company.secretary@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-gold text-navy font-bold text-sm px-6 py-3 rounded-xl hover:bg-gold/90 transition-colors">
+              <a href="mailto:company.secretary@shaheeninsurance.com" className="inline-flex items-center gap-2 bg-navy text-white font-bold text-sm px-6 py-3 rounded-xl hover:bg-navy/90 transition-colors">
                 <Mail size={14} />company.secretary@shaheeninsurance.com
               </a>
             </div>
