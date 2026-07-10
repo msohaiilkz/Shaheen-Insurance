@@ -43,7 +43,7 @@ export default function JourneyGate() {
   }
 
   return (
-    <section className="relative flex flex-col md:flex-row h-screen min-h-[640px] w-full overflow-hidden">
+    <section className="relative flex flex-col md:flex-row min-h-screen md:h-screen w-full overflow-hidden">
       {SIDES.map((side) => {
         const { icon: Icon } = side
         const isTakaful = side.mode === 'takaful'
@@ -90,7 +90,7 @@ export default function JourneyGate() {
             </svg>
 
             {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center items-start px-8 sm:px-12 lg:px-16 py-24 max-w-xl mx-auto md:mx-0 md:ml-auto md:mr-auto">
+            <div className="relative z-10 h-full flex flex-col justify-center items-start px-8 sm:px-12 lg:px-16 pt-24 pb-16 md:py-24 max-w-xl mx-auto md:mx-0 md:ml-auto md:mr-auto">
               {/* Selected badge */}
               {selected && (
                 <span className="absolute top-24 right-8 sm:right-12 inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 text-white text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-full">

@@ -89,7 +89,7 @@ export default function Navbar() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null)
   const location = useLocation()
-  const { isTakaful } = useJourney()
+  const { isTakaful, mode, setMode } = useJourney()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -300,6 +300,25 @@ export default function Navbar() {
 
               {/* Bottom CTA */}
               <div className="px-4 pb-6 pt-3 border-t border-gray-100">
+                {/* Journey switch (mobile) */}
+                {mode && (
+                  <div className="mb-3">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 mb-2 px-1">Journey</p>
+                    <div className="flex gap-2">
+                      {(['conventional', 'takaful'] as const).map((m) => (
+                        <button
+                          key={m}
+                          onClick={() => setMode(m)}
+                          className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wide border transition-colors ${
+                            mode === m ? 'bg-navy text-white border-navy' : 'bg-white text-navy border-navy/15'
+                          }`}
+                        >
+                          {m}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <Link
                   to="/claims/intimation"
                   onClick={() => setMobileOpen(false)}
