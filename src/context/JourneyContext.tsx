@@ -1,8 +1,6 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useContext, useState, type ReactNode } from 'react'
 
 export type JourneyMode = 'conventional' | 'takaful'
-
-const STORAGE_KEY = 'shaheen-journey-mode'
 
 interface JourneyContextValue {
   /** Selected journey, or null if the user has not chosen yet. */
@@ -16,24 +14,16 @@ interface JourneyContextValue {
 
 const JourneyContext = createContext<JourneyContextValue | undefined>(undefined)
 
-function readStored(): JourneyMode | null {
-  if (typeof window === 'undefined') return null
-  const v = window.localStorage.getItem(STORAGE_KEY)
-  return v === 'conventional' || v === 'takaful' ? v : null
-}
-
+/**
+ * Session-only: the choice persists while navigating within the app (the
+ * provider lives above the router), but a full page reload resets it so the
+ * homepage always greets visitors with the two options.
+ */
 export function JourneyProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<JourneyMode | null>(() => readStored())
-
-  useEffect(() => {
-    if (mode) window.localStorage.setItem(STORAGE_KEY, mode)
-  }, [mode])
+  const [mode, setModeState] = useState<JourneyMode | null>(null)
 
   const setMode = (next: JourneyMode) => setModeState(next)
-  const reset = () => {
-    window.localStorage.removeItem(STORAGE_KEY)
-    setModeState(null)
-  }
+  const reset = () => setModeState(null)
 
   return (
     <JourneyContext.Provider value={{ mode, isTakaful: mode === 'takaful', setMode, reset }}>

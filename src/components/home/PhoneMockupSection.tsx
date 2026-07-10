@@ -347,7 +347,7 @@ export default function PhoneMockupSection() {
 
   return (
     <div ref={outerRef} className="relative bg-light-blue2" style={{ height: '400vh' }}>
-      <div ref={stickyRef} className="sticky top-0 h-screen flex items-center overflow-hidden">
+      <div ref={stickyRef} className="sticky top-0 h-screen flex items-center overflow-hidden pt-16 md:pt-0">
 
         {/* Background texture */}
         <svg className="absolute inset-0 w-full h-full opacity-[0.05] pointer-events-none" xmlns="http://www.w3.org/2000/svg">
@@ -366,12 +366,12 @@ export default function PhoneMockupSection() {
           style={{ background: 'radial-gradient(ellipse, rgba(214,166,90,0.25) 0%, transparent 70%)' }}
         />
 
-        <div className="w-full max-w-7xl mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="w-full max-w-7xl mx-auto px-5 lg:px-10 grid lg:grid-cols-2 gap-6 lg:gap-16 items-center">
 
           {/* LEFT — Text */}
           <div className="relative z-10">
             {/* Step dots */}
-            <div className="flex gap-2 mb-8">
+            <div className="flex gap-2 mb-5 md:mb-8">
               {STEPS.map((_, i) => (
                 <div
                   key={i}
@@ -398,7 +398,7 @@ export default function PhoneMockupSection() {
             {/* Heading */}
             <h2
               key={step.heading}
-              className="font-display font-black text-navy text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-6"
+              className="font-display font-black text-navy text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase leading-tight tracking-tight mb-4 md:mb-6"
               style={{ animation: 'fadeSlideUp 0.5s ease 0.05s both' }}
             >
               {step.heading.split('\n').map((line, i) => (
@@ -418,8 +418,8 @@ export default function PhoneMockupSection() {
             </p>
 
             {/* Step number */}
-            <div className="mt-10 flex items-center gap-3">
-              <span className="font-display font-black text-gold/40 text-6xl leading-none">{step.label}</span>
+            <div className="mt-6 md:mt-10 flex items-center gap-3">
+              <span className="font-display font-black text-gold/40 text-4xl md:text-6xl leading-none">{step.label}</span>
               <div className="flex-1 h-px bg-navy/10 max-w-[80px]" />
               <span className="text-gray-400 text-xs font-bold tracking-widest uppercase">of {String(STEPS.length).padStart(2, '0')}</span>
             </div>
@@ -435,7 +435,7 @@ export default function PhoneMockupSection() {
               style={{ transformStyle: 'preserve-3d' }}
             >
               {/* Phone shell */}
-              <div className="relative w-[260px] h-[530px] rounded-[48px] bg-[#0d1020] border-[8px] border-[#1e2340] shadow-[0_40px_100px_rgba(0,0,0,0.7)]">
+              <div className="relative w-[200px] h-[408px] md:w-[260px] md:h-[530px] rounded-[40px] md:rounded-[48px] bg-[#0d1020] border-[7px] md:border-[8px] border-[#1e2340] shadow-[0_40px_100px_rgba(0,0,0,0.7)]">
 
                 {/* Screen bezel glow */}
                 <div className="absolute inset-0 rounded-[40px] overflow-hidden">

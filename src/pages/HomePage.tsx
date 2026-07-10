@@ -29,10 +29,10 @@ export default function HomePage() {
       />
 
       {!mode ? (
-        /* Two clear options — the full-screen split entry gate */
+        /* First: only the two options (full-screen gate, nothing below) */
         <JourneyGate />
       ) : (
-        /* The selected customer journey */
+        /* After selecting: the chosen customer journey begins */
         <div id="journey-content">
           <Hero />
           <ProductsSection />

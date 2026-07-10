@@ -43,7 +43,16 @@ export default function JourneyGate() {
   }
 
   return (
-    <section className="relative flex flex-col md:flex-row min-h-screen md:h-screen w-full overflow-hidden">
+    <section className="relative flex flex-col md:flex-row md:h-screen w-full overflow-hidden">
+      {/* Mobile header bar (in-flow, avoids overlapping cards) */}
+      <div className="md:hidden bg-light-blue2 text-center pt-20 pb-4 shrink-0">
+        <div className="inline-flex items-center gap-2.5">
+          <div className="h-px w-6 bg-gold/70" />
+          <span className="text-gold-dark text-[11px] font-bold tracking-[0.3em] uppercase">Choose Your Journey</span>
+          <div className="h-px w-6 bg-gold/70" />
+        </div>
+      </div>
+
       {SIDES.map((side) => {
         const { icon: Icon } = side
         const isTakaful = side.mode === 'takaful'
@@ -54,9 +63,14 @@ export default function JourneyGate() {
             key={side.mode}
             onMouseEnter={() => setHovered(side.mode)}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => setMode(side.mode)}
+            onClick={() => {
+              setMode(side.mode)
+              requestAnimationFrame(() =>
+                document.getElementById('journey-content')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              )
+            }}
             style={{ flexGrow: flexFor(side.mode) }}
-            className="group relative flex-1 min-h-[50vh] md:min-h-0 overflow-hidden transition-[flex-grow] duration-500 ease-out text-left focus:outline-none"
+            className="group relative md:flex-1 overflow-hidden transition-[flex-grow] duration-500 ease-out text-left focus:outline-none"
           >
             {/* Background image */}
             <img
@@ -90,10 +104,10 @@ export default function JourneyGate() {
             </svg>
 
             {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center items-start px-8 sm:px-12 lg:px-16 pt-24 pb-16 md:py-24 max-w-xl mx-auto md:mx-0 md:ml-auto md:mr-auto">
+            <div className="relative z-10 h-full flex flex-col justify-center items-start px-8 sm:px-12 lg:px-16 py-12 md:py-24 max-w-xl mx-auto md:mx-0 md:ml-auto md:mr-auto">
               {/* Selected badge */}
               {selected && (
-                <span className="absolute top-24 right-8 sm:right-12 inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 text-white text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-full">
+                <span className="absolute top-4 right-4 md:top-8 md:right-8 inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 text-white text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-full">
                   <Check size={12} className="text-gold" /> Your Selection
                 </span>
               )}
@@ -137,15 +151,15 @@ export default function JourneyGate() {
       {/* Center divider (desktop) */}
       <div className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-gold/30 z-20 pointer-events-none" />
 
-      {/* Top overline */}
-      <div className="absolute top-20 lg:top-24 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none px-4">
+      {/* Top overline (desktop only — avoids overlapping stacked cards on mobile) */}
+      <div className="hidden md:block absolute top-20 lg:top-24 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none px-4">
         <p className="text-white/90 text-[11px] font-bold tracking-[0.35em] uppercase drop-shadow">
           Choose Your Journey
         </p>
       </div>
 
-      {/* Bottom brand line */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none px-4">
+      {/* Bottom brand line (desktop only — avoids overlapping the CTA on mobile) */}
+      <div className="hidden md:block absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-center pointer-events-none px-4">
         <p className="text-white/50 text-[10px] font-semibold tracking-[0.25em] uppercase">
           Shaheen Foundation — Pakistan Air Force · Since 1996
         </p>
